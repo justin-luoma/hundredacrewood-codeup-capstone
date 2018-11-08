@@ -29,6 +29,12 @@
                         </div>
 
                         <div class='row'>
+                            <div th:if="${param.error}">
+                                Invalid Username and Password.
+                            </div>
+                            <div th:if="${param.logout}">
+                                You have been logged out.
+                            </div>
                             <div class='input-field col s12'>
                                 <input class='validate' type='text' name='username' id='username'/>
                                 <label for='username'>Username</label>
@@ -59,23 +65,5 @@
     </main>
 </div>
 
-
-<!--<div class="container" layout:fragment="content">-->
-<!--<h1>Log In</h1>-->
-<!--<div th:if="${param.error}">-->
-<!--Invalid Username and Password.-->
-<!--</div>-->
-<!--<div th:if="${param.logout}">-->
-<!--You have been logged out.-->
-<!--</div>-->
-
-<!--<form th:action="@{/login}" method="post">-->
-<!--<label for="username">Username</label>-->
-<!--<input id="username" name="username" type="text" />-->
-<!--<label for="password">Password</label>-->
-<!--<input id="password" name="password" type="password" />-->
-<!--<input type="submit" value="Log In" />-->
-<!--</form>-->
-<!--</div>-->
 </body>
 </html>
