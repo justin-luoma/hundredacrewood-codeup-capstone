@@ -1,6 +1,6 @@
 "use strict";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 	let sidenav = document.querySelectorAll('.sidenav');
 	let sidenavs = M.Sidenav.init(sidenav);
 
@@ -16,3 +16,4 @@ function logout(event) {
 	document.getElementById('logoutForm').submit();
 
 }
+
