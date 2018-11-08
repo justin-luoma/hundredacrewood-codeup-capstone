@@ -15,20 +15,34 @@
     <div class="nav-wrapper">
         <a href="#!" class="brand-logo">Logo</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="hide-on-med-and-down left navbarHome">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Topics</a></li>
+            <li><a href="#">My Posts</a></li>
+            <li><a href="#">Friends</a></li>
+            <li><a href="#">Create</a></li>
+            <li><a href="#">Profile</a></li>
+        </ul>
         <ul class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+            <li><a th:href="@{/login}">Login</a></li>
+            <li id="logoutButton"><a href="#">Logout</a></li>
+            <li><a href="#">Register</a></li>
         </ul>
     </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="sass.html">Sass</a></li>
-    <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">Javascript</a></li>
-    <li><a href="mobile.html">Mobile</a></li>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Topics</a></li>
+    <li><a href="#">My Posts</a></li>
+    <li><a href="#">Friends</a></li>
+    <li><a href="#">Create</a></li>
+    <li><hr/></li>
+    <li><a href="#">Profile</a></li>
+    <li><a th:href="@{/login}">Login</a></li>
+
+    <li><a id="logoutButtonMobile" href="#">Logout</a></li>
+    <li><a href="#">Register</a></li>
 </ul>
 
 <main role="main">
@@ -43,12 +57,12 @@
     </div>
 </footer>
 
+
+<form id="logoutForm" th:action="@{/logout}" method="post"></form>
+
+
 <script th:src="@{/js/materialize.min.js}"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.sidenav');
-        var instances = M.Sidenav.init(elems);
-    });
-</script>
+<script th:src="@{/js/layout.js}"></script>
+
 </body>
 </html>
