@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<main layout:fragment="content">
+<div class="container" layout:fragment="content">
     <span sec:authorize="isAuthenticated()">
                     | Logged user: <span sec:authentication="name"></span> |
                     Roles: <span sec:authentication="principal.authorities"></span> |
@@ -16,7 +16,7 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Logout" />
     </form>
-</main>
+</div>
 
 </body>
 </html>
