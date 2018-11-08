@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head
         th:replace="fragments :: head (title='One Hundred Acre Wood Support Groups')">
 </head>
@@ -8,7 +9,8 @@
 
 <nav th:replace="fragments :: nav"></nav>
 
-<main>
+
+<main layout:fragment="content">
     <span sec:authorize="isAuthenticated()">
                     | Logged user: <span sec:authentication="name"></span> |
                     Roles: <span sec:authentication="principal.authorities"></span> |
