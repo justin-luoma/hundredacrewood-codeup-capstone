@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <!--Custom CSS link-->
+    <link rel="stylesheet"  th:href="@{/css/main.css}"/>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <title>Resources</title>
+</head>
+<body>
+
+<div class = "container" layout:fragment="content">
+
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card small grey lighten-3">
+                <div class="card-image">
+                    <img src="https://media.graytvinc.com/images/810*455/SUICIDE+PREVENTION+MGN1.jpg">
+                </div>
+                <span class="card-title black-text"><a href ="https://suicidepreventionlifeline.org/">Suicide Prevention Lifeline</a></span>
+                <div class="card-content">
+                    <p class = "text-black">Suicide Prevention Hotline 1-800-273-8255</p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div class="card small grey lighten-3">
+                <div class="card-image">
+                    <img src="http://www.nuffoodsspectrum.in/NuFFooDs_CMS/upload/FILE_5a311499028b11.jpg">
+                </div>
+                <span class="card-title black-text"><a href ="https://www.nationaleatingdisorders.org/">National Eating Disorders</a></span>
+                <div class="card-content">
+                    <p class = "text-black">Eating Disorder Hotline 1-800-931-2237</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card small grey lighten-3">
+                <div class="card-image">
+                    <img src="https://image.ibb.co/i0KJJV/images.jpg">
+                </div>
+                <span class="card-title black-text"><a href ="https://www.addictioncenter.com/">Addiction Center</a></span>
+                <div class="card-content">
+                    <p class = "text-black">Addiction Hotline 1-855-826-4464</p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <div class="card small grey lighten-3">
+                <div class="card-image">
+                    <img src="https://image.ibb.co/exhAXq/rain-petal.jpg">
+                </div>
+                <span class="card-title black-text"><a href ="https://www.rainn.org/about-national-sexual-assault-telephone-hotline">RAINN</a></span>
+                <div class="card-content">
+                    <p class = "text-black">Sexual Assault Hotline 1-800-656-4673</p>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--custom js-->
+    <script th:src="@{/js/custom.js}"/>
+</body>
+</html>
