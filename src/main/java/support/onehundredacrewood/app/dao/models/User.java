@@ -2,6 +2,7 @@ package support.onehundredacrewood.app.dao.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -49,6 +50,38 @@ public class User {
     @Column
     private Integer strikes;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private List<Post> posts;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private List<Comment> comments;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "friends",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id")}
+    )
+    private List<User> friends;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "follow_post",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "post_id")}
+    )
+    private List<Post> followedPosts;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "follow_topic",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "topic_id")}
+    )
+    private List<Topic> topics;
+
     public User() {
     }
 
@@ -69,20 +102,49 @@ public class User {
         this.strikes = strikes;
     }
 
-    public User(User copy) {
-        this.id = copy.id;
-        this.username = copy.username;
-        this.password = copy.password;
-        this.email = copy.email;
-        this.admin = copy.admin;
-        this.phone = copy.phone;
-        this.texts = copy.texts;
-        this.emails = copy.emails;
-        this.birthday = copy.birthday;
-        this.city = copy.city;
-        this.gender = copy.gender;
-        this.image = copy.image;
-        this.strikes = copy.strikes;
+    public User(String username, String password, String email, boolean admin
+            , String phone, boolean texts, boolean emails, LocalDate birthday
+            , String city, String gender, String image, Integer strikes,
+                List<Post> posts, List<Comment> comments, List<User> friends,
+                List<Post> followedPosts, List<Topic> topics) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.admin = admin;
+        this.phone = phone;
+        this.texts = texts;
+        this.emails = emails;
+        this.birthday = birthday;
+        this.city = city;
+        this.gender = gender;
+        this.image = image;
+        this.strikes = strikes;
+        this.posts = posts;
+        this.comments = comments;
+        this.friends = friends;
+        this.followedPosts = followedPosts;
+        this.topics = topics;
+    }
+
+    public User(User other) {
+        this.id = other.id;
+        this.username = other.username;
+        this.password = other.password;
+        this.email = other.email;
+        this.admin = other.admin;
+        this.phone = other.phone;
+        this.texts = other.texts;
+        this.emails = other.emails;
+        this.birthday = other.birthday;
+        this.city = other.city;
+        this.gender = other.gender;
+        this.image = other.image;
+        this.strikes = other.strikes;
+        this.posts = other.posts;
+        this.comments = other.comments;
+        this.friends = other.friends;
+        this.followedPosts = other.followedPosts;
+        this.topics = other.topics;
     }
 
     public long getId() {
@@ -187,5 +249,45 @@ public class User {
 
     public void setStrikes(Integer strikes) {
         this.strikes = strikes;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
+    }
+
+    public List<Post> getFollowedPosts() {
+        return followedPosts;
+    }
+
+    public void setFollowedPosts(List<Post> followedPosts) {
+        this.followedPosts = followedPosts;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 }

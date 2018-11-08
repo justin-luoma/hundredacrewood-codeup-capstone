@@ -2,11 +2,10 @@ package support.onehundredacrewood.app.dao.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,41 +15,29 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(length = 50, nullable = false)
-    private String title;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    @Column(length = 5000, nullable = false)
+    @Column(nullable = false, length = 5000)
     private String body;
 
     @Column(nullable = false)
     private LocalDateTime created;
 
     @Column(nullable = false)
-    private boolean locked;
-
-    @Column(nullable = false)
     private boolean reported;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "post_topic",
-            joinColumns = {@JoinColumn(name = "post_id")},
-            inverseJoinColumns = {@JoinColumn(name = "topic_id")}
-    )
-    private List<Topic> topics;
-
-    public Post() {
+    public Comment() {
     }
 
-    public Post(User user, String title, String body, LocalDateTime created,
-                boolean locked, boolean reported, List<Topic> topics) {
+    public Comment(User user, Post post, String body, LocalDateTime created,
+                   boolean reported) {
         this.user = user;
-        this.title = title;
+        this.post = post;
         this.body = body;
         this.created = created;
-        this.locked = locked;
         this.reported = reported;
-        this.topics = topics;
     }
 
     public long getId() {
@@ -69,12 +56,12 @@ public class Post {
         this.user = user;
     }
 
-    public String getTitle() {
-        return title;
+    public Post getPost() {
+        return post;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public String getBody() {
@@ -93,27 +80,11 @@ public class Post {
         this.created = created;
     }
 
-    public boolean isLocked() {
-        return locked;
-    }
-
-    public void setLocked(boolean locked) {
-        this.locked = locked;
-    }
-
     public boolean isReported() {
         return reported;
     }
 
     public void setReported(boolean reported) {
         this.reported = reported;
-    }
-
-    public List<Topic> getTopics() {
-        return topics;
-    }
-
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
     }
 }
