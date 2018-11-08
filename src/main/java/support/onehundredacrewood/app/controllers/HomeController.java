@@ -8,6 +8,7 @@ import java.security.Principal;
 
 @Controller
 public class HomeController {
+
     @GetMapping("/")
     public String home() {
         return "home";

@@ -4,9 +4,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import support.onehundredacrewood.app.dao.User;
-import support.onehundredacrewood.app.dao.UserWithRoles;
-import support.onehundredacrewood.app.repositories.UserRepo;
+import support.onehundredacrewood.app.dao.models.User;
+import support.onehundredacrewood.app.dao.models.UserWithRoles;
+import support.onehundredacrewood.app.dao.repositories.UserRepo;
 
 @Service
 public class UserDetailsLoader implements UserDetailsService {
