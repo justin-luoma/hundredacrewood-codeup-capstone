@@ -1,7 +1,7 @@
-package support.onehundredacrewood.app.repositories;
+package support.onehundredacrewood.app.dao.repositories;
 
 import org.springframework.data.repository.CrudRepository;
-import support.onehundredacrewood.app.dao.User;
+import support.onehundredacrewood.app.dao.models.User;
 
 public interface UserRepo extends CrudRepository<User, Long> {
     User findByUsername(String username);

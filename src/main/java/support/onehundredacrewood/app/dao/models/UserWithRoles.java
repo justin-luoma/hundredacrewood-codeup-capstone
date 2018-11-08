@@ -1,4 +1,4 @@
-package support.onehundredacrewood.app.dao;
+package support.onehundredacrewood.app.dao.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
