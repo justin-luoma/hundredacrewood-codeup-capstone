@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
+<head
+        th:replace="fragments :: head (title='One Hundred Acre Wood Support Groups')">
 </head>
 <body>
 
-<span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-            </span>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" />
-</form>
+<nav th:replace="fragments :: nav"></nav>
+
+<main>
+    <span sec:authorize="isAuthenticated()">
+                    | Logged user: <span sec:authentication="name"></span> |
+                    Roles: <span sec:authentication="principal.authorities"></span> |
+                </span>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
+</main>
+
+<footer th:replace="fragments :: footer"></footer>
+
+<th:block th:replace="fragments :: mScripts" />
+
 
 </body>
 </html>
