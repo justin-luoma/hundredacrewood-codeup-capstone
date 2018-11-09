@@ -25,7 +25,12 @@
 
         <h5>Your Friends</h5>
 
-        <h5>Posts</h5>
+        <h5>Your Posts</h5>
+        <div th:each="post : ${user.posts}">
+        <div><span th:text="${post.title}"></span></div>
+            <br/>
+        <div><span th:text="${post.body}"></span></div>
+        </div>
 
         <!--Card to store posts / start of posts-->
 
