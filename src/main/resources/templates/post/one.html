@@ -9,8 +9,25 @@
 <body>
 
 <div class="container" layout:fragment="content">
-    title: <p th:text="${post.title}"></p>
-    created by: <p th:text="${post.user.username}"></p>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title" th:text="${post.title}"></span>
+                    <p th:text="${post.body}"></p>
+                </div>
+                <!--<div class="card-action">-->
+                <!--</div>-->
+                <div class="card-content">
+                    <span class="left" th:text="'created: '+${post.created}"></span>
+                    <span class="right" th:text="'created by: '+${post.user.username}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<p th:text="${post.}"></p>-->
+    <!--title: <p th:text="${post.title}"></p>-->
+    <!--created by: <p th:text="${post.user.username}"></p>-->
 </div>
 
 </body>
