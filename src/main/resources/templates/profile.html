@@ -14,6 +14,19 @@
     <main layout:fragment="content">
         <!--User Information-->
 
+        <h4>Profile</h4>
+
+        <div><span sec:authentication="name"></span></div>
+        <div><span sec:authentication="principal.email"></span></div>
+        <div><span sec:authentication="principal.gender"></span></div>
+        <div><span sec:authentication="principal.phone"></span></div>
+        <div><span sec:authentication="principal.birthday"></span></div>
+
+
+        <h5>Your Friends</h5>
+
+        <h5>Posts</h5>
+
         <!--Card to store posts / start of posts-->
 
         <!--<div class="container d-flex flex-column align-items-center">-->
