@@ -38,6 +38,7 @@ public class AuthController {
     public String register(@ModelAttribute User user, @RequestParam(name = "birthdayString") String birthday) {
         LocalDate birth = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         user.setBirthday(birth);
+        user.setAdmin(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
         return "redirect:/login";

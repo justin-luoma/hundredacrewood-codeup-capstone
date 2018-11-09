@@ -179,7 +179,7 @@ public class User {
         this.email = email;
     }
 
-    public boolean isAdmin() {
+    public boolean getAdmin() {
         return admin;
     }
 
@@ -195,7 +195,7 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean isTexts() {
+    public boolean getTexts() {
         return texts;
     }
 
@@ -203,7 +203,7 @@ public class User {
         this.texts = texts;
     }
 
-    public boolean isEmails() {
+    public boolean getEmails() {
         return emails;
     }
 
