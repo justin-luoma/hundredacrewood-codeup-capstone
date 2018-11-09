@@ -1,5 +1,7 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head th:fragment="head-fragment">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,36 +16,47 @@
 <body>
 <nav>
     <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
+        <a th:href="@{/}" class="brand-logo">Logo</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="hide-on-med-and-down left navbarHome">
-            <li><a href="#">Home</a></li>
+            <li><a th:href="@{/}">Home</a></li>
             <li><a href="#">Topics</a></li>
-            <li><a href="#">My Posts</a></li>
-            <li><a href="#">Friends</a></li>
-            <li><a href="#">Create</a></li>
-            <li><a href="#">Profile</a></li>
+            <th:block sec:authorize="isAuthenticated()">
+                <li><a href="#">My Posts</a></li>
+                <li><a href="#">Friends</a></li>
+                <li><a href="#">Create</a></li>
+            </th:block>
         </ul>
         <ul class="right hide-on-med-and-down">
-            <li><a th:href="@{/login}">Login</a></li>
-            <li id="logoutButton"><a href="#">Logout</a></li>
-            <li><a href="#">Register</a></li>
+            <th:block sec:authorize="isAuthenticated()">
+                <li id="logoutButton"><a href="#">Logout</a></li>
+                <li><a href="#">Profile</a></li>
+            </th:block>
+            <th:block sec:authorize="!isAuthenticated()">
+                <li><a th:href="@{/login}">Login</a></li>
+                <li><a th:href="@{/register}">Register</a></li>
+            </th:block>
         </ul>
     </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-    <li><a href="#">Home</a></li>
+    <li><a th:href="@{/}">Home</a></li>
     <li><a href="#">Topics</a></li>
-    <li><a href="#">My Posts</a></li>
-    <li><a href="#">Friends</a></li>
-    <li><a href="#">Create</a></li>
+    <th:block sec:authorize="isAuthenticated()">
+        <li><a href="#">My Posts</a></li>
+        <li><a href="#">Friends</a></li>
+        <li><a href="#">Create</a></li>
+    </th:block>
     <li><hr/></li>
-    <li><a href="#">Profile</a></li>
-    <li><a th:href="@{/login}">Login</a></li>
-
-    <li><a id="logoutButtonMobile" href="#">Logout</a></li>
-    <li><a href="#">Register</a></li>
+    <th:block sec:authorize="isAuthenticated()">
+        <li id="logoutButtonMobile"><a href="#">Logout</a></li>
+        <li><a href="#">Profile</a></li>
+    </th:block>
+    <th:block sec:authorize="!isAuthenticated()">
+        <li><a th:href="@{/login}">Login</a></li>
+        <li><a th:href="@{/register}">Register</a></li>
+    </th:block>
 </ul>
 
 <main role="main">
