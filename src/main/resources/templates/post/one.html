@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" lang="en">
+<head>
+    <title>${|Post: ${post.title}|}</title>
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+    title: <p th:text="${post.title}"></p>
+    created by: <p th:text="${post.user.username}"></p>
+</div>
+
+</body>
+</html>
