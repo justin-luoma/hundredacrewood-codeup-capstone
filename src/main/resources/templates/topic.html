@@ -11,6 +11,13 @@
 <div class="container" layout:fragment="content">
     <h1>Topics</h1>
 
+    <div th:each="topic : ${topic}">
+        <div th:text="${topic.name}">
+
+        </div>
+
+    </div>
+
 
 </div>
 
