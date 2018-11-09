@@ -22,7 +22,7 @@
         <ul class="hide-on-med-and-down mr-auto clear">
             <!--<li><a th:href="@{/}"><h1>Logo</h1></a></li>-->
             <li><a th:href="@{/}">Home</a></li>
-            <li><a href="#">Topics</a></li>
+            <li><a th:href="@{/topic}">Topics</a></li>
             <th:block sec:authorize="isAuthenticated()">
                 <li><a href="#">My Posts</a></li>
                 <li><a href="#">Friends</a></li>
