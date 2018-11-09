@@ -12,9 +12,10 @@
     <h1>Topics</h1>
 
     <div th:each="topic : ${topic}">
-        <div th:text="${topic.name}">
-
-        </div>
+        <h6><div th:text="${topic.name}"></div></h6>
+        <p th:text="${topic.posts}"></p>
+        <button>View More</button>
+        <hr/>
 
     </div>
 

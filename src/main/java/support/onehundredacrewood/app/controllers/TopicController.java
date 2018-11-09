@@ -4,6 +4,7 @@ package support.onehundredacrewood.app.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import support.onehundredacrewood.app.dao.models.Topic;
 import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 
@@ -20,10 +21,16 @@ public class TopicController {
 
     @GetMapping("/topic")
     public String showTopics(Model model) {
-
-
-        model.addAttribute("topic", topicRepo.findAll());
-
+        model.addAttribute("topic",topicRepo.findAll());
         return "topic";
     }
+
+    @GetMapping("/topic/{id}")
+    public String individualTopic(@PathVariable long id, Model model) {
+        model.addAttribute("topics", topicRepo.findById(id));
+
+
+        return "topic/";
+    }
+
 }
