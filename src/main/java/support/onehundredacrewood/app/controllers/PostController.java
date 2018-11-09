@@ -16,7 +16,7 @@ public class PostController {
 
     @GetMapping("/posts")
     public String getPost(Model model) {
-        Post post = postRepo.findById(1);
+        Post post = postRepo.findById(7);
         model.addAttribute("post", post);
         return "post/one";
     }
