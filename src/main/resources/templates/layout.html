@@ -16,9 +16,11 @@
 <body>
 <nav>
     <div class="nav-wrapper">
-        <a th:href="@{/}" class="brand-logo">Logo</a>
+        <a th:href="@{/}" class="brand-logo hide-on-large-only hide-on-large-only">Logo</a>
+        <a th:href="@{/}" class="brand-logo hide-on-med-and-down left logo-on-large">Logo</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="hide-on-med-and-down left navbarHome">
+        <ul class="hide-on-med-and-down mr-auto clear">
+            <!--<li><a th:href="@{/}"><h1>Logo</h1></a></li>-->
             <li><a th:href="@{/}">Home</a></li>
             <li><a href="#">Topics</a></li>
             <th:block sec:authorize="isAuthenticated()">

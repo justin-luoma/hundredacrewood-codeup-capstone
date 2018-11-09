@@ -78,6 +78,10 @@ main {
     border-radius: 0.25rem;
 }
 
-.navbarHome {
-    margin-left: 75px;
+.logo-on-large {
+    position: inherit!important;
+}
+
+.mr-auto {
+    margin-right: auto;
 }
