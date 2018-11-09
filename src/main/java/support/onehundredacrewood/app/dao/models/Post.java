@@ -39,6 +39,10 @@ public class Post {
     )
     private List<Topic> topics;
 
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_id")
+    private List<Comment> comments;
+
     public Post() {
     }
 
@@ -51,6 +55,19 @@ public class Post {
         this.locked = locked;
         this.reported = reported;
         this.topics = topics;
+    }
+
+    public Post(User user, String title, String body, LocalDateTime created,
+                boolean locked, boolean reported, List<Topic> topics,
+                List<Comment> comments) {
+        this.user = user;
+        this.title = title;
+        this.body = body;
+        this.created = created;
+        this.locked = locked;
+        this.reported = reported;
+        this.topics = topics;
+        this.comments = comments;
     }
 
     public long getId() {
@@ -115,5 +132,13 @@ public class Post {
 
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
