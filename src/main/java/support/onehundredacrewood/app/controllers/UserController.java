@@ -23,12 +23,9 @@ public class UserController {
         User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepo.findById(principal.getId());
 
-
-        System.out.println(user.getPosts());
-        model.addAttribute("user", user);
+        model.addAttribute("user",user);
         return "profile";
     }
-
 
 
 }
