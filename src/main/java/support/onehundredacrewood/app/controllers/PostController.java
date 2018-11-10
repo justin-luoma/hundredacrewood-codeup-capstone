@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import support.onehundredacrewood.app.dao.models.Post;
 import support.onehundredacrewood.app.dao.models.User;
@@ -24,6 +25,13 @@ public class PostController {
     @GetMapping("/posts")
     public String getPost(Model model) {
         Post post = postRepo.findById(7);
+        model.addAttribute("post", post);
+        return "post/one";
+    }
+
+    @GetMapping("/posts/{id}")
+    public String getPost(@PathVariable long id, Model model) {
+        Post post = postRepo.findById(id);
         model.addAttribute("post", post);
         return "post/one";
     }
