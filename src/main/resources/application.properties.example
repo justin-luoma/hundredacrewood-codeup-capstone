@@ -4,4 +4,8 @@ spring.datasource.password=password
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
+config.argon2.iterations=10
+config.argon2.memory=65536
+config.argon2.parallelism=1
+
 config.isDev=true
