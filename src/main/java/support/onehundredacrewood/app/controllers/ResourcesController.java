@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ResourcesController {
     @GetMapping("/resources")
     public String showResources() {
-        return "/resources";
+        return "resources";
     }
 }
