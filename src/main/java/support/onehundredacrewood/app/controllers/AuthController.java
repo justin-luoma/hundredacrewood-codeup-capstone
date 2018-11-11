@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -38,6 +39,15 @@ public class AuthController {
     public String register(@ModelAttribute User user, @RequestParam(name = "birthdayString") String birthday) {
         LocalDate birth = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         user.setBirthday(birth);
+
+
+        if (userRepo.findByUsername(user.getUsername()) != null) {
+            user.setPassword(null);
+            return "redirect:/register?error=Username already exists";
+        } else if (userRepo.findByEmail(user.getEmail()) != null) {
+            user.setPassword(null);
+            return "redirect:/register?error=Email already exists";
+        }
         user.setAdmin(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);
