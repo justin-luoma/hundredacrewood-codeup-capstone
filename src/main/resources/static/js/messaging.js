@@ -14,9 +14,54 @@ document.addEventListener("DOMContentLoaded", () => {
                     elem.classList.remove("hide")
                 }
             }
+            const unreadDiv = document.getElementById("unread");
+            if (unreadDiv !== null && unreadDiv.childElementCount === 0) {
+                unreadDiv.innerHTML = "<h3>No unread messages</h3>";
+            }
         })
         .catch(error => console.error(error));
+    const modals = document.getElementById('messageModel');
+    M.Modal.init(modals, {
+        endingTop: "15%",
+        onCloseStart: sendMessage
+    });
+    let messageTab = document.getElementById("messageTab");
+    if (messageTab != undefined)
+        M.Tabs.init(messageTab);
+    const tooltippedElems = document.querySelectorAll('.tooltipped');
+    const tooltippedInstances = M.Tooltip.init(tooltippedElems);
+    const floatingElems = document.querySelectorAll('.fixed-action-btn');
+    const floatingInstance = M.FloatingActionButton.init(floatingElems);
 });
+
+function replyClick(elem) {
+    const modalTitle = document.getElementById("modalTitle");
+    const modalBody = document.getElementById("modalBody");
+    const modalId = document.getElementById("to");
+    modalTitle.innerText = `Replying to: ${elem.dataset.title}`;
+    modalBody.innerText = elem.dataset.body;
+    modalId.value = elem.dataset.id;
+    const modal = M.Modal.getInstance(document.getElementById("messageModel"));
+    modal.open();
+    const toastElem = elem.parentElement;
+    dismissToast(toastElem);
+    // let toastInstance = M.Toast.getInstance(toastElem);
+    // toastInstance.dismiss();
+}
+
+function dismissToast(elem) {
+    let toastInstance = M.Toast.getInstance(elem);
+    toastInstance.dismiss();
+}
+
+function sendMessage(elem) {
+    console.log(elem);
+    const message = document.getElementById("message");
+    if (message.value.length > 0) {
+        const form = document.getElementById("messageForm");
+        form.submit();
+    }
+}
 
 function processMessage(json) {
     let message = json.message;
@@ -25,8 +70,8 @@ function processMessage(json) {
     }
     let toastHtml = `
         <span>${json.from}: ${message}</span>
-        <button class="btn-flat toast-action">Reply</button>
-        <button class="btn-flat toast-action">View</button>
+        <button class="btn-flat toast-action" data-title="${json.from}" data-body="${json.message}" data-id="${json.fromId}" onclick="replyClick(this)">Reply</button>
+        <a class="btn-flat toast-action" href="/messages/${json.fromId}" >View</a>
     `;
     M.toast({
         html: toastHtml,
@@ -45,4 +90,9 @@ function checkMessages() {
             }
         })
     .catch(error => console.error(error));
+}
+
+function markAllRead() {
+    const form = document.getElementById("markAllReadForm")
+    form.submit();
 }

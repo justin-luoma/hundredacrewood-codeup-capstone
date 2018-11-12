@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface MessageRepo extends JpaRepository<Message, Long> {
     Message getFirstByReceiverAndPopupOrderByTimestamp(User user, boolean popup);
-    long countAllByUnread(boolean unread);
+    long countAllByReceiverAndUnread(User receiver, boolean unread);
     List<Message> findAllByReceiverOrderByTimestampDesc(User user);
+    Message findByReceiverAndId(User user, long id);
+    List<Message> findAllByUnreadAndReceiver(boolean unread, User receiver);
 }
