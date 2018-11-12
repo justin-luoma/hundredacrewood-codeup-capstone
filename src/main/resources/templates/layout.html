@@ -29,7 +29,7 @@
             <th:block sec:authorize="isAuthenticated()">
                 <li><a href="#">My Posts</a></li>
                 <li><a href="#">Friends</a></li>
-                <li><a href="#">Create</a></li>
+                <li><a th:href="@{/posts/create}">Create</a></li>
             </th:block>
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -48,11 +48,11 @@
 
 <ul class="sidenav" id="mobile-demo">
     <li><a th:href="@{/}">Home</a></li>
-    <li><a href="#">Topics</a></li>
+    <li><a th:href="@{/topic}">Topics</a></li>
     <th:block sec:authorize="isAuthenticated()">
         <li><a href="#">My Posts</a></li>
         <li><a href="#">Friends</a></li>
-        <li><a href="#">Create</a></li>
+        <li><a th:href="@{/posts/create}">Create</a></li>
     </th:block>
     <li><hr/></li>
     <th:block sec:authorize="isAuthenticated()">
