@@ -12,14 +12,29 @@
 <div class="container" layout:fragment="content">
     <div th:text="${topic.name}"></div>
 
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Ab ad adipisci amet atque beatae culpa dolorum illum
+        iste minus odit provident reprehenderit, ut veniam. Ab accusamus
+        magni natus odio similique.
+
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium,
+        ad molestiae necessitatibus nisi officiis perspiciatis sed sit! Ad asperiores
+        atque, blanditiis ducimus iusto maxime molestiae perferendis, quam soluta vitae,
+        voluptatibus.
+    </p>
+
+
     <th:block th:each="post : ${posts}">
         <p th:text="${post.title}"></p>
         <span th:text="${post.body}"></span>
-
+        <br/>
+        <a class='col s12 btn btn-large waves-effect indigo' href="#">View Post</a>
+        <hr/>
     </th:block>
 
 
-    </div>
+</div>
 
 </body>
 </html>
