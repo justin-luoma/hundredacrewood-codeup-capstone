@@ -19,6 +19,16 @@
                 </a>
                     <p th:text="${post.body}"></p>
                     <p th:text="'created by: ' + ${post.user.username}"></p>
+                        <!--<a href="topic.html"-->
+                        <!--th:href="@{/topic/${topic.id}}"-->
+                        <!--th:if="${topic.name!i.last ? ', ': ', '}">-->
+                            <!--<th:block th:each="topic,i : ${post.topics}">-->
+                        <!--</a>-->
+                            <!--</th:block>-->
+                   <p> <th:block th:each="topic,i : ${post.topics}">
+                       <th:block th:text="${topic.name.concat(!i.last ? ', ' : ' ')}"></th:block>
+                    </th:block>
+                   </p>
             </div>
             <span th:text="${post.comments.size()}"></span>
         </div>

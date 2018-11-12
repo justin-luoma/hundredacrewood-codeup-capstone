@@ -22,6 +22,11 @@
                     <span class="left" th:text="'created: '+${post.created}"></span>
                     <span class="right" th:text="'created by: '+${post.user.username}"></span>
                 </div>
+                <span>
+                    <th:block th:each="topic,i : ${post.topics}">
+                    <th:block th:text="${topic.name.concat(!i.last ? ', ' : ' ')}"></th:block>
+                    </th:block>
+                </span>
             </div>
         </div>
     </div>

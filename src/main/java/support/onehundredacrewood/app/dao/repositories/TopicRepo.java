@@ -5,4 +5,6 @@ import support.onehundredacrewood.app.dao.models.Topic;
 
 public interface TopicRepo extends CrudRepository<Topic, Long> {
     Topic findById(long id);
+
+    Topic findByName(String name);
 }
