@@ -14,21 +14,24 @@
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <span class="card-title" th:text="${post.title}"></span>
-                    <p th:text="${post.body}"></p>
                 </div>
                 <!--<div class="card-action">-->
                 <!--</div>-->
+
+
                 <div class="card-content">
+                    <p th:text="${post.body}"></p>
                     <span class="left" th:text="'created: '+${post.created}"></span>
                     <span class="right" th:text="'created by: '+${post.user.username}"></span>
                 </div>
+                <a class='col s12 btn btn-large waves-effect indigo' th:href="@{|/users/${post.user.id}|}">User Profile</a>
+
             </div>
         </div>
     </div>
     <span th:text="${post.comments.size()}"></span>
 
-    <a class='col s12 btn btn-large waves-effect indigo'
-       th:href="@{|/users/${post.user.id}|}">User Profile</a>
+
     <!--<p th:text="${post.}"></p>-->
     <!--title: <p th:text="${post.title}"></p>-->
     <!--created by: <p th:text="${post.user.username}"></p>-->
