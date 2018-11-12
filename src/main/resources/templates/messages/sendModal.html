@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<th:block th:fragment="messageModal">
+    <div id="messageModel" class="modal">
+        <div class="modal-content">
+            <h4 id="modalTitle"></h4>
+            <p id="modalBody"></p>
+            <div class="row">
+                <form class="col s12" th:action="@{/messaging}" method="post" id="messageForm">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="message" name="body" class="materialize-textarea" maxlength="500"></textarea>
+                            <label for="message">Message</label>
+                        </div>
+                        <input type="number" name="to" id="to" hidden="" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn modal-close"><i class="material-icons right">send</i>Send</a>
+        </div>
+    </div>
+</th:block>
+
+</body>
+</html>
