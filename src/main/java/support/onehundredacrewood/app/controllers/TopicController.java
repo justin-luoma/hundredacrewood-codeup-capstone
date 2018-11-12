@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import support.onehundredacrewood.app.dao.models.Topic;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
 import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 
@@ -27,8 +28,9 @@ public class TopicController {
 
     @GetMapping("/topic/{id}")
     public String individualTopic(@PathVariable long id, Model model) {
-        model.addAttribute("topic", topicRepo.findById(id));
-        model.addAttribute("posts", postRepo.getTop3OrderByCreatedDesc());
+        Topic topic = topicRepo.findById(id);
+        model.addAttribute("topic", topic);
+        model.addAttribute("posts", postRepo.getTop3ByTopicsOrderByCreatedDesc(topic));
 
         return "topics/topic";
     }
