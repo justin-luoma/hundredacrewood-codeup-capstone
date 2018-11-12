@@ -82,6 +82,14 @@ public class User {
     )
     private List<Topic> topics;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_id")
+    private List<Message> receivedMessages;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id")
+    private List<Message> sentMessages;
+
     public User() {
     }
 
@@ -106,7 +114,8 @@ public class User {
             , String phone, boolean texts, boolean emails, LocalDate birthday
             , String city, String gender, String image, Integer strikes,
                 List<Post> posts, List<Comment> comments, List<User> friends,
-                List<Post> followedPosts, List<Topic> topics) {
+                List<Post> followedPosts, List<Topic> topics,
+                List<Message> receivedMessages, List<Message> sentMessages) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -124,6 +133,8 @@ public class User {
         this.friends = friends;
         this.followedPosts = followedPosts;
         this.topics = topics;
+        this.receivedMessages = receivedMessages;
+        this.sentMessages = sentMessages;
     }
 
     public User(User other) {
@@ -145,6 +156,8 @@ public class User {
         this.friends = other.friends;
         this.followedPosts = other.followedPosts;
         this.topics = other.topics;
+        this.receivedMessages = other.receivedMessages;
+        this.sentMessages = other.sentMessages;
     }
 
     public long getId() {
@@ -179,7 +192,7 @@ public class User {
         this.email = email;
     }
 
-    public boolean getAdmin() {
+    public boolean isAdmin() {
         return admin;
     }
 
@@ -195,7 +208,7 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean getTexts() {
+    public boolean setTexts() {
         return texts;
     }
 
@@ -203,7 +216,7 @@ public class User {
         this.texts = texts;
     }
 
-    public boolean getEmails() {
+    public boolean setEmails() {
         return emails;
     }
 
@@ -289,5 +302,21 @@ public class User {
 
     public void setTopics(List<Topic> topics) {
         this.topics = topics;
+    }
+
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void setReceivedMessages(List<Message> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
     }
 }
