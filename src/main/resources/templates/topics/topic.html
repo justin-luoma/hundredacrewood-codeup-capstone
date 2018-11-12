@@ -5,22 +5,18 @@
       layout:decorate="~{layout}" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Topics</title>
+    <title>Selected Topic</title>
 </head>
+
 <body>
 <div class="container" layout:fragment="content">
-    <h1>Topics</h1>
+    <!--<div th:text="${posts.id}"></div>-->
 
-    <div th:each="topic : ${topic}">
-        <h6><div th:text="${topic.name}"></div></h6>
-        <p th:text="${topic.posts}"></p>
-        <button>View More</button>
-        <hr/>
+    <h1>Test Text</h1>
+
+
 
     </div>
-
-
-</div>
 
 </body>
 </html>
