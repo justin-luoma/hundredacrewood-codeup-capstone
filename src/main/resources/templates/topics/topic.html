@@ -33,9 +33,10 @@
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <p th:text="${post.title}"></p>
-                        <span th:text="${post.body}"></span>
+                        <br/>
+                        <p th:text="${post.body}"></p>
                     </div>
-                    <br/>
+                    <p class="card-content white-text" th:text="'created by: ' + ${post.user.username}"></p>
                     <a class='col s12 btn btn-large waves-effect indigo' href="#">View Post</a>
                     <hr/>
                 </div>
