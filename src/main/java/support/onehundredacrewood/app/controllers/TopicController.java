@@ -28,7 +28,7 @@ public class TopicController {
     @GetMapping("/topic/{id}")
     public String individualTopic(@PathVariable long id, Model model) {
         model.addAttribute("topic", topicRepo.findById(id));
-        model.addAttribute("posts", postRepo.getAllByIdExistsOrderByCreatedDesc().subList(0,2));
+        model.addAttribute("posts", postRepo.getTop3OrderByCreatedDesc());
 
         return "topics/topic";
     }

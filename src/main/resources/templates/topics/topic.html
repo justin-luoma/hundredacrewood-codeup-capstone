@@ -13,7 +13,7 @@
     <div th:text="${topic.name}"></div>
 
     <th:block th:each="post : ${posts}">
-
+        <p th:text="${post.title}"></p>
     </th:block>
 
 
