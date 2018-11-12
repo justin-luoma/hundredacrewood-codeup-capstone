@@ -10,68 +10,38 @@
 <body>
 
 
-<div class="container">
-    <main layout:fragment="content">
-        <!--User Information-->
+<div class="container" layout:fragment="content">
 
-        <h4>Profile</h4>
+    <!--User Information-->
 
-        <div><span sec:authentication="name"></span></div>
-        <div><span sec:authentication="principal.email"></span></div>
-        <div><span sec:authentication="principal.gender"></span></div>
-        <div><span sec:authentication="principal.phone"></span></div>
-        <div><span sec:authentication="principal.birthday"></span></div>
+    <h4>Profile</h4>
+
+    <div><span sec:authentication="name"></span></div>
+    <div><span sec:authentication="principal.email"></span></div>
+    <div><span sec:authentication="principal.gender"></span></div>
+    <div><span sec:authentication="principal.phone"></span></div>
+    <div><span sec:authentication="principal.birthday"></span></div>
 
 
-        <h5>Your Friends</h5>
+    <h5>Your Friends</h5>
 
-        <h5>Your Posts</h5>
-        <div class="row">
-            <div class="col s12 m6" th:each="post : ${user.posts}">
-                <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
+    <div th:each="friend : ${user.friends}">
+        <div th:text="${friend.username}"></div>
+    </div>
+    <h5>Your Posts</h5>
+    <div class="row">
+        <div class="col s12 m6" th:each="post : ${user.posts}">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+
                         <span class="card-title" th:text="${post.title}"></span>
                         <span th:text="${post.body}"></span>
                         <br>
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-
-
-
-        <!--Card to store posts / start of posts-->
-
-        <!--<div class="container d-flex flex-column align-items-center">-->
-        <!--<h5 class="indigo-text">Profile</h5>-->
-        <!--<div class="z-depth-1 grey lighten-4 row min75 mt-1" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">-->
-        <!--<div class='input-field col s12 m6' th:object="${user}">-->
-        <!--<span th:replace="*{username}"></span>-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="row">-->
-        <!--<div class="col s12 m6">-->
-        <!--<div class="card blue-grey darken-1">-->
-        <!--<div class="card-content white-text">-->
-        <!--<span class="card-title">Card Title</span>-->
-        <!--<p>I am a very simple card. I am good at containing small bits of information.-->
-        <!--I am convenient because I require little markup to use effectively.</p>-->
-        <!--</div>-->
-        <!--<div class="card-action">-->
-        <!--<a href="#">This is a link</a>-->
-        <!--<a href="#">This is a link</a>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-    </main>
 </div>
 
 </body>
