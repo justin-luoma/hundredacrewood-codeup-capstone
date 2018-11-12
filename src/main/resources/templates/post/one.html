@@ -26,6 +26,9 @@
         </div>
     </div>
     <span th:text="${post.comments.size()}"></span>
+
+    <a class='col s12 btn btn-large waves-effect indigo'
+       th:href="@{|/users/${post.user.id}|}">User Profile</a>
     <!--<p th:text="${post.}"></p>-->
     <!--title: <p th:text="${post.title}"></p>-->
     <!--created by: <p th:text="${post.user.username}"></p>-->
