@@ -8,3 +8,4 @@ Features
 - Follow topics
 - Follow posts
 - Follow friends 
+- Message friends

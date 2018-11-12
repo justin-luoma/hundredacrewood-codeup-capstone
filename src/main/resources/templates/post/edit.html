@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${|Edit Post: ${post.title}|}</title>
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+    <form th:action="@{/posts/{id}/update(id=${post.id})}" th:method="post" th:object="${post}">
+        Title:
+        <input th:field="*{title}" />
+        <br />
+        Description:
+        <input th:field="*{body}" />
+        <br />
+        <input type="hidden" id="postId" th:value="${post.id}" />
+        <input type="submit" />
+
+</body>
+</html>

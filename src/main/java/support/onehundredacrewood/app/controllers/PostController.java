@@ -51,4 +51,19 @@ public class PostController {
         postRepo.save(post);
         return "redirect:/post/"+ post.getId();
     }
+
+    @GetMapping("/posts/{id}/update")
+    public String editPost(@PathVariable long id, Model vModel) {
+        vModel.addAttribute("post", postRepo.findById(id));
+        return "post/edit";
+    }
+
+    @PostMapping("/posts/{id}/update")
+    public String updatePost(@ModelAttribute Post post) {
+        Post postUpdate = postRepo.findById(1);
+        postUpdate.setTitle(post.getTitle());
+        postUpdate.setBody(post.getBody());
+        postRepo.save(postUpdate);
+        return "redirect:/posts/"+ post.getId();
+    }
 }
