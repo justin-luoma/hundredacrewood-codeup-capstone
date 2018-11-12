@@ -14,9 +14,9 @@
     <div class="row">
         <div class="col s12 m6">
             <div class="card">
-                <!--<a th:href="@{'/posts/{id}'}">-->
+                <a th:href="@{'/posts/' + ${post.id}}">
                     <span class="card-title" th:text="${post.title}"></span>
-                <!--</a>-->
+                </a>
                     <p th:text="${post.body}"></p>
                     <p th:text="'created by: ' + ${post.user.username}"></p>
             </div>
