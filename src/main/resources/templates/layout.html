@@ -33,6 +33,7 @@
             <th:block sec:authorize="isAuthenticated()">
                 <li id="logoutButton"><a href="#">Logout</a></li>
                 <li><a th:href="@{/profile}">Profile</a></li>
+                <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
             </th:block>
             <th:block sec:authorize="!isAuthenticated()">
                 <li><a th:href="@{/login}">Login</a></li>
@@ -54,6 +55,7 @@
     <th:block sec:authorize="isAuthenticated()">
         <li id="logoutButtonMobile"><a href="#">Logout</a></li>
         <li><a th:href="@{/profile}">Profile</a></li>
+        <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
     </th:block>
     <th:block sec:authorize="!isAuthenticated()">
         <li><a th:href="@{/login}">Login</a></li>
@@ -81,5 +83,7 @@
 
 <script th:src="@{/js/materialize.min.js}"></script>
 <script th:src="@{/js/layout.js}"></script>
+
+<script sec:authorize="isAuthenticated()" th:src="@{/js/messaging.js}"></script>
 </body>
 </html>
