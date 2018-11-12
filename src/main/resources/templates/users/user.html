@@ -17,6 +17,11 @@
 
     <h4><span th:text="${user.username}"></span></h4>
 
+    <div th:each="post : ${user.posts}">
+        <span th:text="${post.title}"></span>
+        <span th:text="${post.body}"></span>
+    </div>
+
     <!--<div><span th:each</div>-->
 
 
