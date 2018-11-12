@@ -8,26 +8,127 @@
 </head>
 <body>
 
-<div class="container" layout:fragment="content">
-    <th:block th:each="message : ${messages}">
-        <div class="row">
-            <div class="col s12">
-                <div class="card blue-grey">
-                    <div class="card-content white-text">
-                        <span class="card-title" th:text="${message.sender.username}"></span>
-                        <p th:text="${message.body}"></p>
+<th:block layout:fragment="content">
+    <div class="row p0">
+        <div class="col s12 p0">
+            <ul class="tabs" id="messageTab">
+                <li class="tab col s3"><a class="active" href="#unread">Unread</a></li>
+                <li class="tab col s3"><a href="#read">Read</a></li>
+                <li class="tab col s3"><a href="#sent">Sent</a></li>
+                <!--<li class="tab col s3"><a href="#test4">Test 4</a></li>-->
+            </ul>
+        </div>
+        <div id="unread" class="col s12">
+            <th:block th:each="message : ${messages}">
+                <th:block th:if="${message.unread}">
+                    <div class="row" id="unreadMessages">
+                        <div class="col s12">
+                            <div class="card blue-grey">
+                                <div class="card-content white-text">
+                                    <span class="card-title" th:text="${message.sender.username}"></span>
+                                    <p th:text="${message.body}"></p>
+                                </div>
+                                <!--<div class="card-action">-->
+                                <!--</div>-->
+                                <div class="card-content">
+                                    <span class="left" th:text="'sent: '+${message.timestamp}"></span>
+                                    <span class="right" th:text="'unread:'+${message.unread}"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!--<div class="card-action">-->
-                    <!--</div>-->
-                    <div class="card-content">
-                        <span class="left" th:text="'sent: '+${message.timestamp}"></span>
-                        <span class="right" th:text="'unread:'+${message.unread}"></span>
+                    <div class="fixed-action-btn">
+                        <a class="btn-floating btn-large red tooltipped" data-position="left" data-tooltip="Mark all as read" onclick="markAllRead()">
+                            <i class="far fa-envelope-open"></i>
+                        </a>
+                        <!--<ul>-->
+                            <!--<li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>-->
+                        <!--</ul>-->
+                    </div>
+                    <form th:method="post" th:action="@{/messages/read}" id="markAllReadForm">
+                    </form>
+                </th:block>
+            </th:block>
+        </div>
+        <div id="read" class="col s12">
+            <th:block th:each="message : ${messages}">
+                <th:block th:if="${!message.unread}">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="card blue-grey">
+                                <div class="card-content white-text">
+                                    <span class="card-title" th:text="'From: '+${message.sender.username}"></span>
+                                    <p th:text="${message.body}"></p>
+                                </div>
+                                <!--<div class="card-action">-->
+                                <!--</div>-->
+                                <div class="card-content">
+                                    <span class="left" th:text="'sent: '+${message.timestamp}"></span>
+                                    <span class="right" th:text="'unread:'+${message.unread}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </th:block>
+        </div>
+        <div id="sent" class="col s12">
+            <th:block th:each="message : ${user.sentMessages}">
+                <div class="row">
+                    <div class="col s12">
+                        <div class="card blue-grey">
+                            <div class="card-content white-text">
+                                <span class="card-title" th:text="'To: '+${message.receiver.username}"></span>
+                                <p th:text="${message.body}"></p>
+                            </div>
+                            <!--<div class="card-action">-->
+                            <!--</div>-->
+                            <div class="card-content">
+                                <span class="left" th:text="'sent: '+${message.timestamp}"></span>
+                                <span class="right" th:text="'unread:'+${message.unread}"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
         </div>
-    </th:block>
-</div>
+    </div>
+
+    <!--<div class="card w-100 h-100">-->
+        <!--<div class="card-tabs">-->
+            <!--<ul class="tabs tabs-fixed-width">-->
+                <!--<li class="tab"><a class="active" href="#unread">Unread</a></li>-->
+                <!--<li class="tab"><a href="#test5">Test 2</a></li>-->
+                <!--<li class="tab"><a href="#test6">Test 3</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="card-content grey lighten-4">-->
+            <!--<div id="unread">-->
+                <!--<th:block th:each="message : ${messages}">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col s12">-->
+                            <!--<div class="card blue-grey">-->
+                                <!--<div class="card-content white-text">-->
+                                    <!--<span class="card-title" th:text="${message.sender.username}"></span>-->
+                                    <!--<p th:text="${message.body}"></p>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;<div class="card-action">&ndash;&gt;-->
+                                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                <!--<div class="card-content">-->
+                                    <!--<span class="left" th:text="'sent: '+${message.timestamp}"></span>-->
+                                    <!--<span class="right" th:text="'unread:'+${message.unread}"></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</th:block>-->
+            <!--</div>-->
+            <!--<div id="test5">Test 2</div>-->
+            <!--<div id="test6">Test 3</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+</th:block>
 
 </body>
 </html>
