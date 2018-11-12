@@ -23,10 +23,9 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String getPost(Model model) {
-        Post post = postRepo.findById(7);
-        model.addAttribute("post", post);
-        return "post/one";
+    public String showPosts(Model vModel) {
+        vModel.addAttribute("posts", postRepo.findAll());
+        return "post/index";
     }
 
     @GetMapping("/posts/{id}")
