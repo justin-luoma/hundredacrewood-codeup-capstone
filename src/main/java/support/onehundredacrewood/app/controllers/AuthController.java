@@ -48,6 +48,8 @@ public class AuthController {
             user.setPassword(null);
             return "redirect:/register?error=Email already exists";
         }
+        if (user.getImage().isEmpty())
+            user.setImage(null);
         user.setAdmin(false);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepo.save(user);

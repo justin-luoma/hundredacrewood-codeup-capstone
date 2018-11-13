@@ -9,6 +9,7 @@
 <body>
 
 <div class="container d-flex flex-column align-items-center" layout:fragment="content">
+    <script>UPLOADCARE_PUBLIC_KEY = '0f3c66d0f509cc4d8bbd'</script>
     <h5 class="indigo-text">Register</h5>
     <div class="z-depth-1 grey lighten-4 row min75 mt-1" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
     <form class="col s12" id="registerForm" action="#" th:action="@{/register}" method="post" th:object="${user}">
@@ -66,6 +67,13 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col s12">
+                <label>Profile Image</label>
+                <br />
+                <input type="hidden" role="uploadcare-uploader" name="content" data-preview-step="" data-public-key="0f3c66d0f509cc4d8bbd" data-images-only data-crop="1:1" th:name="image" />
+            </div>
+        </div>
 
         <div class="row">
             <div class="col s12 m6">
@@ -99,6 +107,7 @@
     </form>
     </div>
     <a th:href="@{/login}">Login</a>
+    <script th:src="@{/js/uploadcare.full.min.js}"></script>
     <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/tooltip.min.js}"></script>
     <script th:src="@{/js/register.js}"></script>
