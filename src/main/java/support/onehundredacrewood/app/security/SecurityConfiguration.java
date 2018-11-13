@@ -62,7 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/posts/{id}/update", //only authenticated users can update/edit posts
                         "/messaging",
                         "/messages",
-                        "/messages/**"// only authenticated users can edit ads
+                        "/messages/**",
+                        "/posts/myposts"// only authenticated users can edit ads
                 )
                 .authenticated()
         ;

@@ -59,11 +59,24 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/update")
-    public String updatePost(@ModelAttribute Post post) {
-        Post postUpdate = postRepo.findById(1);
+    public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
+        Post postUpdate = postRepo.findById(id);
         postUpdate.setTitle(post.getTitle());
         postUpdate.setBody(post.getBody());
         postRepo.save(postUpdate);
         return "redirect:/posts/"+ post.getId();
+    }
+
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        postRepo.deleteById(id);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/myposts")
+    public String showUserPosts( Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("posts", postRepo.findAllByUserOrderByCreatedDesc(user));
+        return "post/index";
     }
 }
