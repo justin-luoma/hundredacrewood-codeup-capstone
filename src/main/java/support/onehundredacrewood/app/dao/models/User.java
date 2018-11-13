@@ -160,6 +160,12 @@ public class User {
         this.sentMessages = other.sentMessages;
     }
 
+    public List<User> addFriend(User user) {
+        List<User> friends = this.friends;
+        friends.add(user);
+        return friends;
+    }
+
     public long getId() {
         return id;
     }
