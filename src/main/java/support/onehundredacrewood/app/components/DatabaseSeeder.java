@@ -69,17 +69,17 @@ public class DatabaseSeeder {
                 .count();
         if (count < 11) {
             Topic topics[] = {
-                    new Topic("Depression"),
-                    new Topic("Anxiety"),
-                    new Topic("Death"),
-                    new Topic("Chronic Pain"),
-                    new Topic("Addiction"),
-                    new Topic("Eating Disorder"),
-                    new Topic("Gay & Lesbian"),
-                    new Topic("Family"),
-                    new Topic("Divorce"),
-                    new Topic("Love"),
-                    new Topic("Postpartum Depression")
+                    new Topic("Depression", "TBD"),
+                    new Topic("Anxiety", "TBD"),
+                    new Topic("Death", "TBD"),
+                    new Topic("Chronic Pain", "TBD"),
+                    new Topic("Addiction", "TBD"),
+                    new Topic("Eating Disorder", "TBD"),
+                    new Topic("Gay & Lesbian", "TBD"),
+                    new Topic("Family", "TBD"),
+                    new Topic("Divorce", "TBD"),
+                    new Topic("Love", "TBD"),
+                    new Topic("Postpartum Depression", "TBD")
             };
             topicRepo.saveAll(Arrays.asList(topics));
         }
