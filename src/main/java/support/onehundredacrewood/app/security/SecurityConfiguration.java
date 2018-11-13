@@ -52,6 +52,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Pages that require athentication */
                 .and()
                 .authorizeRequests()
+                .antMatchers("/admin")
+                .hasAuthority("ADMIN")
+                .and()
+                .authorizeRequests()
                 .antMatchers(
                         "/posts/create", // only authenticated users can create ads
                         "/profile",

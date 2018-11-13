@@ -8,6 +8,8 @@ import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.models.UserWithRoles;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
 
+import java.util.Arrays;
+
 @Service
 public class UserDetailsLoader implements UserDetailsService {
     private final UserRepo userRepo;

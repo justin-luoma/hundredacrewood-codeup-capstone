@@ -14,4 +14,6 @@ public interface PostRepo extends CrudRepository<Post, Long> {
     List<Post> getTop3OrderByCreatedDesc();
 
     List<Post> getTop3ByTopicsOrderByCreatedDesc(Topic topics);
+
+    List<Post> findAllByReportedAndLockedOrderByCreatedDesc(boolean reported, boolean locked);
 }

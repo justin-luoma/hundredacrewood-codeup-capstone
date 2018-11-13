@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import support.onehundredacrewood.app.dao.models.User;
 
+import java.util.List;
+
 public interface UserRepo extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
@@ -13,5 +15,5 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     User findById(long id);
 
-
+    List<User> findAllByStrikesGreaterThan(int strikes);
 }

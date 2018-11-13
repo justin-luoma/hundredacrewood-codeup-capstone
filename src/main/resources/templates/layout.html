@@ -36,6 +36,7 @@
             <th:block sec:authorize="isAuthenticated()">
                 <li id="logoutButton"><a href="#">Logout</a></li>
                 <li><a th:href="@{/profile}">Profile</a></li>
+                <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
                 <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
             </th:block>
             <th:block sec:authorize="!isAuthenticated()">
@@ -58,6 +59,7 @@
     <th:block sec:authorize="isAuthenticated()">
         <li id="logoutButtonMobile"><a href="#">Logout</a></li>
         <li><a th:href="@{/profile}">Profile</a></li>
+        <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
         <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
     </th:block>
     <th:block sec:authorize="!isAuthenticated()">
