@@ -35,5 +35,4 @@ public class TopicController {
         return "topics/topic";
     }
 
-
 }

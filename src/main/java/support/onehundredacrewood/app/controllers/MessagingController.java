@@ -3,10 +3,7 @@ package support.onehundredacrewood.app.controllers;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import support.onehundredacrewood.app.dao.models.Message;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.repositories.MessageRepo;
@@ -64,14 +61,40 @@ public class MessagingController {
     @GetMapping("/messaging/count")
     @ResponseBody
     public long countMessages() {
-        return messageRepo.countAllByUnread(true);
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return messageRepo.countAllByReceiverAndUnread(principal, true);
+    }
+
+    @PostMapping("/messages/read")
+    public String markAllRead() {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Message> unreadMessages = messageRepo.findAllByUnreadAndReceiver(true, principal);
+        System.out.println(unreadMessages.size());
+        unreadMessages.forEach(message -> message.setUnread(false));
+        unreadMessages.forEach(m -> System.out.println(m.getUnread()));
+        messageRepo.saveAll(unreadMessages);
+        messageRepo.flush();
+        return "redirect:/messages";
     }
 
     @GetMapping("/messages")
     public String showMessages(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Message> messages = messageRepo.findAllByReceiverOrderByTimestampDesc(user);
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepo.findById(principal.getId());
+        List<Message> messages = messageRepo.findAllByReceiverOrderByTimestampDesc(principal);
         model.addAttribute("messages", messages);
+        model.addAttribute("user", user);
         return "messages/messages";
+    }
+
+    @GetMapping("/messages/{id}")
+    public String showMessage(@PathVariable("id") long id, Model model) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Message message = messageRepo.findByReceiverAndId(principal, id);
+        if (message == null) {
+            return "messages/message?error";
+        }
+        model.addAttribute("message", message);
+        return "messages/message";
     }
 }
