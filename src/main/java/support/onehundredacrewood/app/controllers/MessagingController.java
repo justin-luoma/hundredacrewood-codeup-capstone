@@ -37,6 +37,7 @@ public class MessagingController {
         messageRepo.saveAndFlush(message);
         m.put("from", message.getSender().getUsername());
         m.put("fromId", String.valueOf(message.getSender().getId()));
+        m.put("id", String.valueOf(message.getId()));
         m.put("message", message.getBody());
         return m;
     }
@@ -87,13 +88,20 @@ public class MessagingController {
         return "messages/messages";
     }
 
+    @GetMapping("/messages/error")
+    public String showError(Model model) {
+        model.addAttribute("error", true);
+        return "messages/message";
+    }
+
     @GetMapping("/messages/{id}")
     public String showMessage(@PathVariable("id") long id, Model model) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Message message = messageRepo.findByReceiverAndId(principal, id);
         if (message == null) {
-            return "messages/message?error";
+            return "redirect:/messages/error";
         }
+        model.addAttribute("error", false);
         model.addAttribute("message", message);
         return "messages/message";
     }

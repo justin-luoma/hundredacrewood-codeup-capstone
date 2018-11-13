@@ -83,7 +83,7 @@ function processMessage(json) {
     let toastHtml = `
         <span>${json.from}: ${message}</span>
         <button class="btn-flat toast-action" data-title="${json.from}" data-body="${json.message}" data-id="${json.fromId}" onclick="replyClick(this)">Reply</button>
-        <a class="btn-flat toast-action" href="/messages/${json.fromId}" >View</a>
+        <a class="btn-flat toast-action" href="/messages/${json.id}" >View</a>
     `;
     M.toast({
         html: toastHtml,
