@@ -29,7 +29,8 @@
     <h5>Your Friends</h5>
 
     <div th:each="friend : ${user.friends}">
-        <div th:text="${friend.username}"></div>
+        <!--<div th:text="${friend.username}"></div>-->
+        <a th:href="@{|/users/${friend.id}|}" th:text="${friend.username}"></a>
     </div>
     <h5>Your Posts</h5>
     <div class="row">

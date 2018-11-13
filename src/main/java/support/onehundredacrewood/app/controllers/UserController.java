@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import support.onehundredacrewood.app.dao.models.Post;
-import support.onehundredacrewood.app.dao.models.Topic;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
 import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
 
 import java.util.Comparator;
+import java.util.List;
 
 
 @Controller
@@ -44,10 +44,15 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public String userProfiles(@PathVariable(name = "id") long id, Model model){
+        User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User me = userRepo.findById(principal.getId());
         User user = userRepo.findById(id);
-        model.addAttribute("topic", topicRepo.findById(id));
-
+        boolean friends = false;
+        if (principal != null) {
+            friends = areFriends(me.getFriends(), user.getId());
+        }
         model.addAttribute("user", user);
+        model.addAttribute("isFriend", friends);
         return "users/user";
     }
 
@@ -63,4 +68,7 @@ public class UserController {
         return "redirect:/users/" + id;
     }
 
+    private boolean areFriends(List<User> friends, final long userId) {
+        return  friends.stream().anyMatch(f -> f.getId() == userId);
+    }
 }
