@@ -16,7 +16,7 @@
     <h3>User Profile</h3>
 
     <h4><span th:text="${user.username}"></span></h4>
-    <form th:method="post"  th:name="${user.id}" th:action="@{/users/follow}">
+    <form th:method="post" th:if="${!isFriend}"  th:name="${user.id}" th:action="@{/users/follow}">
         <input type="hidden" name="id" th:value="${user.id}"/>
     <button class='col s12 btn btn-large waves-effect indigo'>Follow</button>
     </form>
@@ -27,6 +27,18 @@
         <span th:text="${post.body}"></span>
         <br/>
     </div>
+    <th:block th:if="${isFriend}">
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red tooltipped" data-position="left"
+               th:data-title="${user.username}" th:data-id="${user.id}"
+               th:data-tooltip="'Send message to '+${user.username}" onclick="createNewMessage(this)">
+                <i class="fas fa-pen"></i>
+            </a>
+            <!--<ul>-->
+            <!--<li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>-->
+            <!--</ul>-->
+        </div>
+    </th:block>
 
     <!--<div><span th:each</div>-->
 

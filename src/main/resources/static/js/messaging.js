@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const modals = document.getElementById('messageModel');
     M.Modal.init(modals, {
         endingTop: "15%",
-        onCloseStart: sendMessage
     });
     let messageTab = document.getElementById("messageTab");
     if (messageTab != undefined)
@@ -32,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const tooltippedInstances = M.Tooltip.init(tooltippedElems);
     const floatingElems = document.querySelectorAll('.fixed-action-btn');
     const floatingInstance = M.FloatingActionButton.init(floatingElems);
+    const sendMessageBtn = document.getElementById("sendMessageBtn");
+    sendMessageBtn.addEventListener("click", sendMessageBtn);
 });
 
 function replyClick(elem) {
@@ -47,6 +48,17 @@ function replyClick(elem) {
     dismissToast(toastElem);
     // let toastInstance = M.Toast.getInstance(toastElem);
     // toastInstance.dismiss();
+}
+
+function createNewMessage(elem) {
+    const modalTitle = document.getElementById("modalTitle");
+    const modalBody = document.getElementById("modalBody");
+    const modalId = document.getElementById("to");
+    modalTitle.innerText = `New message to: ${elem.dataset.title}`;
+    modalBody.classList.add("hide");
+    modalId.value = elem.dataset.id;
+    const modal = M.Modal.getInstance(document.getElementById("messageModel"));
+    modal.open();
 }
 
 function dismissToast(elem) {
@@ -93,6 +105,6 @@ function checkMessages() {
 }
 
 function markAllRead() {
-    const form = document.getElementById("markAllReadForm")
+    const form = document.getElementById("markAllReadForm");
     form.submit();
 }
