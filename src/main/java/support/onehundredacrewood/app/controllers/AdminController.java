@@ -1,14 +1,11 @@
 package support.onehundredacrewood.app.controllers;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import sun.plugin.liveconnect.SecurityContextHelper;
 import support.onehundredacrewood.app.dao.repositories.CommentRepo;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
-import support.onehundredacrewood.app.security.SecurityConfiguration;
 
 @Controller
 public class AdminController {
