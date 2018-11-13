@@ -19,6 +19,27 @@
         <br />
         <input type="hidden" id="postId" th:value="${post.id}" />
         <input type="submit" />
+        <br />
+        <!--<button id="delete-post" class="waves-effect waves-dark btn-small">Delete</button>-->
+        <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
+        <input type="hidden" id="deletePost" th:field="${post}">Delete Post</input>
+        <button type="submit" onClick="return confirm('sure?')"/>
+    </form>
 
+        <script>
+
+
+            // <!--var deletePost = document.querySelector("#delete-post");-->
+            // <!--//let postId = document.querySelector("#postId").value;-->
+            // <!--deletePost.addEventListener('click', function(e){-->
+            //     <!--e.preventDefault();-->
+            //     <!--var confirmMessage = confirm("Are you sure?");-->
+            //     <!--if(confirmMessage){-->
+            //         <!--fetch(`/posts/${post.id}/delete`, {-->
+            //             <!--method: "POST"-->
+            //         <!--}).then( res => res.json()).then( () => location.href = "/posts");-->
+            //     <!--}-->
+            // <!--});-->
+        </script>
 </body>
 </html>
