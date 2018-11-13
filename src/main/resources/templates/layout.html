@@ -30,7 +30,7 @@
             <li><a th:href="@{/resources}">Resources</a></li>
             <th:block sec:authorize="isAuthenticated()">
                 <li><a th:href="@{/posts/myposts}">My Posts</a></li>
-                <li><a href="#">Friends</a></li>
+                <li class="hide"><a href="#">Friends</a></li>
                 <li><a th:href="@{/posts/create}">Create</a></li>
             </th:block>
         </ul>
@@ -56,7 +56,7 @@
     <li><a th:href="@{/resources}">Resources</a></li>
     <th:block sec:authorize="isAuthenticated()">
         <li><a th:href="@{/posts/myposts}">My Posts</a></li>
-        <li><a href="#">Friends</a></li>
+        <li class="hide"><a href="#">Friends</a></li>
         <li><a th:href="@{/posts/create}">Create</a></li>
     </th:block>
     <li><hr/></li>
