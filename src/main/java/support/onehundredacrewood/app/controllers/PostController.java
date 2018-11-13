@@ -72,4 +72,11 @@ public class PostController {
         postRepo.deleteById(id);
         return "redirect:/posts";
     }
+
+    @GetMapping("/posts/myposts")
+    public String showUserPosts( Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("posts", postRepo.findAllByUserOrderByCreatedDesc(user));
+        return "post/index";
+    }
 }
