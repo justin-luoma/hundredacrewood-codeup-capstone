@@ -5,16 +5,22 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 public class UserWithRoles extends User implements UserDetails {
+    private boolean admin;
 
     public UserWithRoles(User user) {
         super(user);  // Call the copy constructor defined in User
+        this.admin = user.isAdmin();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = ""; // Since we're not using the authorization part of the component
+        String roles = "USER";
+        if (admin) {
+            roles = "ADMIN,USER";
+        }
         return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
     }
 
