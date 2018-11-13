@@ -14,6 +14,9 @@ public class Topic {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false, length = 500)
+    private String description;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "post_topic",
@@ -25,8 +28,15 @@ public class Topic {
     public Topic() {
     }
 
-    public Topic(String name) {
+    public Topic(String name, String description) {
         this.name = name;
+        this.description = description;
+    }
+
+    public Topic(String name, String description, List<Post> posts) {
+        this.name = name;
+        this.description = description;
+        this.posts = posts;
     }
 
     public long getId() {
@@ -43,6 +53,14 @@ public class Topic {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Post> getPosts() {
