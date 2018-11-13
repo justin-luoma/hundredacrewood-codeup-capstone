@@ -59,8 +59,8 @@ public class PostController {
     }
 
     @PostMapping("/posts/{id}/update")
-    public String updatePost(@ModelAttribute Post post) {
-        Post postUpdate = postRepo.findById(1);
+    public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
+        Post postUpdate = postRepo.findById(id);
         postUpdate.setTitle(post.getTitle());
         postUpdate.setBody(post.getBody());
         postRepo.save(postUpdate);
