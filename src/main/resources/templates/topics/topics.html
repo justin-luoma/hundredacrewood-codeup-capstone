@@ -15,32 +15,33 @@
         veniam voluptatum? Porro, vero!
     </p>
 
-    <div class="row" th:each="topic : ${topic}">
-        <h5>
-            <div th:text="${topic.name}"></div>
-        </h5>
+    <div class="row" th:each="topic : ${topics}">
+        <h5 th:text="${topic.name}"></h5>
+        <a class='col  btn btn-small waves-effect indigo'
+           th:href="@{|/topic/${topic.id}|}">View More</a>
         <div class="col s12 m12">
-
-            <div th:each="post : ${topic.posts}">
-                <div class="col s12 m6">
-                    <div class="card blue-grey darken-1">
-                        <div class="card-content white-text">
-
-                            <p th:text="${post.title}"></p>
-                            <br/>
-                            <span th:text="${post.body}"></span>
-
+            <th:block th:if="${topic.posts != null && topic.posts.size() > 0}">
+                <th:block th:each="post, i : ${topic.posts}">
+                    <th:block th:if="${i.index < 3}">
+                        <div class="col s12 m6">
+                            <div class="card blue-grey darken-1">
+                                <div class="card-content white-text">
+                                    <p th:text="${post.title}"></p>
+                                    <br/>
+                                    <p th:text="${post.body}"></p>
+                                </div>
+                                <div class="card-content white-text">
+                                    <span class="white-text">created by: <a th:href="@{|/users/${post.user.id}|}"
+                                                                        th:text="${post.user.username}"></a></span>
+                                </div>
+                                <a class='col s12 btn btn-large waves-effect indigo'
+                                   th:href="@{|/posts/${post.id}|}">View Post</a>
+                                <hr/>
+                            </div>
                         </div>
-                        <br/>
-
-                        <a class='col s12 btn btn-large waves-effect indigo'
-                           th:href="@{|/topic/${topic.id}|}">View More</a>
-                        
-
-                    </div>
-                    <hr/>
-                </div>
-            </div>
+                    </th:block>
+                </th:block>
+            </th:block>
         </div>
     </div>
 

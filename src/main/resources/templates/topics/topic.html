@@ -36,8 +36,10 @@
                         <br/>
                         <p th:text="${post.body}"></p>
                     </div>
-                    <p class="card-content white-text" th:text="'created by: '
-                     + ${post.user.username}"></p>
+                    <div class="card-content white-text">
+                                    <span class="white-text">created by: <a th:href="@{|/users/${post.user.id}|}"
+                                                                            th:text="${post.user.username}"></a></span>
+                    </div>
                     <a class='col s12 btn btn-large waves-effect indigo'
                        th:href="@{|/posts/${post.id}|}">View Post</a>
                     <hr/>

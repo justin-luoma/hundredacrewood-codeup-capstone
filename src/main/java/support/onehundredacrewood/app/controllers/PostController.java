@@ -3,23 +3,26 @@ package support.onehundredacrewood.app.controllers;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import support.onehundredacrewood.app.dao.models.Post;
+import support.onehundredacrewood.app.dao.models.Topic;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
+import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class PostController {
     private final PostRepo postRepo;
+    private final TopicRepo topicRepo;
 
-    public PostController(PostRepo postRepo) {
-
+    public PostController(PostRepo postRepo, TopicRepo topicRepo) {
         this.postRepo = postRepo;
+        this.topicRepo = topicRepo;
     }
 
     @GetMapping("/posts")
@@ -36,20 +39,27 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String createPostForm(Model vModel) {
-        vModel.addAttribute("post", new Post());
+    public String createPostForm(Model model) {
+        model.addAttribute("post", new Post());
+        model.addAttribute("selectTopic", topicRepo.findAll());
         return "post/create";
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post post) {
+    public String createPost(@ModelAttribute Post post, @RequestParam(name="selectTopic") Long[] topics) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
         post.setCreated(LocalDateTime.now());
         post.setReported(false);
         post.setLocked(false);
-        postRepo.save(post);
-        return "redirect:/post/"+ post.getId();
+        List<Topic> newTopics = new ArrayList<>();
+        for (Long topic: topics) {
+            newTopics.add(topicRepo.findById(topic).get());
+        }
+        post.setTopics(newTopics);
+        Post newPost = postRepo.save(post);
+        System.out.println(Arrays.toString(topics));
+        return "redirect:/posts/"+ newPost.getId();
     }
 
     @GetMapping("/posts/{id}/update")

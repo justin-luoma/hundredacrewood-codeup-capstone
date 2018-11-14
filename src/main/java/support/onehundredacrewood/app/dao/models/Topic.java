@@ -1,6 +1,7 @@
 package support.onehundredacrewood.app.dao.models;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -17,12 +18,7 @@ public class Topic {
     @Column(nullable = false, length = 500)
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "post_topic",
-            joinColumns = {@JoinColumn(name = "topic_id")},
-            inverseJoinColumns = {@JoinColumn(name = "post_id")}
-    )
+    @ManyToMany(mappedBy = "topics", fetch = FetchType.LAZY)
     private List<Post> posts;
 
     public Topic() {
@@ -64,6 +60,7 @@ public class Topic {
     }
 
     public List<Post> getPosts() {
+        this.posts.sort(Comparator.comparing(Post::getCreated).reversed());
         return posts;
     }
 
