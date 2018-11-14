@@ -57,7 +57,7 @@ public class UserController {
         if (auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
             User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User me = userRepo.findById(principal.getId()).get();
-            friends = areFriends(me.getFriends(), user.getId());
+            friends = me.getId() == user.getId() || areFriends(me.getFriends(), user.getId());
         }
 
 
