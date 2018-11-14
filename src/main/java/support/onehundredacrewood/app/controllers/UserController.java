@@ -1,6 +1,8 @@
 package support.onehundredacrewood.app.controllers;
 
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import support.onehundredacrewood.app.dao.repositories.UserRepo;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -34,7 +37,7 @@ public class UserController {
     @GetMapping("/profile")
     public String showProfile(Model model) {
         User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepo.findById(principal.getId());
+        User user = userRepo.findById(principal.getId()).get();
         user.getPosts().sort(Comparator.comparing(Post::getCreated).reversed());
 
         model.addAttribute("user",user);
@@ -44,13 +47,20 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public String userProfiles(@PathVariable(name = "id") long id, Model model){
-        User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User me = userRepo.findById(principal.getId());
-        User user = userRepo.findById(id);
+        Optional<User> oUser = userRepo.findById(id);
+        if (!oUser.isPresent()) {
+            return "redirect:/";
+        }
+        User user = oUser.get();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean friends = false;
-        if (principal != null) {
+        if (auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
+            User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User me = userRepo.findById(principal.getId()).get();
             friends = areFriends(me.getFriends(), user.getId());
         }
+
+
         model.addAttribute("user", user);
         model.addAttribute("isFriend", friends);
         return "users/user";
@@ -59,8 +69,8 @@ public class UserController {
     @PostMapping("/users/follow")
     public String followUser(@RequestParam(name = "id") long id){
         User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepo.findById(principal.getId());
-        User friend = userRepo.findById(id);
+        User user = userRepo.findById(principal.getId()).get();
+        User friend = userRepo.findById(id).get();
 
         user.addFriend(friend);
         userRepo.save(user);

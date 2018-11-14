@@ -13,7 +13,5 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     User findByUsernameOrEmail(String username, String email);
 
-    User findById(long id);
-
     List<User> findAllByStrikesGreaterThan(int strikes);
 }

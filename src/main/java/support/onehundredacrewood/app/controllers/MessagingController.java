@@ -48,7 +48,7 @@ public class MessagingController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Message message = new Message(
                 user,
-                userRepo.findById(to),
+                userRepo.findById(to).get(),
                 LocalDateTime.now(),
                 true,
                 false,
@@ -80,7 +80,7 @@ public class MessagingController {
     @GetMapping("/messages")
     public String showMessages(Model model) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepo.findById(principal.getId());
+        User user = userRepo.findById(principal.getId()).get();
         List<Message> messages = messageRepo.findAllByReceiverOrderByTimestampDesc(principal);
         model.addAttribute("messages", messages);
         model.addAttribute("user", user);
