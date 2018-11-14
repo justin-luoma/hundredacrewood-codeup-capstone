@@ -28,6 +28,7 @@ public class PostController {
                           UserRepo userRepo) {
         this.postRepo = postRepo;
         this.topicRepo = topicRepo;
+
         this.userRepo = userRepo;
     }
 
@@ -112,6 +113,7 @@ public class PostController {
         User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post post = postRepo.findById(id);
         User user = userRepo.findById(principal.getId()).get();
+
 
         user.followPost(post);
         postRepo.save(post);
