@@ -28,7 +28,6 @@ public class PostController {
                           UserRepo userRepo) {
         this.postRepo = postRepo;
         this.topicRepo = topicRepo;
-
         this.userRepo = userRepo;
     }
 
