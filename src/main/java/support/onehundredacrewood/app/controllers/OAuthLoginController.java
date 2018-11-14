@@ -40,6 +40,8 @@ public class OAuthLoginController {
         user.setBirthday(birth);
         user.setOauthLogin(true);
         user.setOauthProvider(provider);
+        if (user.getImage().isEmpty())
+            user.setImage(null);
         User newUser = userRepo.saveAndFlush(user);
         refreshLogin(newUser);
         return "redirect:/profile";
