@@ -192,6 +192,12 @@ public class User {
         return friends;
     }
 
+    public List<Post> followPost(Post post) {
+        List<Post> followedPosts = this.followedPosts;
+        followedPosts.add(post);
+        return followedPosts;
+    }
+
     public long getId() {
         return id;
     }

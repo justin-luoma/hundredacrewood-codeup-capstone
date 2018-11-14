@@ -39,6 +39,7 @@ public class Post {
     )
     private List<Topic> topics;
 
+
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "post_id")
     private List<Comment> comments;
@@ -69,6 +70,7 @@ public class Post {
         this.topics = topics;
         this.comments = comments;
     }
+
 
     public long getId() {
         return id;
@@ -140,5 +142,9 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public static boolean isFollowing(List<Post> following, final long postId) {
+        return following.stream().anyMatch(p -> p.getId() == postId);
     }
 }
