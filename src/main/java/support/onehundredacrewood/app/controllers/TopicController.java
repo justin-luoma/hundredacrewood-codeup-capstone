@@ -28,7 +28,6 @@ public class TopicController {
     @GetMapping("/topic")
     public String showTopics(Model model) {
         List<Topic> topics = topicRepo.findAll();
-//        topics.forEach(t -> t.getPosts().sort(Comparator.comparing(Post::getCreated).reversed()));
 
         model.addAttribute("topics", topics);
         return "topics/topics";
