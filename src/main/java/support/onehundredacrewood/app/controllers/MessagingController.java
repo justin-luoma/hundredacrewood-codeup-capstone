@@ -70,7 +70,6 @@ public class MessagingController {
     public String markAllRead() {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Message> unreadMessages = messageRepo.findAllByUnreadAndReceiver(true, principal);
-        System.out.println(unreadMessages.size());
         unreadMessages.forEach(message -> message.setUnread(false));
         unreadMessages.forEach(m -> System.out.println(m.getUnread()));
         messageRepo.saveAll(unreadMessages);

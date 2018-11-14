@@ -3,13 +3,11 @@ package support.onehundredacrewood.app.controllers;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
 
+import java.security.Principal;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,11 +33,18 @@ public class AuthController {
         return "auth/register";
     }
 
+    @GetMapping("/test")
+    @ResponseBody
+    public String testAuth() {
+
+        return "test";
+    }
+
     @PostMapping("/register")
-    public String register(@ModelAttribute User user, @RequestParam(name = "birthdayString") String birthday) {
+    public String register(@ModelAttribute User user, @RequestParam(name = "birthdayString") String birthday, @RequestParam(name = "genderString") String gender) {
         LocalDate birth = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         user.setBirthday(birth);
-
+        user.setGender(gender);
 
         if (userRepo.findByUsername(user.getUsername()) != null) {
             user.setPassword(null);

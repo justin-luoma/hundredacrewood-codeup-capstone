@@ -2,8 +2,10 @@ package support.onehundredacrewood.app.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,21 +37,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                /* Login configuration */
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/") // user's home page, it can be any URL
-                .permitAll() // Anyone can go to the login page
-                /* Logout configuration */
-                .and()
-                .logout()
-                .logoutSuccessUrl("/login?logout") // append a query string value
-                /* Pages that can be viewed without having to log in */
+                .authorizeRequests()
+                .antMatchers("/js/**", "/css/**")
+                .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/") // anyone can see the home and the ads pages
+                .anyRequest().access("not(hasRole('ROLE_USER'))")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .permitAll()
-                /* Pages that require athentication */
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login?logout")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/")
+                .permitAll()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/admin")
@@ -57,13 +64,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/posts/create", // only authenticated users can create ads
+                        "/posts/create",
                         "/profile",
-                        "/posts/{id}/update", //only authenticated users can update/edit posts
+                        "/posts/{id}/update",
                         "/messaging",
                         "/messages",
                         "/messages/**",
-                        "/posts/myposts"// only authenticated users can edit ads
+                        "/posts/myposts"
                 )
                 .authenticated()
         ;
