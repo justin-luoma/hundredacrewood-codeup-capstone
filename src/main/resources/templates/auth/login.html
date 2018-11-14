@@ -35,6 +35,9 @@
                             <div th:if="${param.logout}">
                                 You have been logged out.
                             </div>
+                            <div th:if="${param.oauth}">
+                                That account doesn't exist, you must register or login with your password.
+                            </div>
                             <div class='input-field col s12'>
                                 <input class='validate' type='text' name='username' id='username'/>
                                 <label for='username'>Username or Email</label>
@@ -60,7 +63,13 @@
                     </form>
                 </div>
             </div>
-            <a th:href="@{/register}">Create account</a>
+            <div class="row d-flex flex-column align-items-center">
+                <a class="loginBtn loginBtn--google" th:href="@{/oauth2/authorization/google}">
+                    Login with Google
+                </a>
+                <a class="mt-1" th:href="@{/register}">Create account</a>
+            </div>
+
         </center>
     </main>
 </div>

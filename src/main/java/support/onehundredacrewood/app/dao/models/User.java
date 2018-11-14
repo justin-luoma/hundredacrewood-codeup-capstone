@@ -50,6 +50,12 @@ public class User {
     @Column
     private Integer strikes;
 
+    @Column(nullable = false)
+    private boolean oauthLogin;
+
+    @Column
+    private String oauthProvider;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private List<Post> posts;
@@ -108,6 +114,26 @@ public class User {
         this.gender = gender;
         this.image = image;
         this.strikes = strikes;
+        this.oauthLogin = false;
+    }
+
+    public User(String username, String password, String email, boolean admin
+            , String phone, boolean texts, boolean emails, LocalDate birthday
+            , String city, String gender, String image, Integer strikes, boolean oauthLogin, String oauthProvider) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.admin = admin;
+        this.phone = phone;
+        this.texts = texts;
+        this.emails = emails;
+        this.birthday = birthday;
+        this.city = city;
+        this.gender = gender;
+        this.image = image;
+        this.strikes = strikes;
+        this.oauthLogin = oauthLogin;
+        this.oauthProvider = this.oauthLogin ? oauthProvider : null;
     }
 
     public User(String username, String password, String email, boolean admin
@@ -324,5 +350,29 @@ public class User {
 
     public void setSentMessages(List<Message> sentMessages) {
         this.sentMessages = sentMessages;
+    }
+
+    public boolean isTexts() {
+        return texts;
+    }
+
+    public boolean isEmails() {
+        return emails;
+    }
+
+    public boolean isOauthLogin() {
+        return oauthLogin;
+    }
+
+    public void setOauthLogin(boolean oauthLogin) {
+        this.oauthLogin = oauthLogin;
+    }
+
+    public String getOauthProvider() {
+        return oauthProvider;
+    }
+
+    public void setOauthProvider(String oauthProvider) {
+        this.oauthProvider = oauthProvider;
     }
 }

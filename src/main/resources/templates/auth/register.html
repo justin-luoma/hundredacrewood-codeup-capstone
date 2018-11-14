@@ -57,7 +57,7 @@
 
         <div class='row'>
             <div class="input-field col s12">
-                <select th:field="*{gender}" id="gender" name="gender" required="">
+                <select id="gender" name="genderString" required="">
                     <option value="" disabled selected>Please Select</option>
                     <option value="female">Female</option>
                     <option value="male">Male</option>
@@ -71,7 +71,7 @@
             <div class="col s12">
                 <label>Profile Image</label>
                 <br />
-                <input type="hidden" role="uploadcare-uploader" name="content" data-preview-step="" data-public-key="0f3c66d0f509cc4d8bbd" data-images-only data-crop="1:1" th:name="image" />
+                <input type="hidden" role="uploadcare-uploader"  data-preview-step="" data-public-key="0f3c66d0f509cc4d8bbd" data-images-only data-crop="1:1" th:name="image" />
             </div>
         </div>
 
@@ -106,7 +106,15 @@
         </div>
     </form>
     </div>
-    <a th:href="@{/login}">Login</a>
+    <div class="row d-flex flex-column align-items-center mb-2">
+        <form th:action="@{/oauth2/registering}" method="post">
+            <input type="hidden" name="provider" value="google" />
+            <button type="submit" class="loginBtn loginBtn--google">
+                Register with Google
+            </button>
+        </form>
+        <a th:href="@{/login}">Login</a>
+    </div>
     <script th:src="@{/js/uploadcare.full.min.js}"></script>
     <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/tooltip.min.js}"></script>
