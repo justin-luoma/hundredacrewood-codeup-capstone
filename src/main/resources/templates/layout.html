@@ -4,6 +4,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head th:fragment="head-fragment">
     <meta charset="UTF-8"/>
+    <!--google verification-->
+    <meta name="google-site-verification" content="rJXprdkjqzy6opsYkmoPqT528ytBh26BffbybK7y2LY" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet" />-->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
@@ -28,20 +30,20 @@
             <li><a th:href="@{/topic}">Topics</a></li>
             <li><a th:href="@{/posts}">Posts</a></li>
             <li><a th:href="@{/resources}">Resources</a></li>
-            <th:block sec:authorize="isAuthenticated()">
+            <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
                 <li><a th:href="@{/posts/myposts}">My Posts</a></li>
                 <li class="hide"><a href="#">Friends</a></li>
                 <li><a th:href="@{/posts/create}">Create</a></li>
             </th:block>
         </ul>
         <ul class="right hide-on-med-and-down">
-            <th:block sec:authorize="isAuthenticated()">
+            <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
                 <li id="logoutButton"><a href="#">Logout</a></li>
                 <li><a th:href="@{/profile}">Profile</a></li>
                 <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
                 <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
             </th:block>
-            <th:block sec:authorize="!isAuthenticated()">
+            <th:block sec:authorize="!isAuthenticated() || hasAuthority('ROLE_USER')">
                 <li><a th:href="@{/login}">Login</a></li>
                 <li><a th:href="@{/register}">Register</a></li>
             </th:block>
@@ -54,19 +56,19 @@
     <li><a th:href="@{/topic}">Topics</a></li>
     <li><a th:href="@{/posts}">Posts</a></li>
     <li><a th:href="@{/resources}">Resources</a></li>
-    <th:block sec:authorize="isAuthenticated()">
+    <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
         <li><a th:href="@{/posts/myposts}">My Posts</a></li>
         <li class="hide"><a href="#">Friends</a></li>
         <li><a th:href="@{/posts/create}">Create</a></li>
     </th:block>
     <li><hr/></li>
-    <th:block sec:authorize="isAuthenticated()">
+    <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
         <li id="logoutButtonMobile"><a href="#">Logout</a></li>
         <li><a th:href="@{/profile}">Profile</a></li>
         <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
         <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
     </th:block>
-    <th:block sec:authorize="!isAuthenticated()">
+    <th:block sec:authorize="!isAuthenticated() || hasAuthority('ROLE_USER')">
         <li><a th:href="@{/login}">Login</a></li>
         <li><a th:href="@{/register}">Register</a></li>
     </th:block>
@@ -111,9 +113,9 @@
 <script th:src="@{/js/materialize.min.js}"></script>
 <script th:src="@{/js/layout.js}"></script>
 
-<script sec:authorize="isAuthenticated()" th:src="@{/js/messaging.js}"></script>
+<script sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')" th:src="@{/js/messaging.js}"></script>
 
-<th:block sec:authorize="isAuthenticated()" th:replace="messages/sendModal :: messageModal">
+<th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')" th:replace="messages/sendModal :: messageModal">
 </th:block>
 </body>
 </html>
