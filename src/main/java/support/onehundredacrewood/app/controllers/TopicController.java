@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import support.onehundredacrewood.app.dao.models.Post;
 import support.onehundredacrewood.app.dao.models.Topic;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
 import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -24,8 +26,11 @@ public class TopicController {
     }
 
     @GetMapping("/topic")
-    public String showTopics(@ModelAttribute Model model) {
-        model.addAttribute("topic", topicRepo.findAll());
+    public String showTopics(Model model) {
+        List<Topic> topics = topicRepo.findAll();
+//        topics.forEach(t -> t.getPosts().sort(Comparator.comparing(Post::getCreated).reversed()));
+
+        model.addAttribute("topics", topics);
         return "topics/topics";
     }
 
