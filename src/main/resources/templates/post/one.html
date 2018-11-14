@@ -34,7 +34,13 @@
                 </span>
 
                 <a class='col s12 btn btn-large waves-effect indigo' th:href="@{|/users/${post.user.id}|}">User Profile</a>
+
             </div>
+
+            <form sec:authorize="isAuthenticated()" th:if="${!isFollowing}" th:action="@{/posts/follow}" method="post">
+                <input type="hidden" name="id" th:value="${post.id}"/>
+                <button type="submit" class="col s6 btn btn-large waves-effect indigo">Follow Post</button>
+            </form>
         </div>
     </div>
     <span th:text="${post.comments.size()}"></span>

@@ -32,6 +32,10 @@
         <!--<div th:text="${friend.username}"></div>-->
         <a th:href="@{|/users/${friend.id}|}" th:text="${friend.username}"></a>
     </div>
+
+    <h5>Followed Posts</h5>
+
+
     <h5>Your Posts</h5>
     <div class="row">
         <div class="col s12 m6" th:each="post, i : ${user.posts}">
