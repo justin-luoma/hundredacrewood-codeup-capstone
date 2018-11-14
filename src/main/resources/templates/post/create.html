@@ -8,20 +8,42 @@
 <body>
 
 <div class = "container" layout:fragment="content">
-
-<form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-    <br />
-    Title of post:
-    <input th:field="*{title}" />
-    <br />
-    Body:
-    <textarea th:field="*{body}" />
-    <br />
-    Topic:
-    <input th:field="*{topics}" />
-    <input type="submit" />
-</form>
+    <div class="row">
+        <form class="col s12" th:action="@{/posts/create}" th:method="post" th:object="${post}">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="title" id="title" type="text">
+                    <label for="title">Title</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea name="body" id="body" class="materialize-textarea"></textarea>
+                    <label for="body">Body</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select multiple="" name="selectTopic">
+                        <th:block th:each="topic : ${selectTopic}">
+                            <option th:value="${topic.id}" th:text="${topic.name}"></option>
+                        </th:block>
+                    </select>
+                    <label>Topics</label>
+                </div>
+            </div>
+            <div class='row'>
+                <button type='submit' class='col s12 btn btn-large waves-effect indigo'>Create</button>
+            </div>
+        </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var postCreateSelect = document.querySelectorAll('select');
+            var postCreateSelectInstances = M.FormSelect.init(postCreateSelect);
+        });
+    </script>
+</div>
 
 </body>
 </html>

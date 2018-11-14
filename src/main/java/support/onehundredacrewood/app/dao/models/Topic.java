@@ -25,7 +25,7 @@ public class Topic {
     )
     private List<Post> posts;
 
-    public Topic() {
+    public Topic(){
     }
 
     public Topic(String name, String description) {
