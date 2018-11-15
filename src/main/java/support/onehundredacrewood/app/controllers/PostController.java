@@ -138,6 +138,20 @@ public class PostController {
         return "redirect:/posts/" + postId;
     }
 
+    @PostMapping("/posts/report")
+    public String report(@RequestParam(name = "id") long postId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
+            Post post = postRepo.findById(postId);
+            post.setReported(true);
+            postRepo.save(post);
+
+            return "redirect:/posts/" + postId;
+        }
+
+        return "redirect:/";
+    }
+
     @PostMapping("/posts/lock")
     public String lockPost(@RequestParam(name = "id") long postId) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -161,6 +175,20 @@ public class PostController {
 
         postRepo.deleteById(id);
         return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/comment/report")
+    public String reportComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
+            commentRepo.findById(commentId).ifPresent(c -> {
+                c.setReported(true);
+                commentRepo.saveAndFlush(c);
+            });
+            return "redirect:/posts/" + postId;
+        }
+
+        return "redirect:/";
     }
 
     @PostMapping("/posts/comment/delete")
