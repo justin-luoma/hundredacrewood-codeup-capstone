@@ -54,6 +54,11 @@
                             </a>
                         </th:block>
                     </th:block>
+                    <th:block th:if="${#authentication.principal.id == post.user.id || #authentication.principal.admin}">
+                        <a class="hoverPointer" onclick="(() => {const form = document.getElementById('deletePostForm'); form.submit()})()">
+                            Delete Post
+                        </a>
+                    </th:block>
                     <th:block sec:authorize="hasAuthority('ADMIN')">
                         <th:block th:if="${!post.locked}">
                             <a class="hoverPointer" onclick="(() => {const form = document.getElementById('lockPostForm'); form.submit()})()">
@@ -65,9 +70,6 @@
                                 Unlock Post
                             </a>
                         </th:block>
-                        <a class="hoverPointer" onclick="(() => {const form = document.getElementById('deletePostForm'); form.submit()})()">
-                            Delete Post
-                        </a>
                         <th:block th:if="${post.reported}">
                             <a class="hoverPointer" onclick="(() => {const form = document.getElementById('clearReportForm'); form.submit()})()">
                                 Clear Report
@@ -158,12 +160,14 @@
         </form>
     </th:block>
 
-    <th:block sec:authorize="hasAuthority('ADMIN')">
-        <form id="lockPostForm" th:action="@{/posts/lock-toggle}" method="post">
+    <th:block th:if="${#authentication.principal.id == post.user.id || #authentication.principal.admin}">
+        <form id="deletePostForm" th:action="@{/posts/delete}" method="post">
             <input type="hidden" th:name="id" th:value="${post.id}" />
         </form>
+    </th:block>
 
-        <form id="deletePostForm" th:action="@{/posts/delete}" method="post">
+    <th:block sec:authorize="hasAuthority('ADMIN')">
+        <form id="lockPostForm" th:action="@{/posts/lock-toggle}" method="post">
             <input type="hidden" th:name="id" th:value="${post.id}" />
         </form>
 
