@@ -134,6 +134,8 @@ public class PostController {
         }
         User user = userRepo.findById(userId).get();
         Post post = postRepo.findById(postId);
+        if (post.isLocked())
+            return "redirect:/posts/" + postId;
         comment.setCreated(LocalDateTime.now());
         comment.setPost(post);
         comment.setReported(false);
