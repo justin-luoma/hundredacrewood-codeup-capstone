@@ -13,12 +13,15 @@
 
     <th:block th:each="post : ${posts}">
     <div class="row">
-        <div class="col s12 m6">
-            <div class="card">
+        <div class="col s12 m12">
+            <div class="card blue-grey darken-1">
                 <a th:href="@{'/posts/' + ${post.id}}">
+                    <div class="card-content white-text mb-0 pb-0">
                     <span class="card-title" th:text="${post.title}"></span>
                 </a>
                     <p th:text="${post.body}"></p>
+            </div>
+            <div class="card-content white-text pb-0">
                     <p th:text="'created by: ' + ${post.user.username}"></p>
                         <!--<a href="topic.html"-->
                         <!--th:href="@{/topic/${topic.id}}"-->
@@ -26,15 +29,20 @@
                             <!--<th:block th:each="topic,i : ${post.topics}">-->
                         <!--</a>-->
                             <!--</th:block>-->
+            </div>
+            <div class="card-content white-text pt-0">
                    <p> <th:block th:each="topic,i : ${post.topics}">
                        <th:block th:text="${topic.name.concat(!i.last ? ', ' : ' ')}"></th:block>
                     </th:block>
                    </p>
+                <a th:href="@{'/posts/' + ${post.id}}">
+                    <span th:text="${post.comments.size()} + ' ' + comments"></a></span>
             </div>
-            <span th:text="${post.comments.size()}"></span>
+            </div>
+
         </div>
-    </div>
     </th:block>
+</div>
 </div>
 
 </body>
