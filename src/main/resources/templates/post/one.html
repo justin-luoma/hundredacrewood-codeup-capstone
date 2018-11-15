@@ -26,7 +26,6 @@
                 <div class="card-content white-text pt-0">
                     <label th:if="${post.topics.size() > 0}">Topics:</label>
                     <th:block th:each="topic,i : ${post.topics}">
-                        <!--<th:block th:text="${topic.name.concat(!i.last ? ', ' : ' ')}">-->
                         <a class="light-blue-text lighten-4" th:href="@{|/topic/${topic.id}|}"
                            th:text="${topic.name}"></a>
                         <span th:if="${!i.last}">|</span>
