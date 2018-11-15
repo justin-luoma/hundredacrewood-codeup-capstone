@@ -87,9 +87,14 @@ public class PostController {
         return "redirect:/posts/"+ newPost.getId();
     }
 
-    @GetMapping("/posts/{id}/update")
-    public String editPost(@PathVariable long id, Model vModel) {
-        vModel.addAttribute("post", postRepo.findById(id));
+    @GetMapping("/posts/{postId}/update")
+    public String editPost(@PathVariable long postId, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post post = postRepo.findById(postId);
+        if (user.getId() != post.getUser().getId()) {
+            return "redirect:/";
+        }
+        model.addAttribute("post", post);
         return "post/edit";
     }
 
