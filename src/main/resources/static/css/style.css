@@ -2,6 +2,7 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
+	background-color: #f0f7f4;
 }
 
 main {
@@ -212,22 +213,17 @@ center.h-100 {
 	cursor: pointer;
 }
 
-
 /*Footer*/
-.layoutLi {
-	display: inline;
-}
-
 #footerColor {
 	background-color: #705d56;
 	padding-top: 10px;
 }
 
-#bottomFooter{
+#bottomFooter {
 	padding-top: 0px;
 }
 
-#footerRow{
+#footerRow {
 	margin-bottom: 5px;
 }
 
