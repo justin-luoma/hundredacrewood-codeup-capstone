@@ -24,6 +24,7 @@ public class OAuthSecurity extends WebSecurityConfigurerAdapter {
                 .and()
                 .loginPage("/oauth2/login")
                 .defaultSuccessUrl("/oauth2/success")
+                .failureUrl("/login?error")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/oauth2/registering")
