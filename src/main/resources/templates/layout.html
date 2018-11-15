@@ -21,7 +21,7 @@
 </head>
 <body>
 <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper" id="navColor">
         <a th:href="@{/}" class="brand-logo hide-on-large-only hide-on-large-only">
             <img class="avatar logo" th:src="@{/img/logo.png}" />
         </a>
@@ -83,9 +83,9 @@
     <div layout:fragment="content"></div>
 </main>
 
-<footer class="page-footer orange" th:fragment="footer">
+<footer class="page-footer" id="footerColor" th:fragment="footer">
     <div class="container">
-        <div class="row">
+        <div class="row" id="footerRow">
             <div class="col l6 s12">
                 <h5 class="white-text">Disclaimer</h5>
                 <p class="grey-text text-lighten-4">This is a development project and should be treated as such. Do not enter private or personal information.</p>
@@ -93,18 +93,18 @@
             <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Links</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" th:href="@{/}">Home</a></li>
-                    <li><a class="grey-text text-lighten-3" th:href="@{/resources}">Resources</a></li>
-                    <li><a class="grey-text text-lighten-3" th:href="@{/posts}">Posts</a></li>
-                    <li><a class="grey-text text-lighten-3" th:href="@{/topic}">Topics</a></li>
-                    <li><a class="grey-text text-lighten-3" th:href="@{/about}">About Us</a></li>
+                    <li class="layoutLi"><a class="grey-text text-lighten-3" th:href="@{/}">Home</a></li>
+                    <li class="layoutLi"><a class="grey-text text-lighten-3" th:href="@{/resources}">Resources</a></li>
+                    <li class="layoutLi"><a class="grey-text text-lighten-3" th:href="@{/posts}">Posts</a></li>
+                    <li class="layoutLi"><a class="grey-text text-lighten-3" th:href="@{/topic}">Topics</a></li>
+                    <li class="layoutLi"><a class="grey-text text-lighten-3" th:href="@{/about}">About Us</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="footer-copyright">
+    <div class="footer-copyright" id="bottomFooter">
         <div class="container">
-            <p>© 2018 Copyright: Justin Luoma</p>
+            <p>© 2018 Hundred Acre Wood</p>
         </div>
     </div>
 </footer>

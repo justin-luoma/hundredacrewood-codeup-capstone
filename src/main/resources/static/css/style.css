@@ -1,209 +1,235 @@
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	background-color: #f0f7f4;
 }
 
 main {
-    flex: 1 0 auto;
+	flex: 1 0 auto;
 }
 
 .d-flex {
-    display: flex;
+	display: flex;
 }
 
 .justify-content-center {
-    justify-content: center;
+	justify-content: center;
 }
 
 .flex-column {
-    flex-flow: column;
+	flex-flow: column;
 }
 
 .align-items-center {
-    align-items: center;
+	align-items: center;
 }
 
 .min75 {
-    min-width: 75%;
+	min-width: 75%;
 }
 
 .mt-0 {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .mt-1 {
-    margin-top: 1em!important;
+	margin-top: 1em !important;
 }
 
 .mb-2 {
-    margin-bottom: 2em!important;
+	margin-bottom: 2em !important;
 }
 
 .mb-0 {
-    margin-bottom: 0!important;
+	margin-bottom: 0 !important;
 }
 
 .pb-0 {
-    padding-bottom: 0!important;
+	padding-bottom: 0 !important;
 }
 
 .pt-0 {
-    padding-top: 0;
+	padding-top: 0;
 }
 
 .p-0 {
-    padding: 0!important;
+	padding: 0 !important;
 }
 
 .m-0 {
-    margin: 0;
+	margin: 0;
 }
 
 .tooltip {
-    position: absolute;
-    z-index: 1070;
-    display: block;
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: left;
-    text-align: start;
-    text-decoration: none;
-    text-shadow: none;
-    text-transform: none;
-    letter-spacing: normal;
-    word-break: normal;
-    word-spacing: normal;
-    white-space: normal;
-    line-break: auto;
-    font-size: 0.875rem;
-    word-wrap: break-word;
+	position: absolute;
+	z-index: 1070;
+	display: block;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: left;
+	text-align: start;
+	text-decoration: none;
+	text-shadow: none;
+	text-transform: none;
+	letter-spacing: normal;
+	word-break: normal;
+	word-spacing: normal;
+	white-space: normal;
+	line-break: auto;
+	font-size: 0.875rem;
+	word-wrap: break-word;
 }
 
 .tooltip .arrow {
-    position: absolute;
-    display: block;
-    width: 0.8rem;
-    height: 0.4rem;
+	position: absolute;
+	display: block;
+	width: 0.8rem;
+	height: 0.4rem;
 }
 
 .tooltip .arrow::before {
-    position: absolute;
-    content: "";
-    border-color: transparent;
-    border-style: solid;
+	position: absolute;
+	content: "";
+	border-color: transparent;
+	border-style: solid;
 }
 
 .tooltip-inner {
-    max-width: 200px;
-    padding: 0.25rem 0.5rem;
-    color: #fff;
-    text-align: center;
-    background-color: #000;
-    border-radius: 0.25rem;
+	max-width: 200px;
+	padding: 0.25rem 0.5rem;
+	color: #fff;
+	text-align: center;
+	background-color: #000;
+	border-radius: 0.25rem;
 }
 
 .logo-on-large {
-    position: inherit!important;
+	position: inherit !important;
 }
 
 .mr-auto {
-    margin-right: auto;
+	margin-right: auto;
 }
 
 .w-100 {
-    width: 100%!important;
+	width: 100% !important;
 }
 
 .p0 {
-    padding: 0!important;
+	padding: 0 !important;
 }
 
 center.h-100 {
-    height: 100%!important;
+	height: 100% !important;
 }
 
 @media only screen and (min-width: 601px) {
-    #toast-container {
-        bottom: 10%!important;
-        right: 2%!important;
-    }
+	#toast-container {
+		bottom: 10% !important;
+		right: 2% !important;
+	}
 }
 
 .avatar {
-    vertical-align: middle;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+	vertical-align: middle;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
 }
 
 .loginBtn {
-    box-sizing: border-box;
-    position: relative;
-    /* width: 13em;  - apply for fixed size */
-    margin: 0.2em;
-    padding: 0 15px 0 46px;
-    border: none;
-    text-align: left;
-    line-height: 34px;
-    white-space: nowrap;
-    border-radius: 0.2em;
-    font-size: 16px;
-    color: #FFF;
-}
-.loginBtn:before {
-    content: "";
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 34px;
-    height: 100%;
-}
-.loginBtn:focus {
-    outline: none;
-}
-.loginBtn:active {
-    box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+	box-sizing: border-box;
+	position: relative;
+	/* width: 13em;  - apply for fixed size */
+	margin: 0.2em;
+	padding: 0 15px 0 46px;
+	border: none;
+	text-align: left;
+	line-height: 34px;
+	white-space: nowrap;
+	border-radius: 0.2em;
+	font-size: 16px;
+	color: #FFF;
 }
 
+.loginBtn:before {
+	content: "";
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 34px;
+	height: 100%;
+}
+
+.loginBtn:focus {
+	outline: none;
+}
+
+.loginBtn:active {
+	box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+}
 
 /* Facebook */
 .loginBtn--facebook {
-    background-color: #4C69BA;
-    background-image: linear-gradient(#4C69BA, #3B55A0);
-    /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
-    text-shadow: 0 -1px 0 #354C8C;
-}
-.loginBtn--facebook:before {
-    border-right: #364e92 1px solid;
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
-}
-.loginBtn--facebook:hover,
-.loginBtn--facebook:focus {
-    background-color: #5B7BD5;
-    background-image: linear-gradient(#5B7BD5, #4864B1);
+	background-color: #4C69BA;
+	background-image: linear-gradient(#4C69BA, #3B55A0);
+	/*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+	text-shadow: 0 -1px 0 #354C8C;
 }
 
+.loginBtn--facebook:before {
+	border-right: #364e92 1px solid;
+	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+}
+
+.loginBtn--facebook:hover,
+.loginBtn--facebook:focus {
+	background-color: #5B7BD5;
+	background-image: linear-gradient(#5B7BD5, #4864B1);
+}
 
 /* Google */
 .loginBtn--google {
-    /*font-family: "Roboto", Roboto, arial, sans-serif;*/
-    background: #DD4B39;
-}
-.loginBtn--google:before {
-    border-right: #BB3F30 1px solid;
-    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
-}
-.loginBtn--google:hover,
-.loginBtn--google:focus {
-    background: #E74B37;
+	/*font-family: "Roboto", Roboto, arial, sans-serif;*/
+	background: #DD4B39;
 }
 
-.hoverPointer {cursor: pointer;}
+.loginBtn--google:before {
+	border-right: #BB3F30 1px solid;
+	background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+}
+
+.loginBtn--google:hover,
+.loginBtn--google:focus {
+	background: #E74B37;
+}
+
+.hoverPointer {
+	cursor: pointer;
+}
+
+/*Footer*/
+#footerColor {
+	background-color: #705d56;
+	padding-top: 10px;
+}
+
+#bottomFooter {
+	padding-top: 0px;
+}
+
+#footerRow {
+	margin-bottom: 5px;
+}
+
+#navColor {
+    background-color: #70abaf;
+}
 
 .logo {
     margin-bottom: 5px;
