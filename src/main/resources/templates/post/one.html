@@ -45,7 +45,7 @@
                     </th:block>
                     <th:block sec:authorize="hasAuthority('ADMIN')">
                         <a class="hoverPointer" onclick="(() => {const form = document.getElementById('lockPostForm'); form.submit()})()">Lock Post</a>
-                        <!--<a class="hoverPointer">Delete Post</a>-->
+                        <a class="hoverPointer" onclick="(() => {const form = document.getElementById('deletePostForm'); form.submit()})()">Delete Post</a>
                     </th:block>
                 </div>
 
@@ -94,6 +94,11 @@
     </th:block>
     <th:block sec:authorize="hasAuthority('ADMIN')">
         <form id="lockPostForm" th:action="@{/posts/lock}" method="post">
+            <input type="hidden" th:name="id" th:value="${post.id}" />
+        </form>
+    </th:block>
+    <th:block sec:authorize="hasAuthority('ADMIN')">
+        <form id="deletePostForm" th:action="@{/posts/delete}" method="post">
             <input type="hidden" th:name="id" th:value="${post.id}" />
         </form>
     </th:block>

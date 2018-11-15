@@ -98,12 +98,6 @@ public class PostController {
         return "redirect:/posts/"+ post.getId();
     }
 
-    @PostMapping("/posts/{id}/delete")
-    public String deletePost(@PathVariable long id) {
-        postRepo.deleteById(id);
-        return "redirect:/posts";
-    }
-
     @GetMapping("/posts/myposts")
     public String showUserPosts( Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -155,5 +149,17 @@ public class PostController {
         post.setLocked(true);
         postRepo.save(post);
         return "redirect:/posts/" + postId;
+    }
+
+
+    @PostMapping("/posts/delete")
+    public String deletePost(@RequestParam(name = "id") long id) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        postRepo.deleteById(id);
+        return "redirect:/posts";
     }
 }
