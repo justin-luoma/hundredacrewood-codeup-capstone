@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -227,7 +228,11 @@ public class PostController {
     @PostMapping("/posts/comment/delete")
     public String deleteComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (!principal.isAdmin()) {
+        long id = 0;
+        Optional<Comment> comment = commentRepo.findById(commentId);
+        if (comment.isPresent())
+            id = comment.get().getUser().getId();
+        if (!principal.isAdmin() && principal.getId() != id) {
             return "redirect:/";
         }
 
