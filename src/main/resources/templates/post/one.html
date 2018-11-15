@@ -59,6 +59,11 @@
                         <a class="hoverPointer" onclick="(() => {const form = document.getElementById('deletePostForm'); form.submit()})()">
                             Delete Post
                         </a>
+                        <th:block th:if="${post.reported}">
+                            <a class="hoverPointer" onclick="(() => {const form = document.getElementById('clearReportForm'); form.submit()})()">
+                                Clear Report
+                            </a>
+                        </th:block>
                     </th:block>
                 </div>
 
@@ -161,6 +166,9 @@
         <form id="deleteCommentForm" th:action="@{/posts/comment/delete}" method="post">
             <input type="hidden" id="deleteCommentInput" th:name="id" />
             <input type="hidden" name="postId" th:value="${post.id}">
+        </form>
+        <form id="clearReportForm" th:action="@{/posts/clear}" method="post">
+            <input type="hidden" name="id" th:value="${post.id}">
         </form>
     </th:block>
     <!--<p th:text="${post.}"></p>-->

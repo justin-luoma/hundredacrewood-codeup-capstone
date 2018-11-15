@@ -152,6 +152,19 @@ public class PostController {
         return "redirect:/";
     }
 
+    @PostMapping("/posts/clear")
+    public String clearReport(@RequestParam(name = "id") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        Post post = postRepo.findById(postId);
+        post.setReported(false);
+        postRepo.save(post);
+        return "redirect:/posts/" + postId;
+    }
+
     @PostMapping("/posts/lock")
     public String lockPost(@RequestParam(name = "id") long postId) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
