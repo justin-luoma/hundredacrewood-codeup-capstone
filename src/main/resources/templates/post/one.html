@@ -41,13 +41,16 @@
                            onclick="(() => {const newComment = document.getElementById('newComment'); newComment.classList.remove('hide')})()">
                             Comment
                         </a>
-                        <th:block th:if="${!isFollowing}">
+                        <a class="hoverPointer" th:if="${#authentication.principal.id == post.user.id}" th:href="@{|/posts/${post.id}/update|}">
+                            Edit
+                        </a>
+                        <th:block th:if="${!isFollowing && #authentication.principal.id != post.user.id}">
                             <a class="hoverPointer"
                                onclick="(() => {const form = document.getElementById('followForm'); form.submit()})()">
                                 Follow Post
                             </a>
                         </th:block>
-                        <th:block th:if="${!post.reported}">
+                        <th:block th:if="${!post.reported && #authentication.principal.id != post.user.id}">
                             <a class="hoverPointer"
                                onclick="(() => {const form = document.getElementById('reportPostForm'); form.submit()})()">
                                 Report

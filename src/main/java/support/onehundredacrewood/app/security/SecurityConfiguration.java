@@ -66,13 +66,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/posts/create",
                         "/profile",
-                        "/posts/{id}/update",
+                        "/posts/{postId}/update",
                         "/messaging",
                         "/messages",
                         "/messages/**",
                         "/posts/myposts",
                         "/posts/follow",
-                        "/posts/comment"
+                        "/posts/comment",
+                        "/posts/report",
+                        "/posts/clear",
+                        "/posts/lock-toggle",
+                        "/posts/delete",
+                        "/posts/comment/report",
+                        "/posts/comment/clear",
+                        "/posts/commemt/delete"
                 )
                 .authenticated()
         ;
