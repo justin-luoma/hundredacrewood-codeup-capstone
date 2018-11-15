@@ -85,11 +85,14 @@ function processMessage(json) {
         <button class="btn-flat toast-action" data-title="${json.from}" data-body="${json.message}" data-id="${json.fromId}" onclick="replyClick(this)">Reply</button>
         <a class="btn-flat toast-action" href="/messages/${json.id}" >View</a>
     `;
-    M.toast({
-        html: toastHtml,
-        classes: "message-toast",
-        outDuration: 3000
-    });
+    if (json.from != undefined) {
+        M.toast({
+            html: toastHtml,
+            classes: "message-toast",
+            outDuration: 3000
+        });
+    }
+
 }
 
 function checkMessages() {
