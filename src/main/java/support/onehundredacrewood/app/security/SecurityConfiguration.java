@@ -71,7 +71,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/messages",
                         "/messages/**",
                         "/posts/myposts",
-                        "/posts/follow"
+                        "/posts/follow",
+                        "/posts/comment"
                 )
                 .authenticated()
         ;

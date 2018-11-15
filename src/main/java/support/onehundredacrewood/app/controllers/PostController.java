@@ -6,9 +6,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import support.onehundredacrewood.app.dao.models.Comment;
 import support.onehundredacrewood.app.dao.models.Post;
 import support.onehundredacrewood.app.dao.models.Topic;
 import support.onehundredacrewood.app.dao.models.User;
+import support.onehundredacrewood.app.dao.repositories.CommentRepo;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
 import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
@@ -23,12 +25,14 @@ public class PostController {
     private final PostRepo postRepo;
     private final TopicRepo topicRepo;
     private final UserRepo userRepo;
+    private final CommentRepo commentRepo;
 
     public PostController(PostRepo postRepo, TopicRepo topicRepo,
-                          UserRepo userRepo) {
+                          UserRepo userRepo, CommentRepo commentRepo) {
         this.postRepo = postRepo;
         this.topicRepo = topicRepo;
         this.userRepo = userRepo;
+        this.commentRepo = commentRepo;
     }
 
     @GetMapping("/posts")
@@ -51,6 +55,7 @@ public class PostController {
 
         model.addAttribute("post", post);
         model.addAttribute("isFollowing", isFollowing);
+        model.addAttribute("comment", new Comment());
         return "post/one";
     }
 
@@ -106,9 +111,8 @@ public class PostController {
         return "post/index";
     }
 
-    @PostMapping("posts/follow")
+    @PostMapping("/posts/follow")
     public String followPosts(@RequestParam(name = "id") long id, @RequestHeader(value = "referer") final String referer) {
-        System.out.println(referer);
         User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post post = postRepo.findById(id);
         User user = userRepo.findById(principal.getId()).get();
@@ -118,5 +122,23 @@ public class PostController {
         postRepo.save(post);
 
         return "redirect:" + referer;
+    }
+
+    @PostMapping("/posts/comment")
+    public String comment(@ModelAttribute Comment comment,
+                          @RequestParam(name = "postId") long postId,
+                          @RequestParam(name = "userId") long userId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal.getId() != userId) {
+            return "redirect:/";
+        }
+        User user = userRepo.findById(userId).get();
+        Post post = postRepo.findById(postId);
+        comment.setCreated(LocalDateTime.now());
+        comment.setPost(post);
+        comment.setReported(false);
+        comment.setUser(user);
+        commentRepo.saveAndFlush(comment);
+        return "redirect:/posts/" + postId;
     }
 }
