@@ -22,8 +22,12 @@
 <body>
 <nav>
     <div class="nav-wrapper">
-        <a th:href="@{/}" class="brand-logo hide-on-large-only hide-on-large-only">Logo</a>
-        <a th:href="@{/}" class="brand-logo hide-on-med-and-down left logo-on-large">Logo</a>
+        <a th:href="@{/}" class="brand-logo hide-on-large-only hide-on-large-only">
+            <img class="avatar logo" th:src="@{/img/logo.png}" />
+        </a>
+        <a th:href="@{/}" class="brand-logo hide-on-med-and-down left logo-on-large">
+            <img class="avatar logo large-only" th:src="@{/img/logo.png}" />
+        </a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="hide-on-med-and-down mr-auto clear">
             <!--<li><a th:href="@{/}"><h1>Logo</h1></a></li>-->

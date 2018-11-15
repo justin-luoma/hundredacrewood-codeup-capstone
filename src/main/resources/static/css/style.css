@@ -204,3 +204,11 @@ center.h-100 {
 }
 
 .hoverPointer {cursor: pointer;}
+
+.logo {
+    margin-bottom: 5px;
+}
+
+.logo, .large-only {
+    margin-left: 12px;
+}

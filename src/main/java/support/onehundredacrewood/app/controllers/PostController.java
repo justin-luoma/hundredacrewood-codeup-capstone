@@ -51,6 +51,9 @@ public class PostController {
             isFollowing = Post.isFollowing(user.getFollowedPosts(), id);
         }
         Post post = postRepo.findById(id);
+        if (post == null) {
+            return "redirect:/";
+        }
 
 
         model.addAttribute("post", post);
