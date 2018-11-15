@@ -98,12 +98,6 @@ public class PostController {
         return "redirect:/posts/"+ post.getId();
     }
 
-    @PostMapping("/posts/{id}/delete")
-    public String deletePost(@PathVariable long id) {
-        postRepo.deleteById(id);
-        return "redirect:/posts";
-    }
-
     @GetMapping("/posts/myposts")
     public String showUserPosts( Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -141,6 +135,97 @@ public class PostController {
         comment.setReported(false);
         comment.setUser(user);
         commentRepo.saveAndFlush(comment);
+        return "redirect:/posts/" + postId;
+    }
+
+    @PostMapping("/posts/report")
+    public String report(@RequestParam(name = "id") long postId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
+            Post post = postRepo.findById(postId);
+            post.setReported(true);
+            postRepo.save(post);
+
+            return "redirect:/posts/" + postId;
+        }
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/posts/clear")
+    public String clearReport(@RequestParam(name = "id") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        Post post = postRepo.findById(postId);
+        post.setReported(false);
+        postRepo.save(post);
+        return "redirect:/posts/" + postId;
+    }
+
+    @PostMapping("/posts/lock-toggle")
+    public String lockPost(@RequestParam(name = "id") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        Post post = postRepo.findById(postId);
+        post.setLocked(!post.isLocked());
+        postRepo.save(post);
+        return "redirect:/posts/" + postId;
+    }
+
+
+    @PostMapping("/posts/delete")
+    public String deletePost(@RequestParam(name = "id") long id) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        postRepo.deleteById(id);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/comment/report")
+    public String reportComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated()) {
+            commentRepo.findById(commentId).ifPresent(c -> {
+                c.setReported(true);
+                commentRepo.saveAndFlush(c);
+            });
+            return "redirect:/posts/" + postId;
+        }
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/posts/comment/clear")
+    public String clearReportedComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        commentRepo.findById(commentId).ifPresent(c -> {
+            c.setReported(false);
+            commentRepo.saveAndFlush(c);
+        });
+        return "redirect:/posts/" + postId;
+    }
+
+    @PostMapping("/posts/comment/delete")
+    public String deleteComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        commentRepo.deleteById(commentId);
         return "redirect:/posts/" + postId;
     }
 }

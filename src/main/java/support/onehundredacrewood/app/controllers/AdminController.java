@@ -22,9 +22,9 @@ public class AdminController {
 
     @GetMapping("/admin")
     public String showAdmin(Model model) {
-        model.addAttribute("posts", postRepo.findAllByReportedAndLockedOrderByCreatedDesc(true, false));
-        model.addAttribute("comments", commentRepo.findAllByReportedOrderByCreatedDesc(true));
-        model.addAttribute("users", userRepo.findAllByStrikesGreaterThan(0));
+        model.addAttribute("reportedPosts", postRepo.findAllByReportedAndLockedOrderByCreatedDesc(true, false));
+        model.addAttribute("reportedComments", commentRepo.findAllByReportedOrderByCreatedDesc(true));
+        model.addAttribute("usersWithStrikes", userRepo.findAllByStrikesGreaterThan(0));
         return "admin/main";
     }
 }
