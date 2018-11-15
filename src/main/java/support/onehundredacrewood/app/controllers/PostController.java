@@ -162,4 +162,15 @@ public class PostController {
         postRepo.deleteById(id);
         return "redirect:/posts";
     }
+
+    @PostMapping("/posts/comment/delete")
+    public String deleteComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        commentRepo.deleteById(commentId);
+        return "redirect:/posts/" + postId;
+    }
 }
