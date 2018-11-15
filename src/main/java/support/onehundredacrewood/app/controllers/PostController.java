@@ -185,7 +185,10 @@ public class PostController {
     @PostMapping("/posts/delete")
     public String deletePost(@RequestParam(name = "id") long id) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (!principal.isAdmin()) {
+        Post post = postRepo.findById(id);
+        if (!principal.isAdmin() && principal.getId() != post.getUser().getId()) {
+            System.out.println(principal.getId());
+            System.out.println(post.getUser().getId());
             return "redirect:/";
         }
 
