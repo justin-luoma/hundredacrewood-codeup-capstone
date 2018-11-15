@@ -42,9 +42,10 @@
                         <a class="hoverPointer"
                            onclick="(() => {const form = document.getElementById('followForm'); form.submit()})()">Follow
                             Post</a>
-                        <form id="followForm" th:action="@{/posts/follow}" method="post">
-                            <input type="hidden" name="id" th:value="${post.id}"/>
-                        </form>
+                    </th:block>
+                    <th:block sec:authorize="hasAuthority('ADMIN')">
+                        <a class="hoverPointer" onclick="(() => {const form = document.getElementById('lockPostForm'); form.submit()})()">Lock Post</a>
+                        <!--<a class="hoverPointer">Delete Post</a>-->
                     </th:block>
                 </div>
 
@@ -86,7 +87,16 @@
         </div>
     </div>
 
-
+    <th:block th:if="${!isFollowing}">
+        <form id="followForm" th:action="@{/posts/follow}" method="post">
+            <input type="hidden" name="id" th:value="${post.id}"/>
+        </form>
+    </th:block>
+    <th:block sec:authorize="hasAuthority('ADMIN')">
+        <form id="lockPostForm" th:action="@{/posts/lock}" method="post">
+            <input type="hidden" th:name="id" th:value="${post.id}" />
+        </form>
+    </th:block>
     <!--<p th:text="${post.}"></p>-->
     <!--title: <p th:text="${post.title}"></p>-->
     <!--created by: <p th:text="${post.user.username}"></p>-->

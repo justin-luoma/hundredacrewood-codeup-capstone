@@ -143,4 +143,17 @@ public class PostController {
         commentRepo.saveAndFlush(comment);
         return "redirect:/posts/" + postId;
     }
+
+    @PostMapping("/posts/lock")
+    public String lockPost(@RequestParam(name = "id") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        Post post = postRepo.findById(postId);
+        post.setLocked(true);
+        postRepo.save(post);
+        return "redirect:/posts/" + postId;
+    }
 }

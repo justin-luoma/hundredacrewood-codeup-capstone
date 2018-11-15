@@ -8,22 +8,46 @@
 </head>
 <body>
 
-<div class="container" layout:fragment="content">
-    <th:block th:each="user : ${users}">
-        <div>
-            <p th:text="${user.username}"></p>
+<th:block layout:fragment="content">
+    <div class="row p-0">
+        <div class="col s12 p0">
+            <ul class="tabs" id="adminTab">
+                <li class="tab col s4"><a class="active" href="#posts">Reported Posts</a></li>
+                <li class="tab col s4"><a href="#comments">Reported Comments</a></li>
+                <li class="tab col s4"><a href="#users">Users with strikes</a></li>
+            </ul>
         </div>
-    </th:block>
-    <th:block th:each="post : ${posts}">
-        <div>
-            <p th:text="${post.title}"></p>
+        <!--reported posts-->
+        <div id="posts" class="col s12">
+            <div class="card" th:each="post : ${reportedPosts}">
+                <div class="card-content">
+                    <span class="card-title">Title: <a th:href="@{|/posts/${post.id}|}" th:text="${post.title}"></a></span>
+                    <span>Posted by: <a th:href="@{|/users/${post.user.id}|}" th:text="${post.user.username}"></a></span>
+                </div>
+            </div>
         </div>
-    </th:block>
-    <th:block th:each="comment : ${comments}">
-        <div>
-            <p th:text="${comment.body}"></p>
+        <!--reported comments-->
+        <div id="comments" class="col s12">
+            <div class="card" th:each="comment : ${reportedComments}">
+                <div class="card-content">
+                    <span class="card-title">Comment: <a th:href="@{|/posts/${comment.post.id}|}" th:text="${comment.body}"></a></span>
+                    <span>Posted by: <a th:href="@{|/users/${comment.user.id}|}" th:text="${comment.user.username}"></a></span>
+                </div>
+            </div>
         </div>
-    </th:block>
+        <div id="users" class="col s12">
+            <div class="card" th:each="user : ${usersWithStrikes}">
+                <div class="card-content">
+                    <span class="card-title">User: <a th:href="@{|/users/${user.id}|}" th:text="${user.username}"></a></span>
+                    <span th:text="|Strikes: ${user.strikes}|"></span>
+                </div>
+            </div>
+        </div>
+        <!--end of tabs-->
+        </div>
+
+    <script th:src="@{/js/admin.js}"></script>
+
     <!--<span sec:authorize="isAuthenticated()">-->
                     <!--| Logged user: <span sec:authentication="name"></span> |-->
                     <!--Roles: <span sec:authentication="principal.authorities"></span> |-->
@@ -32,7 +56,7 @@
     <!--<div sec:authorize="hasAuthority('ADMIN')">-->
         <!--This content is only shown to administrators.-->
     <!--</div>-->
-</div>
+</th:block>
 
 </body>
 </html>
