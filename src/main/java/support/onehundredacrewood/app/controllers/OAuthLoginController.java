@@ -1,10 +1,12 @@
 package support.onehundredacrewood.app.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.models.UserWithRoles;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
+import support.onehundredacrewood.app.security.Argon2PasswordEncoder;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
@@ -26,20 +29,32 @@ import java.util.List;
 @SessionAttributes({"registering","provider"})
 public class OAuthLoginController {
     private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
     private boolean registering = false;
     private String provider;
 
-    public OAuthLoginController(UserRepo userRepo) {
+    public OAuthLoginController(UserRepo userRepo,
+                                PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/oauth2/register")
-    public String oauthRegister(@ModelAttribute User user, @RequestParam(name = "birthdayString") String birthday, @RequestParam(name = "genderString") String gender) {
+    public String oauthRegister(@ModelAttribute User user,
+                                Model model,
+                                @RequestParam(name = "birthdayString") String birthday,
+                                @RequestParam(name = "genderString") String gender) {
+        if (userRepo.findByUsername(user.getUsername()) != null) {
+            model.addAttribute("user", user);
+            model.addAttribute("error", "Username already exists");
+            return "oauth/register";
+        }
         user.setGender(gender);
         LocalDate birth = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         user.setBirthday(birth);
         user.setOauthLogin(true);
         user.setOauthProvider(provider);
+        user.setPassword(passwordEncoder.encode(user.getUsername()));
         if (user.getImage().isEmpty())
             user.setImage(null);
         User newUser = userRepo.saveAndFlush(user);
