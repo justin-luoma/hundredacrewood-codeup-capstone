@@ -4,6 +4,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}" lang="en">
 <head>
+    <style>
+        @font-face {
+            font-family: pooh;
+            src: url(static/css/pooh.ttf) format("truetype");
+        }
+        #home-title {
+            font-family: pooh;
+        }
+
+    </style>
     <title>Home</title>
 </head>
 <body>
@@ -14,7 +24,10 @@
                     Roles: <span sec:authentication="principal.authorities"></span> |
                     admin? : <span sec:authentication="principal.admin"></span>
                 </span>
+    <h2 id="home-title">Hundred Acre Wood Support</h2>
 </div>
+
+
 
 </body>
 </html>
