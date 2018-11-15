@@ -28,12 +28,36 @@ main {
     min-width: 75%;
 }
 
+.mt-0 {
+    margin-top: 0;
+}
+
 .mt-1 {
-    margin-top: 1em;
+    margin-top: 1em!important;
 }
 
 .mb-2 {
-    margin-bottom: 2em;
+    margin-bottom: 2em!important;
+}
+
+.mb-0 {
+    margin-bottom: 0!important;
+}
+
+.pb-0 {
+    padding-bottom: 0!important;
+}
+
+.pt-0 {
+    padding-top: 0;
+}
+
+.p-0 {
+    padding: 0!important;
+}
+
+.m-0 {
+    margin: 0;
 }
 
 .tooltip {
@@ -178,3 +202,5 @@ center.h-100 {
 .loginBtn--google:focus {
     background: #E74B37;
 }
+
+.hoverPointer {cursor: pointer;}
