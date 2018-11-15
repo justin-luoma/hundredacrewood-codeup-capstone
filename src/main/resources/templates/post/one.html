@@ -35,27 +35,36 @@
                     </th:block>
                 </div>
 
-                <div sec:authorize="isAuthenticated()" th:if="${!post.locked}" class="card-action">
-                    <a class="hoverPointer"
-                       onclick="(() => {const newComment = document.getElementById('newComment'); newComment.classList.remove('hide')})()">
-                        Comment
-                    </a>
-                    <th:block th:if="${!isFollowing}">
+                <div sec:authorize="isAuthenticated()" th:if="${!post.locked || #authentication.principal.admin}" class="card-action">
+                    <th:block th:if="${!post.locked}">
                         <a class="hoverPointer"
-                           onclick="(() => {const form = document.getElementById('followForm'); form.submit()})()">
-                            Follow Post
+                           onclick="(() => {const newComment = document.getElementById('newComment'); newComment.classList.remove('hide')})()">
+                            Comment
                         </a>
-                    </th:block>
-                    <th:block th:if="${!post.reported}">
-                        <a class="hoverPointer"
-                           onclick="(() => {const form = document.getElementById('reportPostForm'); form.submit()})()">
-                            Report
-                        </a>
+                        <th:block th:if="${!isFollowing}">
+                            <a class="hoverPointer"
+                               onclick="(() => {const form = document.getElementById('followForm'); form.submit()})()">
+                                Follow Post
+                            </a>
+                        </th:block>
+                        <th:block th:if="${!post.reported}">
+                            <a class="hoverPointer"
+                               onclick="(() => {const form = document.getElementById('reportPostForm'); form.submit()})()">
+                                Report
+                            </a>
+                        </th:block>
                     </th:block>
                     <th:block sec:authorize="hasAuthority('ADMIN')">
-                        <a class="hoverPointer" onclick="(() => {const form = document.getElementById('lockPostForm'); form.submit()})()">
-                            Lock Post
-                        </a>
+                        <th:block th:if="${!post.locked}">
+                            <a class="hoverPointer" onclick="(() => {const form = document.getElementById('lockPostForm'); form.submit()})()">
+                                Lock Post
+                            </a>
+                        </th:block>
+                        <th:block th:if="${post.locked}">
+                            <a class="hoverPointer" onclick="(() => {const form = document.getElementById('lockPostForm'); form.submit()})()">
+                                Unlock Post
+                            </a>
+                        </th:block>
                         <a class="hoverPointer" onclick="(() => {const form = document.getElementById('deletePostForm'); form.submit()})()">
                             Delete Post
                         </a>
@@ -150,7 +159,7 @@
     </th:block>
 
     <th:block sec:authorize="hasAuthority('ADMIN')">
-        <form id="lockPostForm" th:action="@{/posts/lock}" method="post">
+        <form id="lockPostForm" th:action="@{/posts/lock-toggle}" method="post">
             <input type="hidden" th:name="id" th:value="${post.id}" />
         </form>
 

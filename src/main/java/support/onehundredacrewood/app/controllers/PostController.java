@@ -165,7 +165,7 @@ public class PostController {
         return "redirect:/posts/" + postId;
     }
 
-    @PostMapping("/posts/lock")
+    @PostMapping("/posts/lock-toggle")
     public String lockPost(@RequestParam(name = "id") long postId) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!principal.isAdmin()) {
@@ -173,7 +173,7 @@ public class PostController {
         }
 
         Post post = postRepo.findById(postId);
-        post.setLocked(true);
+        post.setLocked(!post.isLocked());
         postRepo.save(post);
         return "redirect:/posts/" + postId;
     }
