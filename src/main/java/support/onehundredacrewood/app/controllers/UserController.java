@@ -78,6 +78,20 @@ public class UserController {
         return "redirect:/users/" + id;
     }
 
+    @PostMapping("/users/toggle-disabled")
+    public String disableUserToggle(@RequestParam(name = "id") long userId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        User user = userRepo.findById(userId).get();
+        user.setDisabled(!user.isDisabled());
+        userRepo.saveAndFlush(user);
+
+        return "redirect:/users/" + userId;
+    }
+
     private boolean areFriends(List<User> friends, final long userId) {
         return  friends.stream().anyMatch(f -> f.getId() == userId);
     }

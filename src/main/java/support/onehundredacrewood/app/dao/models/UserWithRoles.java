@@ -8,10 +8,12 @@ import java.util.Collection;
 
 public class UserWithRoles extends User implements UserDetails {
     private boolean admin;
+    private boolean disabled;
 
     public UserWithRoles(User user) {
         super(user);  // Call the copy constructor defined in User
         this.admin = user.isAdmin();
+        this.disabled = user.isDisabled();
     }
 
     @Override
@@ -40,6 +42,6 @@ public class UserWithRoles extends User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !this.disabled;
     }
 }

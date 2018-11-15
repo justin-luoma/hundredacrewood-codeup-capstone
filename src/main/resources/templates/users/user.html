@@ -16,6 +16,21 @@
     <h3>User Profile</h3>
 
     <h4><span th:text="${user.username}"></span></h4>
+    <th:block sec:authorize="hasAuthority('ADMIN')" >
+        <form th:action="@{/users/toggle-disabled}" method="post">
+            <th:block th:if="${!user.disabled}">
+                <button class="btn waves-effect waves-light red" type="submit" name="action">Disable User
+                    <i class="material-icons left">lock_outline</i>
+                </button>
+            </th:block>
+            <th:block th:if="${user.disabled}">
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Enable User
+                    <i class="material-icons left">lock_open</i>
+                </button>
+            </th:block>
+            <input type="hidden" name="id" th:value="${user.id}">
+        </form>
+    </th:block>
     <form th:method="post" th:if="${!isFriend}" sec:authorize="isAuthenticated()"  th:name="${user.id}" th:action="@{/users/follow}">
         <input type="hidden" name="id" th:value="${user.id}"/>
     <button class='col s12 btn btn-large waves-effect indigo'>Follow</button>
@@ -27,6 +42,7 @@
         <span th:text="${post.body}"></span>
         <br/>
     </div>
+
     <th:block th:if="${isFriend}">
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large red tooltipped" data-position="left"

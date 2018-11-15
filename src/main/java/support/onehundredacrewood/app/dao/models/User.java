@@ -56,6 +56,9 @@ public class User {
     @Column
     private String oauthProvider;
 
+    @Column(nullable = false)
+    private boolean disabled;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private List<Post> posts;
@@ -115,11 +118,13 @@ public class User {
         this.image = image;
         this.strikes = strikes;
         this.oauthLogin = false;
+        this.disabled = false;
     }
 
     public User(String username, String password, String email, boolean admin
             , String phone, boolean texts, boolean emails, LocalDate birthday
-            , String city, String gender, String image, Integer strikes, boolean oauthLogin, String oauthProvider) {
+            , String city, String gender, String image, Integer strikes,
+                boolean oauthLogin, String oauthProvider, boolean disabled) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -133,12 +138,14 @@ public class User {
         this.image = image;
         this.strikes = strikes;
         this.oauthLogin = oauthLogin;
-        this.oauthProvider = this.oauthLogin ? oauthProvider : null;
+        this.oauthProvider = oauthProvider;
+        this.disabled = disabled;
     }
 
     public User(String username, String password, String email, boolean admin
             , String phone, boolean texts, boolean emails, LocalDate birthday
             , String city, String gender, String image, Integer strikes,
+                boolean oauthLogin, String oauthProvider, boolean disabled,
                 List<Post> posts, List<Comment> comments, List<User> friends,
                 List<Post> followedPosts, List<Topic> topics,
                 List<Message> receivedMessages, List<Message> sentMessages) {
@@ -154,6 +161,9 @@ public class User {
         this.gender = gender;
         this.image = image;
         this.strikes = strikes;
+        this.oauthLogin = oauthLogin;
+        this.oauthProvider = oauthProvider;
+        this.disabled = disabled;
         this.posts = posts;
         this.comments = comments;
         this.friends = friends;
@@ -177,6 +187,9 @@ public class User {
         this.gender = other.gender;
         this.image = other.image;
         this.strikes = other.strikes;
+        this.oauthLogin = other.oauthLogin;
+        this.oauthProvider = other.oauthProvider;
+        this.disabled = other.disabled;
         this.posts = other.posts;
         this.comments = other.comments;
         this.friends = other.friends;
@@ -246,7 +259,7 @@ public class User {
         this.phone = phone;
     }
 
-    public boolean setTexts() {
+    public boolean isTexts() {
         return texts;
     }
 
@@ -254,7 +267,7 @@ public class User {
         this.texts = texts;
     }
 
-    public boolean setEmails() {
+    public boolean isEmails() {
         return emails;
     }
 
@@ -300,6 +313,30 @@ public class User {
 
     public void setStrikes(Integer strikes) {
         this.strikes = strikes;
+    }
+
+    public boolean isOauthLogin() {
+        return oauthLogin;
+    }
+
+    public void setOauthLogin(boolean oauthLogin) {
+        this.oauthLogin = oauthLogin;
+    }
+
+    public String getOauthProvider() {
+        return oauthProvider;
+    }
+
+    public void setOauthProvider(String oauthProvider) {
+        this.oauthProvider = oauthProvider;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 
     public List<Post> getPosts() {
@@ -356,29 +393,5 @@ public class User {
 
     public void setSentMessages(List<Message> sentMessages) {
         this.sentMessages = sentMessages;
-    }
-
-    public boolean isTexts() {
-        return texts;
-    }
-
-    public boolean isEmails() {
-        return emails;
-    }
-
-    public boolean isOauthLogin() {
-        return oauthLogin;
-    }
-
-    public void setOauthLogin(boolean oauthLogin) {
-        this.oauthLogin = oauthLogin;
-    }
-
-    public String getOauthProvider() {
-        return oauthProvider;
-    }
-
-    public void setOauthProvider(String oauthProvider) {
-        this.oauthProvider = oauthProvider;
     }
 }
