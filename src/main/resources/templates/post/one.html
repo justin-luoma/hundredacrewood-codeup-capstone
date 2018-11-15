@@ -106,6 +106,11 @@
                             </a>
                         </span>
                         <span class="right" sec:authorize="hasAuthority('ADMIN')">
+                            <th:block th:if="${comment.reported}">
+                                <a class="brown-text hoverPointer" th:data-target="${comment.id}" onclick="clearReport(this)">
+                                    clear report
+                                </a> |
+                            </th:block>
                             <a class="brown-text hoverPointer" th:data-target="${comment.id}" onclick="deleteComment(this)">
                                 delete
                             </a>
@@ -162,9 +167,20 @@
                 const form = document.getElementById('deleteCommentForm');
                 form.submit();
             }
+            function clearReport(elem) {
+                const id = elem.dataset.target;
+                const input = document.getElementById('clearCommentInput');
+                input.value = id;
+                const form = document.getElementById('clearCommentForm');
+                form.submit();
+            }
         </script>
         <form id="deleteCommentForm" th:action="@{/posts/comment/delete}" method="post">
             <input type="hidden" id="deleteCommentInput" th:name="id" />
+            <input type="hidden" name="postId" th:value="${post.id}">
+        </form>
+        <form id="clearCommentForm" th:action="@{/posts/comment/clear}" method="post">
+            <input type="hidden" id="clearCommentInput" th:name="id" />
             <input type="hidden" name="postId" th:value="${post.id}">
         </form>
         <form id="clearReportForm" th:action="@{/posts/clear}" method="post">

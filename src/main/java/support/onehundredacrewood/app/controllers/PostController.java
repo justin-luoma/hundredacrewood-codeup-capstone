@@ -204,6 +204,20 @@ public class PostController {
         return "redirect:/";
     }
 
+    @PostMapping("/posts/comment/clear")
+    public String clearReportedComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        commentRepo.findById(commentId).ifPresent(c -> {
+            c.setReported(false);
+            commentRepo.saveAndFlush(c);
+        });
+        return "redirect:/posts/" + postId;
+    }
+
     @PostMapping("/posts/comment/delete")
     public String deleteComment(@RequestParam(name = "id") long commentId, @RequestParam(name = "postId") long postId) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
