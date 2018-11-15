@@ -40,8 +40,7 @@ public class Post {
     private List<Topic> topics;
 
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> comments;
 
     public Post() {
