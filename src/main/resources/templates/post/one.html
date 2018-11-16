@@ -13,16 +13,24 @@
         <div class="col s12">
             <h5 th:if="${post.locked}">This post is locked, commenting is disabled.</h5>
             <div class="card blue-grey darken-1">
+                <!--title and body-->
                 <div class="card-content white-text mb-0 pb-0">
                     <span class="card-title" th:text="${post.title}"></span>
-                    <p th:text="${post.body}"></p>
+                    <blockquote th:text="${post.body}"></blockquote>
                 </div>
+                <!--created by and time-->
                 <div class="card-content white-text pb-0">
-                    <span class="left"><a class="light-blue-text lighten-4" th:href="@{|/users/${post.user.id}|}"
-                                          th:text="${post.user.username}"></a> </span>
-                    <span class="right" th:text="'created: '+${post.created}"></span>
+                    <span class="left">by
+                            <a class="light-blue-text lighten-4" th:href="@{|/users/${post.user.id}|}"
+                               th:text="${post.user.username}"></a>
+                            at
+                            <th:block th:text="${post.created}"></th:block>
+                        </span>
+                    <!--<span class="left"><a class="light-blue-text lighten-4" th:href="@{|/users/${post.user.id}|}"-->
+                                          <!--th:text="${post.user.username}"></a> </span>-->
+                    <!--<span class="right" th:text="'created: '+${post.created}"></span>-->
                 </div>
-
+                <!--topics-->
                 <div class="card-content white-text pt-0">
                     <label th:if="${post.topics.size() > 0}">Topics:</label>
                     <th:block th:each="topic,i : ${post.topics}">
@@ -30,9 +38,11 @@
                            th:text="${topic.name}"></a>
                         <span th:if="${!i.last}">|</span>
                         <!--</th:block>-->
-
                     </th:block>
                 </div>
+
+
+
 
                 <div sec:authorize="isAuthenticated()" th:if="${!post.locked || #authentication.principal.admin}" class="card-action">
                     <th:block th:if="${!post.locked}">

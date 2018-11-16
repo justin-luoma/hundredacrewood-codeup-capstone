@@ -12,13 +12,13 @@
         <form class="col s12" th:action="@{/posts/create}" th:method="post" th:object="${post}">
             <div class="row">
                 <div class="input-field col s12">
-                    <input name="title" id="title" type="text">
+                    <input name="title" id="title" type="text" required="" data-length="150" maxlength="150">
                     <label for="title">Title</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea name="body" id="body" class="materialize-textarea"></textarea>
+                    <textarea name="body" id="body" class="materialize-textarea" data-length="5000" maxlength="5000"></textarea>
                     <label for="body">Body</label>
                 </div>
             </div>
@@ -39,6 +39,10 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const charCounters = document.querySelectorAll("[data-length]");
+            for (let elem of charCounters) {
+                new M.CharacterCounter(elem);
+            }
             var postCreateSelect = document.querySelectorAll('select');
             var postCreateSelectInstances = M.FormSelect.init(postCreateSelect);
         });
