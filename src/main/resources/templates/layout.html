@@ -38,7 +38,7 @@
             <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
                 <li><a th:href="@{/posts/myposts}">My Posts</a></li>
                 <li class="hide"><a href="#">Friends</a></li>
-                <li><a th:href="@{/posts/create}">Create</a></li>
+                <li><a th:href="@{/posts/create}">Create a Post</a></li>
             </th:block>
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -64,7 +64,7 @@
     <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
         <li><a th:href="@{/posts/myposts}">My Posts</a></li>
         <li class="hide"><a href="#">Friends</a></li>
-        <li><a th:href="@{/posts/create}">Create</a></li>
+        <li><a th:href="@{/posts/create}">Create a Post</a></li>
     </th:block>
     <li><hr/></li>
     <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
@@ -104,7 +104,7 @@
     </div>
     <div class="footer-copyright" id="bottomFooter">
         <div class="container">
-            <p>© 2018 Hundred Acre Wood</p>
+            <p>© 2018 Hundred Acre Wood Support</p>
         </div>
     </div>
 </footer>

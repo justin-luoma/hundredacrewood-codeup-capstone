@@ -3,13 +3,95 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}" lang="en">
 <head>
+    <link rel = "stylesheet"
+          href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <script type = "text/javascript"
+            src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+    </script>
+    <style>
+        .tab-font {
+            size: 2px !important;
+        }
+    </style>
     <title>About Our Team</title>
 </head>
 <body>
 
-<div class="container" layout:fragment="content">
-    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquam animi autem blanditiis consequatur, dignissimos dolores dolorum eveniet fugit labore laboriosam, laudantium libero necessitatibus nemo praesentium quaerat quo recusandae sit!</h2>
+
+<div class="container fluid" layout:fragment="content">
+<div class="row">
+    <div class="col s12 m4">
+        <div class="card center-align medium blue-grey darken-4">
+            <div class="card-image">
+                <img src="https://justin-luoma.github.io/data/JustinLuoma5.png">
+            </div>
+            <span class="card-title blue-grey-text text-lighten-4 center-align">Justin Luoma</span>
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#justin-email"><p><img src="https://image.ibb.co/fBHVEf/icon-letter-mail-hi.png"></p></a></li>
+                    <li class="tab"><a href="#justin-github"><p><img src="https://image.ibb.co/eH2xuf/github.png"></p></a></li>
+                    <li class="tab"><a href="#justin-in"><p><img src="https://image.ibb.co/mzWXuf/linkedin.jpg"></p></a></li>
+                </ul>
+            </div>
+
+            <div class="card-content blue-grey lighten-4">
+                <div id="justin-email">Justin@justinluoma.com</div>
+                <div id="justin-github"><a href="https://github.com/justin-luoma">Github</a></div>
+                <div id="justin-in"><a href="https://www.linkedin.com/in/justin-luoma/">LinkedIn</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m4">
+        <div class="card center-align medium blue-grey darken-4">
+            <div class="card-image">
+                <img src="http://minionswallpaper.com/Download-Wallpapers/disneyland-castle-picture-To-Download-Wallpaper.jpg">
+            </div>
+            <span class="card-title blue-grey-text text-lighten-4">Michael Waymire</span>
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#michael-email"><p><img src="https://image.ibb.co/fBHVEf/icon-letter-mail-hi.png"></p></a></li>
+                    <li class="tab"><a href="#michael-github"><p><img src="https://image.ibb.co/eH2xuf/github.png"></p></a></li>
+                    <li class="tab"><a href="#michael-in"><p><img src="https://image.ibb.co/mzWXuf/linkedin.jpg"></p></a></li>
+                </ul>
+            </div>
+            <div class="card-content blue-grey lighten-4">
+                <div id="michael-email">michael.waymire86@gmail.com</div>
+                <div id="michael-github"><a href="https://github.com/MichaelWaymire">Github</a></div>
+                <div id="michael-in"><a href="https://www.linkedin.com/in/michael-waymire/">LinkedIn</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m4">
+        <div class="card center-align medium blue-grey darken-4">
+            <div class="card-image">
+                <img src="https://lumiere-a.akamaihd.net/v1/images/open-uri20150608-27674-1tafjo_7ef154a3.jpeg?region=0%2C0%2C1580%2C880">
+            </div>
+            <span class="card-title blue-grey-text text-lighten-4">Daniel Browning</span>
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab"><a class="active" href="#daniel-email"><p><img src="https://image.ibb.co/fBHVEf/icon-letter-mail-hi.png"></p></a></li>
+                    <li class="tab"><a href="#daniel-github"><p><img src="https://image.ibb.co/eH2xuf/github.png"></p></a></li>
+                    <li class="tab"><a href="#daniel-in"><p><img src="https://image.ibb.co/mzWXuf/linkedin.jpg"></p></a></li>
+                </ul>
+            </div>
+            <div class="card-content blue-grey lighten-4">
+                <div id="daniel-email">daniel.d.browning@gmail.com</div>
+                <div id="daniel-github"><a href="https://github.com/daniel-browning">Github</a></div>
+                <div id="daniel-in"><a href="https://www.linkedin.com/in/daniel-browning/">LinkedIn</a></div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
 </div>
 
+<script>
+    $(document).ready(function(){
+        $('.tabs').tabs();
+    });
+</script>
 </body>
 </html>

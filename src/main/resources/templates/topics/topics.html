@@ -9,14 +9,13 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
-    <h1>Topics</h1>
-    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto doloremque error excepturi id
-        illum ipsa laboriosam minima molestiae nulla officiis placeat possimus quasi, qui repellat vel
-        veniam voluptatum? Porro, vero!
-    </p>
+    <h1 class="title-font">Topics</h1>
+    <h5 class="title-font">
+        The various topics for which posts may best relate to
+    </h5>
 
     <div class="row" th:each="topic : ${topics}">
-        <h5 th:text="${topic.name}"></h5>
+        <h5 class="title-font" th:text="${topic.name}"></h5>
         <a class='col  btn btn-small waves-effect indigo'
            th:href="@{|/topic/${topic.id}|}">View More</a>
         <div class="col s12 m12">

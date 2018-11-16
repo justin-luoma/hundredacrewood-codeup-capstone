@@ -1,3 +1,8 @@
+@font-face {
+	font-family: pooh;
+	src: url(/font/pooh.ttf) format("truetype");
+}
+
 body {
 	display: flex;
 	min-height: 100vh;
@@ -7,6 +12,14 @@ body {
 
 main {
 	flex: 1 0 auto;
+}
+
+@font-face {
+	font-family: pooh;
+	src: url(static/css/pooh.ttf) format("truetype");
+}
+.title-font {
+	font-family: pooh;
 }
 
 .d-flex {
@@ -237,4 +250,9 @@ center.h-100 {
 
 .logo, .large-only {
     margin-left: 12px;
+}
+
+
+#home-title {
+	font-family: pooh;
 }
