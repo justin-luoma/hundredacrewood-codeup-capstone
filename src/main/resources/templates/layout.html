@@ -18,6 +18,17 @@
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <script th:src="@{/js/materialize.min.js}"></script>
     <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">One Hundred Acre Wood Support Group</title>
+    <style th:if="${#httpServletRequest.requestURL == 'http://localhost:8080/' ||
+        #httpServletRequest.requestURL == 'http://localhost:8080' ||
+        #httpServletRequest.requestURL == 'https://hundredacrewood.support/' ||
+        #httpServletRequest.requestURL == 'https://hundredacrewood.support'}">
+
+        main {
+            background-image: url("/img/woods.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
 <body>
 <nav>
