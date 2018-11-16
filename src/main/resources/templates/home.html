@@ -4,19 +4,31 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}" lang="en">
 <head>
-
     <title>Home</title>
 </head>
 <body>
 
-<div class="container" layout:fragment="content">
-    <span sec:authorize="isAuthenticated()">
-                    | Logged user: <span sec:authentication="name"></span> |
-                    Roles: <span sec:authentication="principal.authorities"></span> |
-                    admin? : <span sec:authentication="principal.admin"></span>
-                </span>
+<div class="container home" layout:fragment="content">
+    <!--<span th:text="${#httpServletRequest.requestURL}"></span>-->
+    <!--<div class="parallax">-->
+        <!--<img th:src="@{/img/woods.jpg}" alt="forest" />-->
+    <!--</div>-->
+    <!--<span sec:authorize="isAuthenticated()">-->
+                    <!--| Logged user: <span sec:authentication="name"></span> |-->
+                    <!--Roles: <span sec:authentication="principal.authorities"></span> |-->
+                    <!--admin? : <span sec:authentication="principal.admin"></span>-->
+                <!--</span>-->
 
-    <h2 class="center-align title-font">Hundred Acre Wood Support</h2>
+    <div class="card-panel home-title">
+        <h2 class="center-align title-font m-0">Hundred Acre Wood Support</h2>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const parallax = document.querySelectorAll('.parallax');
+            const parallaxInstances = M.Parallax.init(parallax);
+        });
+    </script>
 </div>
 
 
