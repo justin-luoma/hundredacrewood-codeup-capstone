@@ -108,7 +108,7 @@ public class PostController {
         postUpdate.setTopics(post.getTopics());
         postRepo.save(postUpdate);
 
-        notificationSvc.ProcessPostAction(postUpdate, false);
+        notificationSvc.ProcessPostAction(postUpdate, false, null);
         return "redirect:/posts/"+ post.getId();
     }
 
@@ -149,7 +149,7 @@ public class PostController {
         comment.setReported(false);
         comment.setUser(user);
         commentRepo.saveAndFlush(comment);
-        notificationSvc.ProcessPostAction(post, true);
+        notificationSvc.ProcessPostAction(post, true, userId);
         return "redirect:/posts/" + postId;
     }
 
