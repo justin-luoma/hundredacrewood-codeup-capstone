@@ -280,3 +280,7 @@ center.h-100 {
 .home-title {
     background-color: rgb(112, 93, 86, 0.75);
 }
+
+.w-100px {
+    width: 100px;
+}
