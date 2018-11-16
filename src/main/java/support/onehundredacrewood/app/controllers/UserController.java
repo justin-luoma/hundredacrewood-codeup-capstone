@@ -6,10 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import support.onehundredacrewood.app.dao.models.Post;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
@@ -40,9 +37,25 @@ public class UserController {
         User user = userRepo.findById(principal.getId()).get();
         user.getPosts().sort(Comparator.comparing(Post::getCreated).reversed());
 
-        model.addAttribute("user",user);
-        model.addAttribute("post", postRepo.getTop3ByUserOrderByCreatedDesc(user));
+        model.addAttribute("user", user);
         return "profile";
+    }
+
+    @PostMapping("/profile/options")
+    public String updateProfile(@ModelAttribute User user) {
+        User principal = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal.getId() != user.getId()) {
+            return "redirect:/";
+        }
+
+        User updatedUser = userRepo.findById(principal.getId()).get();
+        updatedUser.setEmails(user.isEmails());
+        updatedUser.setTexts(user.isTexts());
+        updatedUser.setPhone(user.getPhone());
+
+        userRepo.saveAndFlush(updatedUser);
+
+        return "redirect:/profile";
     }
 
     @GetMapping("/users/{id}")

@@ -66,6 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/posts/create",
                         "/profile",
+                        "/profile/**",
                         "/posts/{postId}/update",
                         "/messaging",
                         "/messages",

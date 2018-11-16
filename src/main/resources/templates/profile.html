@@ -120,22 +120,66 @@
     </div>
 
     <div id="settings" class="container col s12">
-        <img th:if="${user.image != null}" th:src="${user.image}" alt="profile image" class="avatar"/>
-
-        <div><span sec:authentication="name"></span></div>
-        <div><span sec:authentication="principal.email"></span></div>
-        <div><span sec:authentication="principal.gender"></span></div>
-        <div><span sec:authentication="principal.phone"></span></div>
-        <div><span sec:authentication="principal.birthday"></span></div>
-        <div><span sec:authentication="principal.texts"></span></div>
-        <div><span sec:authentication="principal.emails"></span></div>
+        <div class="row">
+            <div class="col s12 d-flex justify-content-center">
+                <div class="card mw-400">
+                    <div class="card-image" th:if="${user.image != null}">
+                        <img th:src="${user.image}" alt="profile image" class="profile-image"/>
+                    </div>
+                    <div class="card-content">
+                        <p th:text="|Username: ${#authentication.name}|" sec:authentication="name"></p>
+                        <p th:text="|Email: ${#authentication.principal.email}|" sec:authentication="principal.email"></p>
+                        <p th:text="|Gender: ${#authentication.principal.gender}|" sec:authentication="principal.gender"></p>
+                        <p th:text="|Birthday: ${#authentication.principal.birthday}|" sec:authentication="principal.birthday"></p>
+                    </div>
+                    <form class="col s12 d-flex flex-column" th:action="@{/profile/options}" method="post" th:object="${user}">
+                        <div class="row mb-0">
+                            <div class='input-field col s4'>
+                                <input th:field="*{phone}" type='tel' name='phone' id='phone' th:required="${user.isTexts()}" />
+                                <label for='phone' id="phoneLabel">Phone</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <label for="texts">Receive SMS notifications?</label>
+                                <div class="switch">
+                                    <label>
+                                        No
+                                        <input type="checkbox" name="texts" id="texts" th:checked="${user.texts}" />
+                                        <span class="lever"></span>
+                                        Yes
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12">
+                                <label for="texts">Receive Email notifications?</label>
+                                <div class="switch">
+                                    <label>
+                                        No
+                                        <input type="checkbox" name="emails" id="emails" th:checked="${user.emails}" />
+                                        <span class="lever"></span>
+                                        Yes
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" th:name="id" th:field="*{id}" />
+                        <button class="btn-small waves-effect waves-light mb-2" type="submit" name="action">Save
+                            <i class="material-icons right">save</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         "use strict";
 
         document.addEventListener("DOMContentLoaded", () => {
-            profileTabs()
+            profileTabs();
             const cardContents = document.getElementsByClassName("card-content");
             for (let elem of cardContents) {
                 elem.classList.add("hoverPointer");
@@ -150,6 +194,20 @@
             const profileTab = document.getElementById("profileTabs");
             const profileTabsInstance = M.Tabs.init(profileTab);
         }
+
+        const texts = document.getElementById("texts");
+        const phoneInput = document.getElementById("phone");
+        const phoneLabel = document.getElementById("phoneLabel");
+
+        texts.addEventListener("change", function () {
+            if (this.checked) {
+                phoneLabel.innerText = "Phone*";
+                phoneInput.required = true;
+            } else {
+                phoneLabel.innerText = "Phone";
+                phoneInput.required = false;
+            }
+        });
     </script>
 
 </th:block>
