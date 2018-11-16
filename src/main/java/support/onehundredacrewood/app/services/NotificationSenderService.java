@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import support.onehundredacrewood.app.dao.models.Message;
 import support.onehundredacrewood.app.dao.models.Post;
 import support.onehundredacrewood.app.dao.models.User;
+import support.onehundredacrewood.app.mailgun.EmailSenderConfig;
 import support.onehundredacrewood.app.twilio.SmsSenderConfig;
 
 import java.util.List;
@@ -13,9 +14,12 @@ import java.util.List;
 public class NotificationSenderService {
     private final String url = "https://hundredacrewood.support";
     private final SmsSenderConfig.SmsSender smsSender;
+    private final EmailSenderConfig.EmailSender emailSender;
 
-    public NotificationSenderService(SmsSenderConfig.SmsSender smsSender) {
+    public NotificationSenderService(SmsSenderConfig.SmsSender smsSender,
+                                     EmailSenderConfig.EmailSender emailSender) {
         this.smsSender = smsSender;
+        this.emailSender = emailSender;
     }
 
     @Async
@@ -52,17 +56,27 @@ public class NotificationSenderService {
 
     @Async
     public void FollowPostUpdate(User messageRecipient, Post post, boolean isComment) {
+        String followingPost = post.getTitle();
+        String link = url + "/posts/" + post.getId();
+        String what = isComment ? " was commented on " : " was updated ";
         if (allowSendSms(messageRecipient)) {
             String to = messageRecipient.getPhone();
-            String followingPost = post.getTitle();
-            String link = url + "/posts/" + post.getId();
-            String what = isComment ? " was commented on " : " was updated ";
-            String message = "A post you are following" + what + " to view visit: " + link + "\nHundredAcreWood.support";
+            String message = "A post you are following" + what + "to view visit: " + link + "\n\nHundredAcreWood.support";
             smsSender.SendSms(to, message);
+        }
+        if (allowSendEmail(messageRecipient)) {
+            String to = messageRecipient.getEmail();
+            String subject = "Post: " + followingPost + " updated.";
+            String message = "A post you are following" + what + "to view visit: " + link + "\n\nHundredAcreWood.support";
+            emailSender.sendSimpleMessage(to, subject, message);
         }
     }
 
     private boolean allowSendSms(User user) {
         return user.isTexts() && user.getPhone() != null && !user.getPhone().isEmpty();
+    }
+
+    private boolean allowSendEmail(User user) {
+        return user.isEmails() && user.getEmail() != null && !user.getEmail().isEmpty();
     }
 }
