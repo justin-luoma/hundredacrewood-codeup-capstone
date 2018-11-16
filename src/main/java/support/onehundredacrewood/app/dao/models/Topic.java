@@ -1,6 +1,7 @@
 package support.onehundredacrewood.app.dao.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class Topic {
     @Column(nullable = false, length = 500)
     private String description;
 
-    @ManyToMany(mappedBy = "topics", fetch = FetchType.LAZY)
-    private List<Post> posts;
+    @ManyToMany(mappedBy = "topics", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Post> posts = new ArrayList<>();
 
     public Topic() {
     }
