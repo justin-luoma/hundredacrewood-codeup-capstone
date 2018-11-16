@@ -79,7 +79,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/posts/delete",
                         "/posts/comment/report",
                         "/posts/comment/clear",
-                        "/posts/commemt/delete"
+                        "/posts/commemt/delete",
+                        "/admin/**"
                 )
                 .authenticated()
         ;

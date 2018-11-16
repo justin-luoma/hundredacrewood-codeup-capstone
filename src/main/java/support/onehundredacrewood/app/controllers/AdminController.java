@@ -29,10 +29,10 @@ public class AdminController {
         this.emailSender = emailSender;
     }
 
-    @GetMapping("/test")
+    @GetMapping("/admin/test")
     @ResponseBody
-    public String testsms() {
-        emailSender.sendSimpleMessage("","","");
+    public String testEmail() {
+//        emailSender.sendSimpleMessage("caboose0013@gmail.com","test subject","test message");
         return "test";
     }
 
