@@ -47,6 +47,9 @@ public class Post {
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "followedPosts", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<User> usersFollowing;
+
     public Post() {
     }
 
@@ -63,7 +66,7 @@ public class Post {
 
     public Post(User user, String title, String body, LocalDateTime created,
                 boolean locked, boolean reported, List<Topic> topics,
-                List<Comment> comments) {
+                List<Comment> comments, List<User> usersFollowing) {
         this.user = user;
         this.title = title;
         this.body = body;
@@ -72,8 +75,8 @@ public class Post {
         this.reported = reported;
         this.topics = topics;
         this.comments = comments;
+        this.usersFollowing = usersFollowing;
     }
-
 
     public long getId() {
         return id;
@@ -145,6 +148,14 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<User> getUsersFollowing() {
+        return usersFollowing;
+    }
+
+    public void setUsersFollowing(List<User> usersFollowing) {
+        this.usersFollowing = usersFollowing;
     }
 
     public static boolean isFollowing(List<Post> following, final long postId) {

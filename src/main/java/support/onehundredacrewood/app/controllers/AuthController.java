@@ -33,13 +33,6 @@ public class AuthController {
         return "auth/register";
     }
 
-    @GetMapping("/test")
-    @ResponseBody
-    public String testAuth() {
-
-        return "test";
-    }
-
     @PostMapping("/register")
     public String register(@ModelAttribute User user, @RequestParam(name = "birthdayString") String birthday, @RequestParam(name = "genderString") String gender) {
         LocalDate birth = LocalDate.parse(birthday, DateTimeFormatter.ofPattern("MM/dd/yyyy"));

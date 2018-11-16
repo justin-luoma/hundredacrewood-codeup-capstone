@@ -8,6 +8,7 @@ import support.onehundredacrewood.app.dao.models.Message;
 import support.onehundredacrewood.app.dao.models.User;
 import support.onehundredacrewood.app.dao.repositories.MessageRepo;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
+import support.onehundredacrewood.app.services.NotificationSenderService;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -17,10 +18,12 @@ import java.util.List;
 public class MessagingController {
     private final MessageRepo messageRepo;
     private final UserRepo userRepo;
+    private final NotificationSenderService notificationSvc;
 
-    public MessagingController(MessageRepo messageRepo, UserRepo userRepo) {
+    public MessagingController(MessageRepo messageRepo, UserRepo userRepo, NotificationSenderService notificationSvc) {
         this.messageRepo = messageRepo;
         this.userRepo = userRepo;
+        this.notificationSvc = notificationSvc;
     }
 
     @GetMapping("/messaging")
@@ -56,6 +59,7 @@ public class MessagingController {
                 body
         );
         messageRepo.saveAndFlush(message);
+        notificationSvc.SendMessage(message);
         return "redirect:/messages";
     }
 
