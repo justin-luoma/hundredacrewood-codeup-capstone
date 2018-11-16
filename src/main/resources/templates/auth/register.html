@@ -51,7 +51,7 @@
             </div>
             <div class='input-field col s12 m6'>
                 <input th:field="*{phone}" type='tel' name='phone' id='phone' />
-                <label for='phone'>Phone</label>
+                <label for='phone' id="phoneLabel">Phone</label>
             </div>
         </div>
 
@@ -81,7 +81,7 @@
                 <div class="switch">
                     <label>
                         No
-                        <input type="checkbox" name="texts" id="texts" checked="" />
+                        <input type="checkbox" name="texts" id="texts" />
                         <span class="lever"></span>
                         Yes
                     </label>
@@ -92,7 +92,7 @@
                 <div class="switch">
                     <label>
                         No
-                        <input type="checkbox" name="emails" id="emails" checked="" />
+                        <input type="checkbox" name="emails" id="emails" />
                         <span class="lever"></span>
                         Yes
                     </label>

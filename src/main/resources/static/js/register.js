@@ -17,6 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
         bInstance.open();
     });
 
+    const texts = document.getElementById("texts");
+    const phoneInput = document.getElementById("phone");
+    const phoneLabel = document.getElementById("phoneLabel");
+
+    texts.addEventListener("change", function () {
+        if (this.checked) {
+            phoneLabel.innerText = "Phone*";
+            phoneInput.required = true;
+        } else {
+            phoneLabel.innerText = "Phone";
+            phoneInput.required = false;
+        }
+    });
+
     // const submitBtn = document.getElementById("submitBtn");
     // submitBtn.addEventListener("click", (e) => {
     //     e.preventDefault();
