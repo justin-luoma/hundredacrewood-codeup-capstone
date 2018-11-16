@@ -14,6 +14,7 @@ import support.onehundredacrewood.app.dao.repositories.CommentRepo;
 import support.onehundredacrewood.app.dao.repositories.PostRepo;
 import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
+import support.onehundredacrewood.app.services.NotificationSenderService;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -24,13 +25,16 @@ public class PostController {
     private final TopicRepo topicRepo;
     private final UserRepo userRepo;
     private final CommentRepo commentRepo;
+    private final NotificationSenderService notificationSvc;
 
     public PostController(PostRepo postRepo, TopicRepo topicRepo,
-                          UserRepo userRepo, CommentRepo commentRepo) {
+                          UserRepo userRepo, CommentRepo commentRepo,
+                          NotificationSenderService notificationSvc) {
         this.postRepo = postRepo;
         this.topicRepo = topicRepo;
         this.userRepo = userRepo;
         this.commentRepo = commentRepo;
+        this.notificationSvc = notificationSvc;
     }
 
     @GetMapping("/posts")
@@ -102,15 +106,9 @@ public class PostController {
         postUpdate.setTitle(post.getTitle());
         postUpdate.setBody(post.getBody());
         postUpdate.setTopics(post.getTopics());
-//        postUpdate
-//        System.out.println(post.getTopics().get(0).getName());
-//        List<Topic> topics = post.getTopics();
-//        post.getTitle().
-//        List<Topic> topics = post.getTopics();
-//        topics.clear();
-//        post.setTopics(topics);
         postRepo.save(postUpdate);
 
+        notificationSvc.ProcessPostAction(postUpdate, false);
         return "redirect:/posts/"+ post.getId();
     }
 
@@ -151,6 +149,7 @@ public class PostController {
         comment.setReported(false);
         comment.setUser(user);
         commentRepo.saveAndFlush(comment);
+        notificationSvc.ProcessPostAction(post, true);
         return "redirect:/posts/" + postId;
     }
 

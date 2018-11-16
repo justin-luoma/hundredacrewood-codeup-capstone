@@ -73,7 +73,7 @@ public class User {
     )
     private List<User> friends;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "follow_post",
             joinColumns = {@JoinColumn(name = "user_id")},
