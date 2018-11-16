@@ -16,7 +16,7 @@
 
     <div class="row" th:each="topic : ${topics}">
         <span class="title-font customH5" th:text="${topic.name}"></span>
-        <a class='btn-small waves-effect indigo mb-05'
+        <a class="topic-links"
            th:href="@{|/topic/${topic.id}|}">View All Posts</a>
         <div class="col s12 m12">
             <th:block th:if="${topic.posts != null && topic.posts.size() > 0}">
@@ -71,6 +71,21 @@
 
 
     </div>
+
+    <script>
+		"use strict";
+
+		document.addEventListener("DOMContentLoaded", () => {
+			const cardContents = document.getElementsByClassName("card-content");
+			for (let elem of cardContents) {
+				elem.classList.add("hoverPointer");
+				elem.addEventListener("click", (elem) => {
+					const link = elem.target.closest(".card-content").dataset.target;
+					window.location = `/posts/${link}`;
+				})
+			}
+		});
+    </script>
 
 
 </div>

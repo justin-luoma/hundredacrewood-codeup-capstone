@@ -62,9 +62,24 @@
             </div>
         </div>
     </th:block>
+
+    <script>
+		"use strict";
+
+		document.addEventListener("DOMContentLoaded", () => {
+			const cardContents = document.getElementsByClassName("card-content");
+			for (let elem of cardContents) {
+				elem.classList.add("hoverPointer");
+				elem.addEventListener("click", (elem) => {
+					const link = elem.target.closest(".card-content").dataset.target;
+					window.location = `/posts/${link}`;
+				})
+			}
+		});
+    </script>
+
 </div>
-</th:block>
-</div>
+
 
 </body>
 </html>
