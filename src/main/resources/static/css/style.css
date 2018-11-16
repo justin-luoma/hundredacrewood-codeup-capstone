@@ -14,6 +14,14 @@ main {
 	flex: 1 0 auto;
 }
 
+@font-face {
+	font-family: pooh;
+	src: url(static/css/pooh.ttf) format("truetype");
+}
+.title-font {
+	font-family: pooh;
+}
+
 .d-flex {
 	display: flex;
 }
