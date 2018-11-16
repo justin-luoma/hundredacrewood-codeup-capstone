@@ -16,7 +16,7 @@ public class Topic {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 1000)
     private String description;
 
     @ManyToMany(mappedBy = "topics", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
