@@ -149,7 +149,9 @@ public class PostController {
         comment.setReported(false);
         comment.setUser(user);
         commentRepo.saveAndFlush(comment);
-        notificationSvc.ProcessPostAction(post, true);
+        if (userId != post.getUser().getId()) {
+            notificationSvc.ProcessPostAction(post, true);
+        }
         return "redirect:/posts/" + postId;
     }
 
