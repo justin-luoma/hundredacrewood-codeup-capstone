@@ -15,6 +15,7 @@ import support.onehundredacrewood.app.dao.repositories.PostRepo;
 import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
 import support.onehundredacrewood.app.services.NotificationSenderService;
+import support.onehundredacrewood.app.services.ProfanityFilter;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -83,8 +84,9 @@ public class PostController {
             newTopics.add(topicRepo.findById(topic).get());
         }
         post.setTopics(newTopics);
+        post.setBody(ProfanityFilter.getCensoredText(post.getBody()));
+        post.setTitle(ProfanityFilter.getCensoredText(post.getTitle()));
         Post newPost = postRepo.save(post);
-        System.out.println(Arrays.toString(topics));
         return "redirect:/posts/"+ newPost.getId();
     }
 
@@ -103,8 +105,8 @@ public class PostController {
     @PostMapping("/posts/{id}/update")
     public String updatePost(@PathVariable long id, @ModelAttribute Post post) {
         Post postUpdate = postRepo.findById(id);
-        postUpdate.setTitle(post.getTitle());
-        postUpdate.setBody(post.getBody());
+        postUpdate.setTitle(ProfanityFilter.getCensoredText(post.getTitle()));
+        postUpdate.setBody(ProfanityFilter.getCensoredText(post.getBody()));
         postUpdate.setTopics(post.getTopics());
         postRepo.save(postUpdate);
 
@@ -148,6 +150,7 @@ public class PostController {
         comment.setPost(post);
         comment.setReported(false);
         comment.setUser(user);
+        comment.setBody(ProfanityFilter.getCensoredText(comment.getBody()));
         commentRepo.saveAndFlush(comment);
         notificationSvc.ProcessPostAction(post, true, userId);
         return "redirect:/posts/" + postId;
