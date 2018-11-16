@@ -17,7 +17,7 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Post post;
 
-    @Column(nullable = false, length = 5000)
+    @Column(nullable = false, length = 5500)
     private String body;
 
     @Column(nullable = false)
