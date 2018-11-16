@@ -2,6 +2,7 @@ package support.onehundredacrewood.app.dao.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,6 @@ public class Post {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(length = 50, nullable = false)
@@ -31,16 +31,20 @@ public class Post {
     @Column(nullable = false)
     private boolean reported;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "post_topic",
-            joinColumns = {@JoinColumn(name = "post_id")},
-            inverseJoinColumns = {@JoinColumn(name = "topic_id")}
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "post_topic",
+            joinColumns = {
+                    @JoinColumn(name = "post_id",
+                            referencedColumnName = "id")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "topic_id",
+                            referencedColumnName = "id")}
     )
-    private List<Topic> topics;
+    private List<Topic> topics = new ArrayList<>();
 
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post",
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
     public Post() {

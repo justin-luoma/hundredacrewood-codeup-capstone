@@ -16,10 +16,7 @@ import support.onehundredacrewood.app.dao.repositories.TopicRepo;
 import support.onehundredacrewood.app.dao.repositories.UserRepo;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class PostController {
@@ -95,6 +92,7 @@ public class PostController {
             return "redirect:/";
         }
         model.addAttribute("post", post);
+        model.addAttribute("allTopics", topicRepo.findAll());
         return "post/edit";
     }
 
@@ -103,7 +101,16 @@ public class PostController {
         Post postUpdate = postRepo.findById(id);
         postUpdate.setTitle(post.getTitle());
         postUpdate.setBody(post.getBody());
+        postUpdate.setTopics(post.getTopics());
+//        postUpdate
+//        System.out.println(post.getTopics().get(0).getName());
+//        List<Topic> topics = post.getTopics();
+//        post.getTitle().
+//        List<Topic> topics = post.getTopics();
+//        topics.clear();
+//        post.setTopics(topics);
         postRepo.save(postUpdate);
+
         return "redirect:/posts/"+ post.getId();
     }
 

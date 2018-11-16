@@ -59,12 +59,10 @@ public class User {
     @Column(nullable = false)
     private boolean disabled;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Post> posts;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Comment> comments;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -91,12 +89,10 @@ public class User {
     )
     private List<Topic> topics;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "receiver_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receiver")
     private List<Message> receivedMessages;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sender")
     private List<Message> sentMessages;
 
     public User() {
