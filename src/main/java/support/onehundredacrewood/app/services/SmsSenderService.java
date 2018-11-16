@@ -18,13 +18,11 @@ public class SmsSenderService {
     public void SendMessage(Message message) {
         User user = message.getReceiver();
         if (user.isTexts() && user.getPhone() != null && !user.getPhone().isEmpty()) {
+            String m = message.getBody().length() < 140 ? message.getBody() : message.getBody().substring(0, 100) + "..." +
+                    "\nmessage truncated, read the rest @ hundredacrewood.support";
             smsSender.SendSms(user.getPhone(),
-                    constructMessage(message.getSender().getUsername(), message.getBody()));
+                    "New message from: " + message.getSender().getUsername() + "\n" + m +
+                            "\nHundredAcreWood.support");
         }
-    }
-
-    private static String constructMessage(String from, String body) {
-        return "New message from: " + from + "\n" + body +
-                "\nHundredAcreWood.support";
     }
 }
