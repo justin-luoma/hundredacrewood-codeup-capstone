@@ -23,10 +23,11 @@ public class NotificationSenderService {
     }
 
     @Async
-    public void ProcessPostAction(Post post, boolean isComment) {
+    public void ProcessPostAction(Post post, boolean isComment, Long commenterId) {
         List<User> usersFollowingPost = post.getUsersFollowing();
         usersFollowingPost.forEach(u -> {
-            FollowPostUpdate(u, post, isComment);
+            if (!isComment || u.getId() != commenterId)
+                FollowPostUpdate(u, post, isComment);
         });
     }
 
