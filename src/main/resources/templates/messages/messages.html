@@ -25,7 +25,8 @@
                         <div class="col s12">
                             <div class="card blue-grey">
                                 <div class="card-content white-text">
-                                    <span class="card-title" th:text="${message.sender.username}"></span>
+                                    <a class="card-title" th:href="@{|/users/${message.sender.id}|}"
+                                          th:text="${message.sender.username}"></a>
                                     <p th:text="${message.body}"></p>
                                 </div>
                                 <!--<div class="card-action">-->
@@ -57,7 +58,8 @@
                         <div class="col s12">
                             <div class="card blue-grey">
                                 <div class="card-content white-text">
-                                    <span class="card-title" th:text="'From: '+${message.sender.username}"></span>
+                                    <a class="card-title" th:href="@{|/users/${message.sender.id}|}"
+                                          th:text="'From: '+${message.sender.username}"></a>
                                     <p th:text="${message.body}"></p>
                                 </div>
                                 <!--<div class="card-action">-->
@@ -78,7 +80,8 @@
                     <div class="col s12">
                         <div class="card blue-grey">
                             <div class="card-content white-text">
-                                <span class="card-title" th:text="'To: '+${message.receiver.username}"></span>
+                                <a class="card-title" th:href="@{|/users/${message.receiver.id}|}"
+                                   th:text="'To: '+${message.receiver.username}"></a>
                                 <p th:text="${message.body}"></p>
                             </div>
                             <!--<div class="card-action">-->
