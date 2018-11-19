@@ -117,7 +117,8 @@ public class UserController {
         }
 
         User user = userRepo.findById(userId).get();
-        user.setStrikes(user.getStrikes() + 1);
+        int strikes = user.getStrikes() != null ? user.getStrikes() + 1 : 1;
+        user.setStrikes(strikes);
         userRepo.saveAndFlush(user);
         
         return "redirect:/users/" + userId;
