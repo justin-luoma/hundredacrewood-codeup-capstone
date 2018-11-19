@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var date = document.querySelectorAll('.datepicker');
     var dates = M.Datepicker.init(date, {
         format: "mm/dd/yyyy",
-        defaultDate: new Date('2000-01-01'),
+        defaultDate: new Date('1991-05-04'),
         yearRange: [1950, 2010]
     });
 

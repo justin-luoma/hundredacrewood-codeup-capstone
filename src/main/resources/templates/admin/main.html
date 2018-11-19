@@ -19,27 +19,84 @@
         </div>
         <!--reported posts-->
         <div id="posts" class="col s12">
-            <div class="card" th:each="post : ${reportedPosts}">
-                <div class="card-content">
-                    <span class="card-title">Title: <a th:href="@{|/posts/${post.id}|}" th:text="${post.title}"></a></span>
-                    <span>Posted by: <a th:href="@{|/users/${post.user.id}|}" th:text="${post.user.username}"></a></span>
-                </div>
-            </div>
+                <th:block th:each="post : ${reportedPosts}">
+                    <div class="row">
+                        <div class="col s12 m12">
+                            <div class="card blue-grey darken-1">
+                                <!--title and body-->
+                                <div class="card-content white-text mb-0 pb-0" th:data-target="${post.id}">
+                                    <span class="card-title" th:text="${post.title}"></span>
+
+                                    <blockquote th:text="${post.body}"></blockquote>
+                                </div>
+                                <!--created by and time-->
+                                <div class="card-content white-text pb-0" th:data-target="${post.id}">
+                    <span class="left">
+                            posted:
+                            <th:block th:text="${post.created}"></th:block>
+                        </span>
+                                    <!--<span class="left"><a class="light-blue-text lighten-4" th:href="@{|/users/${post.user.id}|}"-->
+                                    <!--th:text="${post.user.username}"></a> </span>-->
+                                    <!--<span class="right" th:text="'created: '+${post.created}"></span>-->
+                                </div>
+                                <!--topics-->
+                                <div class="card-content white-text pt-0" th:data-target="${post.id}">
+                                    <label th:if="${post.topics.size() > 0}">Topics:</label>
+                                    <th:block th:each="topic,i : ${post.topics}">
+                                        <a class="light-blue-text lighten-4" th:href="@{|/topic/${topic.id}|}"
+                                           th:text="${topic.name}"></a>
+                                        <span th:if="${!i.last}">|</span>
+                                        <!--</th:block>-->
+                                    </th:block>
+                                </div>
+                                <div class="card-action">
+                                    <a class="hoverPointer" th:href="@{|/posts/${post.id}|}" th:text="|${post.comments.size()} ${post.comments.size() == 1 ? 'comment' : 'comments'}|">
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </th:block>
         </div>
         <!--reported comments-->
         <div id="comments" class="col s12">
-            <div class="card" th:each="comment : ${reportedComments}">
-                <div class="card-content">
-                    <span class="card-title">Comment: <a th:href="@{|/posts/${comment.post.id}|}" th:text="${comment.body}"></a></span>
-                    <span>Posted by: <a th:href="@{|/users/${comment.user.id}|}" th:text="${comment.user.username}"></a></span>
+            <th:block th:each="comment : ${reportedComments}">
+                <div class="card blue-grey lighten-1 col s11 offset-s1">
+                    <div class="card-content white-text p-0" th:data-target="${comment.post.id}">
+                        <blockquote th:text="${comment.body}"></blockquote>
+                        <span class="left">by
+                            <a class="indigo-text darken-4" th:href="@{|/users/${comment.user.id}|}"
+                               th:text="${comment.user.username}"></a>
+                            at
+                            <th:block th:text="${comment.created}"></th:block>
+                        </span>
+                        <span class="right">
+                            <a class="brown-text hoverPointer" th:data-target="${comment.id}" onclick="deleteComment(this)">
+                                delete
+                            </a>
+                            <a class="brown-text hoverPointer" th:data-target="${comment.id}" onclick="clearReport(this)">
+                                clear report
+                            </a>
+                        </span>
+                    </div>
                 </div>
-            </div>
+            </th:block>
         </div>
+
         <div id="users" class="col s12">
-            <div class="card" th:each="user : ${usersWithStrikes}">
-                <div class="card-content">
-                    <span class="card-title">User: <a th:href="@{|/users/${user.id}|}" th:text="${user.username}"></a></span>
+            <div class="card blue-grey lighten-1" th:each="user : ${usersWithStrikes}">
+                <div class="card-content setting-page">
+                    <span class="card-title">User: <a class="white-text" th:href="@{|/users/${user.id}|}" th:text="${user.username}"></a></span>
                     <span th:text="|Strikes: ${user.strikes}|"></span>
+                </div>
+                <div class="card-action">
+                    <th:block th:if="${!user.disabled}">
+                        <a class="hoverPointer" onclick="disableUser(this)" th:data-target="${user.id}"><i class="material-icons left">lock_outline</i>Disable User</a>
+                    </th:block>
+                    <th:block th:if="${user.disabled}">
+                        <a class="hoverPointer" onclick="disableUser(this)" th:data-target="${user.id}"><i class="material-icons left">lock_open</i>Enable User</a>
+                    </th:block>
                 </div>
             </div>
         </div>
@@ -48,6 +105,42 @@
 
     <script th:src="@{/js/admin.js}"></script>
 
+    <script>
+        "use strict";
+        function deleteComment(elem) {
+            const id = elem.dataset.target;
+            const input = document.getElementById('deleteCommentInput');
+            input.value = id;
+            const form = document.getElementById('deleteCommentForm');
+            form.submit();
+        }
+        function clearReport(elem) {
+            const id = elem.dataset.target;
+            const input = document.getElementById('clearCommentInput');
+            input.value = id;
+            const form = document.getElementById('clearCommentForm');
+            form.submit();
+        }
+        function disableUser(elem) {
+            const id = elem.dataset.target;
+            const input = document.getElementById('disableUserInput');
+            input.value = id;
+            const form = document.getElementById('disableUserForm');
+            form.submit();
+        }
+    </script>
+    <form id="deleteCommentForm" th:action="@{/posts/comment/delete}" method="post">
+        <input type="hidden" id="deleteCommentInput" th:name="id" />
+        <input type="hidden" name="postId" value="0">
+    </form>
+    <form id="clearCommentForm" th:action="@{/posts/comment/clear}" method="post">
+        <input type="hidden" id="clearCommentInput" th:name="id" />
+        <input type="hidden" name="postId" value="0">
+    </form>
+    <form id="disableUserForm" th:action="@{/users/toggle-disabled}" method="post">
+        <input type="hidden" id="disableUserInput" th:name="id" />
+        <input type="hidden" name="admin" value="true" />
+    </form>
     <!--<span sec:authorize="isAuthenticated()">-->
                     <!--| Logged user: <span sec:authentication="name"></span> |-->
                     <!--Roles: <span sec:authentication="principal.authorities"></span> |-->

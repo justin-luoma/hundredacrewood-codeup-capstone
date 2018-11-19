@@ -124,7 +124,7 @@
                             at
                             <th:block th:text="${comment.created}"></th:block>
                         </span>
-                        <span class="right" sec:authorize="isAuthenticated() && !hasAuthority('ADMIN')" th:if="${!comment.reported}">
+                        <span class="right" sec:authorize="isAuthenticated()" th:if="${!comment.reported}">
                             <a class="brown-text hoverPointer" onclick="reportComment(this)" th:if="${comment.user.id != #authentication.principal.id}"
                                th:data-target="${comment.id}">
                                 report

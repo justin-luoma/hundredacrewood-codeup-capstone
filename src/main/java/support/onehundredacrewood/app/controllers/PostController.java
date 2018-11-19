@@ -236,6 +236,9 @@ public class PostController {
             c.setReported(false);
             commentRepo.saveAndFlush(c);
         });
+        if (postId == 0) {
+            return "redirect:/admin#comments";
+        }
         return "redirect:/posts/" + postId;
     }
 
@@ -251,6 +254,9 @@ public class PostController {
         }
 
         commentRepo.deleteById(commentId);
+        if (postId == 0) {
+            return "redirect:/admin#comments";
+        }
         return "redirect:/posts/" + postId;
     }
 }

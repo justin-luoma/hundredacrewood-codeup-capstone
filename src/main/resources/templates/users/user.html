@@ -29,6 +29,7 @@
                 </button>
             </th:block>
             <input type="hidden" name="id" th:value="${user.id}">
+            <input type="hidden" name="admin" value="false" />
         </form>
     </th:block>
     <form th:method="post" th:if="${!isFriend}" sec:authorize="isAuthenticated()"  th:name="${user.id}" th:action="@{/users/follow}">

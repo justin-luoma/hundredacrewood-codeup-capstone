@@ -10,9 +10,9 @@
 <body>
 <div class="container" layout:fragment="content">
     <h1 class="title-font">Topics</h1>
-    <h5 class="title-font">
-        The various topics for which posts may best relate to
-    </h5>
+    <!--<h5 class="title-font">-->
+        <!--The various topics for which posts may best relate to-->
+    <!--</h5>-->
 
     <div class="row" th:each="topic : ${topics}">
         <span class="title-font customH5" th:text="${topic.name}"></span>
