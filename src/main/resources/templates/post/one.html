@@ -115,7 +115,7 @@
             </th:block>
 
             <th:block th:each="comment : ${post.comments}">
-                <div class="card blue-grey lighten-1 col s11 offset-s1">
+                <div class="card blue-grey lighten-1 col s11 offset-s1" th:id="${comment.id}">
                     <div class="card-content white-text p-0">
                         <blockquote th:text="${comment.body}"></blockquote>
                         <span class="left">by

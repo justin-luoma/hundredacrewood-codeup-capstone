@@ -8,9 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
             elem.classList.add("hoverPointer");
             elem.addEventListener("click", (elem) => {
                 const link = elem.target.closest(".card-content").dataset.target;
+                const cId = elem.target.closest(".card-content").dataset.comment;
                 if (link !== "undefined" && link !== undefined) {
-                    window.location = `/posts/${link}`;
-
+                    console.log(cId);
+                    if (cId !== "undefined" && link !== undefined) {
+                        window.location = `/posts/${link}#${cId}`
+                    } else {
+                        window.location = `/posts/${link}`;
+                    }
                 }
             });
         }
