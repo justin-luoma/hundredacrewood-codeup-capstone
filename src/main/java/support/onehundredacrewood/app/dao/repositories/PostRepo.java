@@ -22,4 +22,5 @@ public interface PostRepo extends CrudRepository<Post, Long> {
 
     List<Post> findAllByUserOrderByCreatedDesc(User user);
 
+    List<Post> findAll();
 }

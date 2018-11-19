@@ -2,6 +2,7 @@ package support.onehundredacrewood.app.dao.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -336,6 +337,7 @@ public class User {
     }
 
     public List<Post> getPosts() {
+        this.posts.sort(Comparator.comparing(Post::getCreated).reversed());
         return posts;
     }
 
@@ -344,6 +346,7 @@ public class User {
     }
 
     public List<Comment> getComments() {
+        this.comments.sort(Comparator.comparing(Comment::getCreated).reversed());
         return comments;
     }
 
@@ -360,6 +363,7 @@ public class User {
     }
 
     public List<Post> getFollowedPosts() {
+        this.followedPosts.sort(Comparator.comparing(Post::getCreated).reversed());
         return followedPosts;
     }
 
@@ -376,6 +380,7 @@ public class User {
     }
 
     public List<Message> getReceivedMessages() {
+        this.receivedMessages.sort(Comparator.comparing(Message::getTimestamp).reversed());
         return receivedMessages;
     }
 
@@ -384,6 +389,7 @@ public class User {
     }
 
     public List<Message> getSentMessages() {
+        this.sentMessages.sort(Comparator.comparing(Message::getTimestamp).reversed());
         return sentMessages;
     }
 
