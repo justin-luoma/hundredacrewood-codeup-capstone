@@ -63,7 +63,7 @@
         <div id="comments" class="col s12">
             <th:block th:each="comment : ${reportedComments}">
                 <div class="card blue-grey lighten-1 col s11 offset-s1">
-                    <div class="card-content white-text p-0" th:data-target="${comment.post.id}">
+                    <div class="card-content white-text p-0 comment-card" th:data-target="${comment.post.id}" th:data-comment="${comment.id}">
                         <blockquote th:text="${comment.body}"></blockquote>
                         <span class="left">by
                             <a class="indigo-text darken-4" th:href="@{|/users/${comment.user.id}|}"
