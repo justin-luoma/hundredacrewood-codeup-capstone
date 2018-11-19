@@ -126,7 +126,7 @@
                         </span>
                         <span class="right" sec:authorize="isAuthenticated()">
                             <a class="brown-text hoverPointer" onclick="reportComment(this)"
-                               th:if="${comment.user.id != #authentication.principal.id || !comment.reported}"
+                               th:if="${comment.user.id != #authentication.principal.id && !comment.reported}"
                                th:data-target="${comment.id}">
                                 report
                             </a>
@@ -139,7 +139,7 @@
                         <span class="right" sec:authorize="hasAuthority('ADMIN')">
                             <th:block th:if="${comment.reported}">
                                 <a class="brown-text hoverPointer" th:data-target="${comment.id}" onclick="clearReport(this)">
-                                    clear report
+                                    clear report &nbsp;
                                 </a>
                             </th:block>
                         </span>
