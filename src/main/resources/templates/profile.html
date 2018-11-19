@@ -126,7 +126,7 @@
                     <div class="card-image" th:if="${user.image != null}">
                         <img th:src="${user.image}" alt="profile image" class="profile-image"/>
                     </div>
-                    <div class="card-content setting-page">
+                    <div class="card-content grey lighten-2 setting-page">
                         <p th:text="|Username: ${#authentication.name}|" sec:authentication="name"></p>
                         <p th:text="|Email: ${#authentication.principal.email}|" sec:authentication="principal.email"></p>
                         <p th:text="|Gender: ${#authentication.principal.gender}|" sec:authentication="principal.gender"></p>
