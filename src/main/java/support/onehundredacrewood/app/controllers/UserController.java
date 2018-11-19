@@ -109,6 +109,21 @@ public class UserController {
         return "redirect:/users/" + userId;
     }
 
+    @PostMapping("/users/add-strike")
+    public String addUserStrike(@RequestParam(name = "id") long userId) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!principal.isAdmin()) {
+            return "redirect:/";
+        }
+
+        User user = userRepo.findById(userId).get();
+        int strikes = user.getStrikes() != null ? user.getStrikes() + 1 : 1;
+        user.setStrikes(strikes);
+        userRepo.saveAndFlush(user);
+        
+        return "redirect:/users/" + userId;
+    }
+
     private boolean areFriends(List<User> friends, final long userId) {
         return  friends.stream().anyMatch(f -> f.getId() == userId);
     }
