@@ -69,7 +69,7 @@
             </th:block>
         </div>
 
-        <th:block th:if="${isFriend}">
+        <th:block sec:authorize="isAuthenticated()">
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large red tooltipped" data-position="left"
                    th:data-title="${user.username}" th:data-id="${user.id}"
