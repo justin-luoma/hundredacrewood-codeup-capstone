@@ -40,7 +40,9 @@ public class PostController {
 
     @GetMapping("/posts")
     public String showPosts(Model vModel) {
-        vModel.addAttribute("posts", postRepo.findAll());
+        List<Post> posts = postRepo.findAll();
+        posts.sort(Comparator.comparing(Post::getCreated).reversed());
+        vModel.addAttribute("posts", posts);
         return "post/index";
     }
 

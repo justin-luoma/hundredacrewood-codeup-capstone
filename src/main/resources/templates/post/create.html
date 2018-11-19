@@ -9,22 +9,22 @@
 
 <div class = "container" layout:fragment="content">
     <div class="row">
-        <form class="col s12" th:action="@{/posts/create}" th:method="post" th:object="${post}">
+        <form class="col s12" th:action="@{/posts/create}" th:method="post" th:object="${post}" id="form">
             <div class="row">
                 <div class="input-field col s12">
-                    <input name="title" id="title" type="text" required="" data-length="150" maxlength="150">
+                    <input name="title" id="title" type="text" required="" data-length="150" maxlength="150" class="validate" minlength="5">
                     <label for="title">Title</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea name="body" id="body" class="materialize-textarea" data-length="5000" maxlength="5000"></textarea>
+                    <textarea name="body" id="body" class="materialize-textarea" data-length="5000" maxlength="5000" minlength="10"></textarea>
                     <label for="body">Body</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <select multiple="" name="selectTopic">
+                    <select class="validate" multiple="" name="selectTopic" required="" id="topics">
                         <th:block th:each="topic : ${selectTopic}">
                             <option th:value="${topic.id}" th:text="${topic.name}"></option>
                         </th:block>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class='row'>
-                <button type='submit' class='col s12 btn btn-large waves-effect indigo'>Create</button>
+                <a onclick="submitForm()" class='col s12 btn btn-large waves-effect indigo'>Create</a>
             </div>
         </form>
     </div>
@@ -43,9 +43,32 @@
             for (let elem of charCounters) {
                 new M.CharacterCounter(elem);
             }
-            var postCreateSelect = document.querySelectorAll('select');
-            var postCreateSelectInstances = M.FormSelect.init(postCreateSelect);
+            const postCreateSelect = document.querySelectorAll('select');
+            const postCreateSelectInstances = M.FormSelect.init(postCreateSelect);
         });
+
+        function submitForm() {
+            const select = document.getElementById("topics");
+            const title = document.getElementById("title");
+            const body = document.getElementById("body");
+
+            if (title.value.length <= 0) {
+                alert("Please enter a title");
+                return
+            }
+
+            if (body.value.length <= 0) {
+                alert("Please enter a body");
+                return
+            }
+
+            if (select.selectedOptions.length === 0) {
+                alert("Please select at least one topic!");
+                return
+            }
+
+            document.getElementById("form").submit();
+        }
     </script>
 </div>
 
