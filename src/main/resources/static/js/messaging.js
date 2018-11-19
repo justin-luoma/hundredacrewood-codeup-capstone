@@ -14,9 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     elem.classList.remove("hide")
                 }
             }
+            const readDiv = document.getElementById("read");
+            if (readDiv !== null && readDiv.childElementCount === 0) {
+                readDiv.innerHTML = "<h3>No read messages</h3>";
+            }
             const unreadDiv = document.getElementById("unread");
             if (unreadDiv !== null && unreadDiv.childElementCount === 0) {
                 unreadDiv.innerHTML = "<h3>No unread messages</h3>";
+            }
+            const sentDiv = document.getElementById("sent");
+            if (sentDiv !== null && sentDiv.childElementCount === 0) {
+                sentDiv.innerHTML = "<h3>No sent messages</h3>";
             }
         })
         .catch(error => console.error(error));
