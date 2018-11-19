@@ -92,7 +92,7 @@ public class UserController {
     }
 
     @PostMapping("/users/toggle-disabled")
-    public String disableUserToggle(@RequestParam(name = "id") long userId) {
+    public String disableUserToggle(@RequestParam(name = "id") long userId, @RequestParam(name = "admin") boolean admin) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (!principal.isAdmin()) {
             return "redirect:/";
@@ -101,6 +101,10 @@ public class UserController {
         User user = userRepo.findById(userId).get();
         user.setDisabled(!user.isDisabled());
         userRepo.saveAndFlush(user);
+
+        if (admin) {
+            return "redirect:/admin#users";
+        }
 
         return "redirect:/users/" + userId;
     }

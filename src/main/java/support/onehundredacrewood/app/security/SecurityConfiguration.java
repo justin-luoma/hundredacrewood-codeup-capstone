@@ -2,10 +2,8 @@ package support.onehundredacrewood.app.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/js/**", "/css/**")
+                .antMatchers("/js/**", "/css/**", "/font/**", "/img/**")
                 .permitAll()
                 .and()
                 .authorizeRequests()
@@ -59,10 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/admin")
-                .hasAuthority("ADMIN")
-                .and()
-                .authorizeRequests()
                 .antMatchers(
                         "/posts/create",
                         "/profile",
@@ -81,7 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/posts/comment/report",
                         "/posts/comment/clear",
                         "/posts/commemt/delete",
-                        "/admin/**"
+                        "/admin"
                 )
                 .authenticated()
         ;
