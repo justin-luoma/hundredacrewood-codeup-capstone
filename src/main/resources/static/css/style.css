@@ -300,3 +300,7 @@ center.h-100 {
 	font-size: 1.25rem!important;
 
 }
+
+.d-inline {
+	display: inline-block;
+}
