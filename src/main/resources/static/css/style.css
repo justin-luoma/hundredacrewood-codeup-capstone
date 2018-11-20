@@ -308,3 +308,67 @@ center.h-100 {
 .home-footer-padding {
     padding-bottom: 10px;
 }
+
+.nav-wrapper > ul > li > a:before,
+ul.sidenav > li > a:before {
+    background-repeat: no-repeat;
+    background-position: center;
+    content: "";
+    display: inline-block;
+    height: 32px;
+    margin-right: 5px;
+    vertical-align: middle;
+    width: 32px;
+    /*border-radius: 50%;*/
+}
+
+.nav-wrapper > ul > li > a,
+ul.sidenav > li > a {
+    padding-left: .25em;
+    padding-right: .25em;
+}
+
+.nav-wrapper > ul > li > a.home:before,
+ul.sidenav > li > a.home:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Winnie-the-Pooh-1-icon.png');
+}
+
+.nav-wrapper > ul > li > a.topics:before,
+ul.sidenav > li > a.topics:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Piglet-2-icon.png');
+}
+
+.nav-wrapper > ul > li > a.posts:before,
+ul.sidenav > li > a.posts:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Eeyore-icon.png');
+}
+
+.nav-wrapper > ul > li > a.resources:before,
+ul.sidenav > li > a.resources:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Tigger-icon.png');
+}
+
+.nav-wrapper > ul > li > a.create:before,
+ul.sidenav > li > a.create:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Owl-icon.png');
+}
+
+.nav-wrapper > ul > li > a.logout:before,
+ul.sidenav > li > a.logout:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Rabbit-icon.png');
+}
+
+.nav-wrapper > ul > li > a.profile:before,
+ul.sidenav > li > a.profile:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Piglet-1-icon.png');
+}
+
+.nav-wrapper > ul > li > a.admin:before,
+ul.sidenav > li > a.admin:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Roo-icon.png');
+}
+
+.nav-wrapper > ul > li > a.messages:before,
+ul.sidenav > li > a.messages:before {
+    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Winnie-the-Pooh-4-icon.png');
+}

@@ -42,51 +42,51 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="hide-on-med-and-down mr-auto clear">
             <!--<li><a th:href="@{/}"><h1>Logo</h1></a></li>-->
-            <li><a th:href="@{/}">Home</a></li>
-            <li><a th:href="@{/topic}">Topics</a></li>
-            <li><a th:href="@{/posts}">Posts</a></li>
-            <li><a th:href="@{/resources}">Resources</a></li>
+            <li><a th:class="home" th:href="@{/}">Home</a></li>
+            <li><a th:class="topics" th:href="@{/topic}">Topics</a></li>
+            <li><a th:class="posts" th:href="@{/posts}">Posts</a></li>
+            <li><a th:class="resources" th:href="@{/resources}">Resources</a></li>
             <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
-                <li><a th:href="@{/posts/myposts}">My Posts</a></li>
+                <li class="hide"><a th:href="@{/posts/myposts}">My Posts</a></li>
                 <li class="hide"><a href="#">Friends</a></li>
-                <li><a th:href="@{/posts/create}">Create a Post</a></li>
+                <li><a th:class="create" th:href="@{/posts/create}">Create a Post</a></li>
             </th:block>
         </ul>
         <ul class="right hide-on-med-and-down">
             <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
-                <li id="logoutButton"><a href="#">Logout</a></li>
-                <li><a th:href="@{/profile}">Profile</a></li>
-                <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
-                <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
+                <li id="logoutButton"><a th:class="logout" href="#">Logout</a></li>
+                <li><a th:class="profile" th:href="@{/profile}">Profile</a></li>
+                <li sec:authorize="hasAuthority('ADMIN')"><a th:class="admin" th:href="@{/admin}">Admin</a></li>
+                <li><a th:class="messages" th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
             </th:block>
             <th:block sec:authorize="!isAuthenticated() || hasAuthority('ROLE_USER')">
-                <li><a th:href="@{/login}">Login</a></li>
-                <li><a th:href="@{/register}">Register</a></li>
+                <li><a th:class="logout" th:href="@{/login}">Login</a></li>
+                <li><a th:class="profile" th:href="@{/register}">Register</a></li>
             </th:block>
         </ul>
     </div>
 </nav>
 
 <ul class="sidenav" id="mobile-demo">
-    <li><a th:href="@{/}">Home</a></li>
-    <li><a th:href="@{/topic}">Topics</a></li>
-    <li><a th:href="@{/posts}">Posts</a></li>
-    <li><a th:href="@{/resources}">Resources</a></li>
+    <li><a th:class="home" th:href="@{/}">Home</a></li>
+    <li><a th:class="topics" th:href="@{/topic}">Topics</a></li>
+    <li><a th:class="posts" th:href="@{/posts}">Posts</a></li>
+    <li><a th:class="resources" th:href="@{/resources}">Resources</a></li>
     <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
-        <li><a th:href="@{/posts/myposts}">My Posts</a></li>
+        <li class="hide"><a th:href="@{/posts/myposts}">My Posts</a></li>
         <li class="hide"><a href="#">Friends</a></li>
-        <li><a th:href="@{/posts/create}">Create a Post</a></li>
+        <li><a th:class="create" th:href="@{/posts/create}">Create a Post</a></li>
     </th:block>
     <li><hr/></li>
     <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
-        <li id="logoutButtonMobile"><a href="#">Logout</a></li>
-        <li><a th:href="@{/profile}">Profile</a></li>
-        <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin}">Admin</a></li>
-        <li><a th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
+        <li id="logoutButtonMobile"><a th:class="logout" href="#">Logout</a></li>
+        <li><a th:class="profile" th:href="@{/profile}">Profile</a></li>
+        <li sec:authorize="hasAuthority('ADMIN')"><a th:class="admin" th:href="@{/admin}">Admin</a></li>
+        <li><a th:class="messages" th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
     </th:block>
     <th:block sec:authorize="!isAuthenticated() || hasAuthority('ROLE_USER')">
-        <li><a th:href="@{/login}">Login</a></li>
-        <li><a th:href="@{/register}">Register</a></li>
+        <li><a th:class="logout" th:href="@{/login}">Login</a></li>
+        <li><a th:class="profile" th:href="@{/register}">Register</a></li>
     </th:block>
 </ul>
 
