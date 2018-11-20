@@ -25,15 +25,15 @@
                         <div class="col s12">
                             <div class="card blue-grey">
                                 <div class="card-content white-text">
-                                    <a class="card-title" th:href="@{|/users/${message.sender.id}|}"
+                                    <a class="card-title white-text" th:href="@{|/users/${message.sender.id}|}"
                                           th:text="${message.sender.username}"></a>
                                     <p th:text="${message.body}"></p>
                                 </div>
                                 <!--<div class="card-action">-->
                                 <!--</div>-->
                                 <div class="card-content">
-                                    <span class="left" th:text="'sent: '+${message.timestamp}"></span>
-                                    <span class="right" th:text="'unread:'+${message.unread}"></span>
+                                    <span class="left white-text" th:text="'sent at: '+${message.timestamp}"></span>
+                                    <!--<span class="right" th:text="'unread:'+${message.unread}"></span>-->
                                 </div>
                             </div>
                         </div>
@@ -58,15 +58,15 @@
                         <div class="col s12">
                             <div class="card blue-grey">
                                 <div class="card-content white-text">
-                                    <a class="card-title" th:href="@{|/users/${message.sender.id}|}"
+                                    <a class="card-title white-text" th:href="@{|/users/${message.sender.id}|}"
                                           th:text="'From: '+${message.sender.username}"></a>
                                     <p th:text="${message.body}"></p>
                                 </div>
                                 <!--<div class="card-action">-->
                                 <!--</div>-->
                                 <div class="card-content">
-                                    <span class="left" th:text="'sent: '+${message.timestamp}"></span>
-                                    <span class="right" th:text="'unread:'+${message.unread}"></span>
+                                    <span class="left white-text" th:text="'sent at: '+${message.timestamp}"></span>
+                                    <!--<span class="right" th:text="'unread:'+${message.unread}"></span>-->
                                 </div>
                             </div>
                         </div>
@@ -80,15 +80,15 @@
                     <div class="col s12">
                         <div class="card blue-grey">
                             <div class="card-content white-text">
-                                <a class="card-title" th:href="@{|/users/${message.receiver.id}|}"
+                                <a class="card-title white-text" th:href="@{|/users/${message.receiver.id}|}"
                                    th:text="'To: '+${message.receiver.username}"></a>
                                 <p th:text="${message.body}"></p>
                             </div>
                             <!--<div class="card-action">-->
                             <!--</div>-->
                             <div class="card-content">
-                                <span class="left" th:text="'sent: '+${message.timestamp}"></span>
-                                <span class="right" th:text="'unread:'+${message.unread}"></span>
+                                <span class="left white-text" th:text="'sent at: '+${message.timestamp}"></span>
+                                <!--<span class="right" th:text="'unread:'+${message.unread}"></span>-->
                             </div>
                         </div>
                     </div>
