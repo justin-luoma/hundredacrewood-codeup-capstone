@@ -396,3 +396,11 @@ ul.sidenav > li > a.messages:before {
 	font-weight: bold;
 	color: #4dbbf1;
 }
+
+.commentDelete {
+	color: #ffab40;
+}
+
+.postUserColor {
+	color: #b6def7;
+}
