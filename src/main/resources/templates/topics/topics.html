@@ -16,7 +16,7 @@
 
     <div class="row" th:each="topic : ${topics}">
         <span class="title-font customH5" th:text="${topic.name}"></span>
-        <a class="topic-links"
+        <a class="topicsLink topic-links"
            th:href="@{|/topic/${topic.id}|}">View All Posts</a>
         <div class="col s12 m12">
             <th:block th:if="${topic.posts != null && topic.posts.size() > 0}">
@@ -35,7 +35,7 @@
                                     <!--created by and time-->
                                     <div class="card-content white-text pb-0" th:data-target="${post.id}">
                     <span class="left">by
-                            <a class="light-blue-text lighten-4" th:href="@{|/users/${post.user.id}|}"
+                            <a class="topicsNandTFont" th:href="@{|/users/${post.user.id}|}"
                                th:text="${post.user.username}"></a>
                             at
                             <th:block th:text="${post.created}"></th:block>
@@ -48,7 +48,7 @@
                                     <div class="card-content white-text pt-0" th:data-target="${post.id}">
                                         <label th:if="${post.topics.size() > 0}">Topics:</label>
                                         <th:block th:each="topic,i : ${post.topics}">
-                                            <a class="light-blue-text lighten-4" th:href="@{|/topic/${topic.id}|}"
+                                            <a class="topicsNandTFont" th:href="@{|/topic/${topic.id}|}"
                                                th:text="${topic.name}"></a>
                                             <span th:if="${!i.last}">|</span>
                                             <!--</th:block>-->

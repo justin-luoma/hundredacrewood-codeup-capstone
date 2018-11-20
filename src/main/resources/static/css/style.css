@@ -386,3 +386,13 @@ ul.sidenav > li > a.messages:before {
 .aboutFontSize {
 	font-size: 1.5rem;
 }
+
+.topicsLink{
+	font-weight: bold;
+	color: #1403e5;
+}
+
+.topicsNandTFont{
+	font-weight: bold;
+	color: #4dbbf1;
+}
