@@ -378,3 +378,11 @@ ul.sidenav > li > a.messages:before {
 	color: #c5cbc8;
 
 }
+
+.h2HomeColor {
+	color: #c5cbc8;
+}
+
+.aboutFontSize {
+	font-size: 1.5rem;
+}
