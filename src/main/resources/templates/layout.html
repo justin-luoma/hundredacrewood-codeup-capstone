@@ -99,8 +99,9 @@
         #httpServletRequest.requestURL == 'https://hundredacrewood.support/' ||
         #httpServletRequest.requestURL == 'https://hundredacrewood.support'}">
     <footer class="page-footer p-0" id="footerColor">
-        <div class="container home-footer-padding">
+        <div class="container home-footer-padding d-flex justify-content-between">
             <p>© 2018 Hundred Acre Wood Support</p>
+            <p><a th:href="@{/about}" th:class="white-text">About Us</a></p>
         </div>
     </footer>
 </th:block>

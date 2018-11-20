@@ -31,6 +31,10 @@ main {
 	justify-content: center;
 }
 
+.justify-content-between {
+    justify-content: space-between;
+}
+
 .flex-column {
 	flex-flow: column;
 }
