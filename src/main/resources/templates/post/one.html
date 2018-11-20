@@ -21,7 +21,7 @@
                 <!--created by and time-->
                 <div class="card-content white-text pb-0">
                     <span class="left">by
-                            <a class="light-blue-text lighten-4" th:href="@{|/users/${post.user.id}|}"
+                            <a class="topicsNandTFont" th:href="@{|/users/${post.user.id}|}"
                                th:text="${post.user.username}"></a>
                             at
                             <th:block th:text="${post.created}"></th:block>
@@ -34,7 +34,7 @@
                 <div class="card-content white-text pt-0">
                     <label th:if="${post.topics.size() > 0}">Topics:</label>
                     <th:block th:each="topic,i : ${post.topics}">
-                        <a class="light-blue-text lighten-4" th:href="@{|/topic/${topic.id}|}"
+                        <a class="topicsNandTFont" th:href="@{|/topic/${topic.id}|}"
                            th:text="${topic.name}"></a>
                         <span th:if="${!i.last}">|</span>
                         <!--</th:block>-->
@@ -119,7 +119,7 @@
                     <div class="card-content white-text p-0">
                         <blockquote th:text="${comment.body}"></blockquote>
                         <span class="left">by
-                            <a class="indigo-text darken-4" th:href="@{|/users/${comment.user.id}|}"
+                            <a class="postUserColor" th:href="@{|/users/${comment.user.id}|}"
                                               th:text="${comment.user.username}"></a>
                             at
                             <th:block th:text="${comment.created}"></th:block>
@@ -131,8 +131,8 @@
                                 report
                             </a>
                             <th:block th:if="${#authentication.principal.id == comment.user.id || #authentication.principal.admin}">
-                                <a class="brown-text hoverPointer" th:data-target="${comment.id}" onclick="deleteComment(this)">
-                                    delete
+                                <a class="commentDelete hoverPointer" th:data-target="${comment.id}" onclick="deleteComment(this)">
+                                    Delete
                                 </a>
                             </th:block>
                         </span>

@@ -370,5 +370,37 @@ ul.sidenav > li > a.admin:before {
 
 .nav-wrapper > ul > li > a.messages:before,
 ul.sidenav > li > a.messages:before {
-    background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Winnie-the-Pooh-4-icon.png');
+	background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Winnie-the-Pooh-4-icon.png');
+}
+
+.homeFandC {
+	font-size: 1.5rem;
+	color: #c5cbc8;
+
+}
+
+.h2HomeColor {
+	color: #c5cbc8;
+}
+
+.aboutFontSize {
+	font-size: 1.5rem;
+}
+
+.topicsLink{
+	font-weight: bold;
+	color: #1403e5;
+}
+
+.topicsNandTFont{
+	font-weight: bold;
+	color: #4dbbf1;
+}
+
+.commentDelete {
+	color: #ffab40;
+}
+
+.postUserColor {
+	color: #b6def7;
 }
