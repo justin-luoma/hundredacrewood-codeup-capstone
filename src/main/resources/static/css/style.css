@@ -332,6 +332,24 @@ ul.sidenav > li > a {
     padding-right: .25em;
 }
 
+.nav-wrapper > ul > li > a,
+ul.sidenav > li:first-child > a {
+	padding-left: .65em;
+}
+
+@media only screen and (min-width: 1201px) {
+	.nav-wrapper > ul > li > a,
+	ul.sidenav > li > a {
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+
+	.nav-wrapper > ul > li > a,
+	ul.sidenav > li:first-child > a {
+		padding-left: 1.25em;
+	}
+}
+
 .nav-wrapper > ul > li > a.home:before,
 ul.sidenav > li > a.home:before {
     background-image: url('https://icons.iconarchive.com/icons/pino/winnie/32/Winnie-the-Pooh-1-icon.png');
