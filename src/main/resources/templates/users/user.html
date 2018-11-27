@@ -17,7 +17,8 @@
 
     <h4><span th:text="${user.username}"></span></h4>
 
-    <a class="waves-effect waves-light btn-small" onclick="(() => {const form = document.getElementById('followForm'); form.submit()})()"
+    <a class="waves-effect waves-light btn-small" sec:authorize="isAuthenticated()"
+       onclick="(() => {const form = document.getElementById('followForm'); form.submit()})()"
        th:if="${!isFriend}">Follow</a>
 
     <th:block sec:authorize="hasAuthority('ADMIN')">
