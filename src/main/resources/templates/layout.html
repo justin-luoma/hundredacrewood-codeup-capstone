@@ -54,10 +54,11 @@
         </ul>
         <ul class="right hide-on-med-and-down">
             <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
-                <li id="logoutButton"><a th:class="logout" href="#">Logout</a></li>
+                <li><a th:class="messages" th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
                 <li><a th:class="profile" th:href="@{/profile}">Profile</a></li>
                 <li sec:authorize="hasAuthority('ADMIN')"><a th:class="admin" th:href="@{/admin}">Admin</a></li>
-                <li><a th:class="messages" th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
+                <li id="logoutButton"><a th:class="logout" href="#">Logout</a></li>
+
             </th:block>
             <th:block sec:authorize="!isAuthenticated() || hasAuthority('ROLE_USER')">
                 <li><a th:class="logout" th:href="@{/login}">Login</a></li>
@@ -79,10 +80,10 @@
     </th:block>
     <li><hr/></li>
     <th:block sec:authorize="isAuthenticated() && !hasAuthority('ROLE_USER')">
-        <li id="logoutButtonMobile"><a th:class="logout" href="#">Logout</a></li>
+        <li><a th:class="messages" th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
         <li><a th:class="profile" th:href="@{/profile}">Profile</a></li>
         <li sec:authorize="hasAuthority('ADMIN')"><a th:class="admin" th:href="@{/admin}">Admin</a></li>
-        <li><a th:class="messages" th:href="@{/messages}">Messages<span class="new badge hide message-badge"></span></a></li>
+        <li id="logoutButtonMobile"><a th:class="logout" href="#">Logout</a></li>
     </th:block>
     <th:block sec:authorize="!isAuthenticated() || hasAuthority('ROLE_USER')">
         <li><a th:class="logout" th:href="@{/login}">Login</a></li>
