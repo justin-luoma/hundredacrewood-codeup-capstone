@@ -132,7 +132,7 @@
                             </a>
                             <th:block th:if="${#authentication.principal.id == comment.user.id || #authentication.principal.admin}">
                                 <a class="commentDelete hoverPointer" th:data-target="${comment.id}" onclick="deleteComment(this)">
-                                    Delete
+                                    delete
                                 </a>
                             </th:block>
                         </span>
