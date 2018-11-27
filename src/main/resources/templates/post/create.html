@@ -4,39 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Create a Post</title>
+    <style>
+        .character-counter {
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
 <div class = "container" layout:fragment="content">
+    <div class="card-panel blue-grey darken-1 z-depth-4">
     <div class="row">
         <form class="col s12" th:action="@{/posts/create}" th:method="post" th:object="${post}" id="form">
             <div class="row">
                 <div class="input-field col s12">
-                    <input name="title" id="title" type="text" required="" data-length="150" maxlength="150" class="validate" minlength="5">
-                    <label for="title">Title</label>
+                    <input name="title" id="title" type="text" required="" data-length="150" maxlength="150" class="validate white-text" minlength="5">
+                    <label class="white-text" for="title">Title</label>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea name="body" id="body" class="materialize-textarea white-text" data-length="5000" maxlength="5000" minlength="10"></textarea>
+                    <label class="white-text" for="body">Body</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea name="body" id="body" class="materialize-textarea" data-length="5000" maxlength="5000" minlength="10"></textarea>
-                    <label for="body">Body</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <select class="validate" multiple="" name="selectTopic" required="" id="topics">
+                    <select class="validate white-text" multiple="" name="selectTopic" required="" id="topics">
                         <th:block th:each="topic : ${selectTopic}">
                             <option th:value="${topic.id}" th:text="${topic.name}"></option>
                         </th:block>
                     </select>
-                    <label>Topics</label>
+                    <label class="white-text">Topics</label>
                 </div>
             </div>
+            </div>
+        </div>
             <div class='row'>
                 <a onclick="submitForm()" class='col s12 btn btn-large waves-effect indigo'>Create</a>
             </div>
         </form>
     </div>
+
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const charCounters = document.querySelectorAll("[data-length]");
