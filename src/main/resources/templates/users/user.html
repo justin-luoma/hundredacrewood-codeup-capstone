@@ -17,7 +17,6 @@
 
     <h4><span th:text="${user.username}"></span></h4>
 
-
     <a th:if="${!isFriend}" class="waves-effect waves-light btn-small"
        onclick="(() => {const form = document.getElementById('followForm'); form.submit()})()">Follow</a>
 
@@ -74,7 +73,7 @@
                 <a class="btn-floating btn-large red tooltipped" data-position="left"
                    th:data-title="${user.username}" th:data-id="${user.id}"
                    th:data-tooltip="'Send message to '+${user.username}" onclick="createNewMessage(this)">
-                    <i class="fas fa-pen"></i>
+                    <i class="fas fa-envelope"></i>
                 </a>
                 <!--<ul>-->
                 <!--<li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>-->
