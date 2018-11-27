@@ -68,13 +68,38 @@
     </div>
 
     <th:block sec:authorize="isAuthenticated()">
-        <div class="fixed-action-btn">
+        <div class="fixed-action-btn" id="floating-message-btn">
             <a class="btn-floating btn-large red tooltipped" data-position="left"
                onclick="createNewMessage(this)" th:data-id="${user.id}"
                th:data-title="${user.username}" th:data-tooltip="'Send message to '+${user.username}">
                 <i class="fas fa-envelope"></i>
             </a>
         </div>
+        <script>
+            "use strict";
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const btn = document.getElementById("floating-message-btn");
+                const footer = document.getElementById("footerColor");
+                const screenH = screen.height - 100;
+                const height = footer.getBoundingClientRect().top - 100;
+
+                btn.style.bottom = "initial";
+                btn.style.top = `${height < screenH ? height : screenH}px`;
+
+                console.log(footer.getBoundingClientRect().top);
+                window.onscroll = () => {
+                    console.log("scroll");
+                    const footer = document.getElementById("footerColor");
+                    const screenH = screen.height - 100;
+                    const height = footer.getBoundingClientRect().top - 100;
+
+                    btn.style.bottom = "initial";
+                    btn.style.top = `${height < screenH ? height : screenH}px`;
+                };
+
+            });
+        </script>
     </th:block>
 
     <!--<div><span th:each</div>-->
