@@ -1,54 +1,58 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}" lang="en">
+<html lang="en"
+      layout:decorate="~{layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create a Post</title>
     <style>
+        .select-dropdown {
+            color: white!important;
+        }
         .character-counter {
-            color: white;
+            color: white!important;
         }
     </style>
 </head>
 <body>
 
-<div class = "container" layout:fragment="content">
+<div class="container" layout:fragment="content">
     <div class="card-panel blue-grey darken-1 z-depth-4">
-    <div class="row">
-        <form class="col s12" th:action="@{/posts/create}" th:method="post" th:object="${post}" id="form">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input name="title" id="title" type="text" required="" data-length="150" maxlength="150" class="validate white-text" minlength="5">
-                    <label class="white-text" for="title">Title</label>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <textarea name="body" id="body" class="materialize-textarea white-text" data-length="5000" maxlength="5000" minlength="10"></textarea>
-                    <label class="white-text" for="body">Body</label>
+        <div class="row">
+            <form class="col s12" id="form" th:action="@{/posts/create}" th:method="post" th:object="${post}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input class="validate white-text" data-length="150" id="title" maxlength="150" minlength="5" name="title"
+                               required="" type="text">
+                        <label class="white-text" for="title">Title</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <select class="validate white-text" multiple="" name="selectTopic" required="" id="topics">
-                        <th:block th:each="topic : ${selectTopic}">
-                            <option th:value="${topic.id}" th:text="${topic.name}"></option>
-                        </th:block>
-                    </select>
-                    <label class="white-text">Topics</label>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea class="materialize-textarea white-text" data-length="5000" id="body" maxlength="5000"
+                                  minlength="10" name="body"></textarea>
+                        <label class="white-text" for="body">Body</label>
+                    </div>
                 </div>
-            </div>
-            </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select class="validate white-text" id="topics" multiple="" name="selectTopic" required="">
+                            <th:block th:each="topic : ${selectTopic}">
+                                <option class="white-text" th:text="${topic.name}" th:value="${topic.id}"></option>
+                            </th:block>
+                        </select>
+                        <label class="white-text">Topics</label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <a class='col s12 btn btn-large waves-effect indigo' onclick="submitForm()">Create</a>
+                </div>
+            </form>
         </div>
-            <div class='row'>
-                <a onclick="submitForm()" class='col s12 btn btn-large waves-effect indigo'>Create</a>
-            </div>
-        </form>
     </div>
 
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const charCounters = document.querySelectorAll("[data-length]");
             for (let elem of charCounters) {
                 new M.CharacterCounter(elem);
