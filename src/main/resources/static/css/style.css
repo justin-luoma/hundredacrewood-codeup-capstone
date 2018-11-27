@@ -351,6 +351,7 @@ ul.sidenav > li:first-child > a {
 
 	#logoutButton > a {
 		padding-left: .7em;
+		margin-right: .7em;
 	}
 
 	#navColor > ul.right.hide-on-med-and-down > li:nth-child(4) > a {
