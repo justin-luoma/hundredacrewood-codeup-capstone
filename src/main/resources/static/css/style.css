@@ -344,9 +344,18 @@ ul.sidenav > li:first-child > a {
 		padding-right: 1em;
 	}
 
-	.nav-wrapper > ul > li > a,
-	ul.sidenav > li:first-child > a {
-		padding-left: 1.25em;
+	/*.nav-wrapper > ul > li > a,*/
+	/*ul.sidenav > li:first-child > a {*/
+		/*padding-left: 1.25em;*/
+	/*}*/
+
+	#logoutButton > a {
+		padding-left: .7em;
+	}
+
+	#navColor > ul.right.hide-on-med-and-down > li:nth-child(4) > a {
+		padding-left: .75em;
+		padding-right: 0;
 	}
 }
 
